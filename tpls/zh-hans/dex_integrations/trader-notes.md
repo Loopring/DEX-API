@@ -71,7 +71,27 @@
 
 - 调用取消订单接口时，除了接口本身所需的参数外，还需传递`signature`即参数签名。
 
-- `LoopringDEX`对API签名使用`EdDSA SHA256`算法，首先将API参数序列化成型如`[(参数1名, 参数1值), (参数2名, 参数2值), ..., (参数N名, 参数N值)]`的字符串二元组数组，其中参数名按照字典序排序，从而保证服务器验证顺序一致。然后整体转为`JSON`字符串作为` SHA256`的操作对象，得到`SHA256Hash`值，再用`EdDSA`算法对该`SHA256Hash`进行签名，私钥即`privateKey`，最终的签名包含三个整数：`Rx, Ry, S`，将这三个序列化成字符串并用`,`连接起来即为API签名，流程请参考`sign_api_data`代码示例。
+- `LoopringDEX`对API签名使用`EdDSA SHA256`算法，首先将`API`请求参数序列化成`JSON`字符串，其中参数名请仔细对照[Restful API 概述](../rest_api_overview.md)，从而保证服务器验证的参数名和参数顺序一致。然后将`JSON`字符串作为` SHA256`的操作对象，得到`SHA256Hash`值，再用`EdDSA`算法对该`SHA256Hash`进行签名，私钥即`privateKey`，最终的签名包含三个整数：`Rx, Ry, S`，将这三个序列化成字符串并用`,`连接起来即为API签名，流程请参考`sign_api_data`代码示例。举例来说，[取消订单](../dex_apis/cancelOrders.md)的参数请求如下：
+
+  ```python
+  {
+      'accountId': 13,
+      'publicKeyY': '10802575061131113209505999699626697047075018741701897561061641971057271069564',
+      'publicKeyX': '17312396437089572956102866305212721919382925957933866445999454165703466907759'
+  }
+  ```
+
+  对应的`JSON`字符串如下：
+
+  ```json
+  '{"accountId":13,"publicKeyY":"10802575061131113209505999699626697047075018741701897561061641971057271069564","publicKeyX":"17312396437089572956102866305212721919382925957933866445999454165703466907759"}'
+  ```
+
+  得到的完整签名如下形式：
+
+  ```python
+  "11378865223614752345658613518683386125920391358009026922518876063785212268418,13034649551900614926562004071205015689144924128006616706548555744311842882482,4525965718308906796716300406789851757724265942264827665613841182980765872070"
+  ```
 
 - 对API接口的签名使用的`EdDSA`使用`ethsnarks`工程代码，其内部使用`Poseidon HASH`算法，`LoopringDEX`的签名参数如下:
 
@@ -108,9 +128,8 @@
   
   #对数据签名并返回签名
   def sign_api_data(api_request_params，api_secret):
-      data = serialize_api_data(api_request_params)
       hasher = hashlib.sha256()
-      msgBuf = ujson.dumps(data).encode('utf-8')
+      msgBuf = serialize_api_data(api_request_params)
       hasher.update(msgBuf)
       msgHash = int(hasher.hexdigest(), 16) % SNARK_SCALAR_FIELD
       signed = PoseidonEdDSA.sign(msgHash, FQ(int(api_secret)))
@@ -118,18 +137,7 @@
       return signature
   
   def serialize_api_data(data):
-      has_signature = False
-      params = []
-      for key, value in data.items():
-          if key == 'signature':
-              has_signature = True
-        else:
-              params.append((key, value))
-  	# sort parameters by key, in alphabet order
-      params.sort(key=itemgetter(0))
-      if has_signature:
-          params.append(('signature', data['signature']))
-    return params
+      return ujson.dumps(data).encode('utf-8')
   ```
 
 ### 需要签名的数据类型（订单ORDER）
