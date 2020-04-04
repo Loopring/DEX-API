@@ -55,7 +55,7 @@ object SubmitOrderRequest {
 
 @ApiModel(description = "API 结果对象")
 case class ResultInfo(
-  @ApiModelProperty(value = "返回码", example = "0", required = true) code: Int = 0,
+  @ApiModelProperty(value = "状态码", example = "0", required = true) code: Int = 0,
   @ApiModelProperty(value = "返回信息", example = "SUCCESS", required = true) message: String = "SUCCESS")
 
 object ResultInfo {
