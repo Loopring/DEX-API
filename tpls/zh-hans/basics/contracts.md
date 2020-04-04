@@ -15,7 +15,7 @@
 - BlockVerifier: [0x40598B41cc17a7E56dd72F415E8223aaCCA94cF7](https://etherscan.io/address/0x40598B41cc17a7E56dd72F415E8223aaCCA94cF7)（[blockverifier.lrctoken.eth](https://etherscan.io/address/blockverifier.lrctoken.eth) ）
 - DowntimeCostCalculator: [0x873685f032c6Aa1572766401f3198a1f09A5C221](https://etherscan.io/address/0x873685f032c6Aa1572766401f3198a1f09A5C221)
 - UniswapTokenSellerAddress: [0xdd5102f902b0892D1bbf2D2d0fCBE11ccEA1D537](https://etherscan.io/address/0xdd5102f902b0892D1bbf2D2d0fCBE11ccEA1D537)
-- UserStakingPoolAddress: [0xF4662bB1C4831fD411a95b8050B3A5998d8A4A5b](https://etherscan.io/address/0xF4662bB1C4831fD411a95b8050B3A5998d8A4A5b)（[stakingpool.lrctoken.eth](https://etherscan.io/address/stakingpool.lrctoken.eth)
+- UserStakingPoolAddress: [0xF4662bB1C4831fD411a95b8050B3A5998d8A4A5b](https://etherscan.io/address/0xF4662bB1C4831fD411a95b8050B3A5998d8A4A5b)（[stakingpool.lrctoken.eth](https://etherscan.io/address/stakingpool.lrctoken.eth) ）
 - ChainlinkTokenPriceProvider: [0x3B740FeE3ED82FA676286938E124A8Bb74553f93](https://etherscan.io/address/0x3B740FeE3ED82FA676286938E124A8Bb74553f93)
 - MovingAveragePriceProvider: [0x388110217e4d194d501BB52c3AB28dC709EB450d](https://etherscan.io/address/0x388110217e4d194d501BB52c3AB28dC709EB450d)
 
