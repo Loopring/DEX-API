@@ -18,15 +18,15 @@ https://api.loopring.io`
 
 
 #### X-API-KEY
-除[查询用户ApiKey](./dex_apis/getApiKey.md)外的所有API都需要指定`X-API-KEY`HTTP头，提供用户的API Key。
+除[查询用户ApiKey](./dex_apis/getApiKey.md)外的所有API都需要指定`X-API-KEY`HTTP头，提供用户的ApiKey。
 
 #### X-API-SIG
 
 以下API需要指定`X-API-SIG`HTTP头，提供用户的的EdDSA数字签名：
 
-- [查询用户API Key](./dex_apis/getApiKey.md)
+- [查询用户ApiKey](./dex_apis/getApiKey.md)
 - [取消订单](./dex_apis/cancelOrder.md)
-- [更新API Key](./dex_apis/applyApiKey.md)
+- [更新ApiKey](./dex_apis/applyApiKey.md)
 
 #### 设置HTTP头
 使用Python设置HTTP头的代码如下：

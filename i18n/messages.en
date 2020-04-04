@@ -44,7 +44,7 @@
     "resultinfo":"ResultInfo Struct",
     "yes": "Y",
     "no": "N",
-    "keydesc": "API Key",
+    "keydesc": "ApiKey",
     "sigdesc": "Signature",
     "resdesc": "Result of API invocation",
     "codedesc": "Description",

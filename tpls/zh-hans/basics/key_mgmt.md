@@ -1,12 +1,12 @@
 
 # 秘钥管理
 
-使用路印API之前，您需要了解如何获取和更改您账号的EdDSA公秘钥对和API Key。调用API时，API Key需要通过HTTP头传递给路印的中继；EdDSA秘钥用来在客户端对链下请求做数字签名。
+使用路印API之前，您需要了解如何获取和更改您账号的EdDSA公秘钥对和ApiKey。调用API时，ApiKey需要通过HTTP头传递给路印的中继；EdDSA秘钥用来在客户端对链下请求做数字签名。
 
 ## 获取
 
 
-首先您需要在路印交易所的网页界面（[Loopring.io](https://loopring.io)）注册一个账号。注册好账号之后，您可以使用『导出账号』功能将账号相关的信息通过JSON格式导出。这些信息包括EdDSA公秘钥对和API Key。
+首先您需要在路印交易所的网页界面（[Loopring.io](https://loopring.io)）注册一个账号。注册好账号之后，您可以使用『导出账号』功能将账号相关的信息通过JSON格式导出。这些信息包括EdDSA公秘钥对和ApiKey。
 
 导出的JSON看起来应该类似于：
 
@@ -28,7 +28,7 @@
 
 
 {% hint style='danger' %}
-请您一定妥善保管EdDSA秘钥和API Key。如果这些信息不慎泄漏，会导致您资产的丢失。
+请您一定妥善保管EdDSA秘钥和ApiKey。如果这些信息不慎泄漏，会导致您资产的丢失。
 在任何情况下，路印交易所和其API均不会向您询问EdDSA私钥。
 {% endhint %}
 
@@ -38,7 +38,7 @@
 您可以通过路印交易所的『更改密码』功能更改您账号的EdDSA公秘钥对。由于涉及到以太坊交易确认和零知识证明，新的EdDSA公秘钥对需要等待一段才会生效。您可以通过`/api/v2/account`接口获取账号信息，如果其中的`frozen`项为`true`，表明您的账号由于正在更新EdDSA公秘钥对，通过旧的EdDSA公秘钥对和新的EdDSA公秘钥对均无法下单。
 
 
-API Key则可以通过路印的API接口更改。
+ApiKey则可以通过路印的API接口更改。
 
 
 #### EdDSA派生算法
@@ -60,6 +60,6 @@ keyPair = myEdDSAGenerator.generate(seed)
 其中`keccakHash`返回kecca256运算后的16进制字符串。
 
 
-#### API Key生成方式
+#### ApiKey生成方式
 
-API Key是在注册账号时由路印中继随机生成的一个全局唯一字符串，与您的账号一对一绑定。
+ApiKey是在注册账号时由路印中继随机生成的一个全局唯一字符串，与您的账号一对一绑定。

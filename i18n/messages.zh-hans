@@ -44,7 +44,7 @@
     "resultinfo":"ResultInfo结构",
     "yes": "是",
     "no": "否",
-    "keydesc": "API Key",
+    "keydesc": "ApiKey",
     "sigdesc": "签名信息",
     "resdesc": "调用结果",
     "codedesc": "描述",
