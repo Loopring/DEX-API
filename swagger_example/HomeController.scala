@@ -112,7 +112,7 @@ class HomeController @Inject() (val controllerComponents: ControllerComponents)
 
   @ApiOperation(
     value = "获取市场深度信息",
-    notes = "获取某个市场对的深度信息。",
+    notes = "获取某个交易对的深度信息。",
     code = 0,
     response = classOf[GetDepthResponse])
   @ApiResponses(
@@ -120,7 +120,7 @@ class HomeController @Inject() (val controllerComponents: ControllerComponents)
       new ApiResponse(code = 108000, message = "ERR_DEPTH_UNSUPPORTED_MARKET"),
       new ApiResponse(code = 108001, message = "ERR_DEPTH_UNSUPPORTED_LEVEL")))
   def getDepth(
-    @ApiParam(value = "市场对", required = true, example = "LRC-ETH") market: String,
+    @ApiParam(value = "交易对", required = true, example = "LRC-ETH") market: String,
     @ApiParam(value = "深度等级，越大表示合并的深度越多", required = true, example = "2") level: Int,
     @ApiParam(value = "返回条数限制", example = "2", defaultValue = "1") limit: Option[Int]) = Action.async {
     Future.successful(Ok(Json.toJson(GetDepthResponse())))

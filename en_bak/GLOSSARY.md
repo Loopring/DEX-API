@@ -16,10 +16,10 @@ Decenralized EXchange的简称，即去中心化交易所。**路印交易所**�
 通过路印中继的API，绕过以太坊区块链，直接发送给路印交易所的请求。
 
 ### Base token
-指一个交易对的交易对象，即写在靠前部分的Token。 LRC-ETH市场对，LRC 即为该市场对的Base Token。
+指一个交易对的交易对象，即写在靠前部分的Token。 LRC-ETH交易对，LRC 即为该交易对的Base Token。
 
 ### Quote token
-指一个交易对的定价Token，即写在靠后部分的Token。 LRC-ETH市场对，ETH 即为该市场对的Quote Token。
+指一个交易对的定价Token，即写在靠后部分的Token。 LRC-ETH交易对，ETH 即为该交易对的Quote Token。
 
 ### Size
 指订单的base Token数量。对于 2000 LRC 买 1 EHT的订单，size为2000。
