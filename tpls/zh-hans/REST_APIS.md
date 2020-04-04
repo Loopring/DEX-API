@@ -24,7 +24,7 @@ https://api.loopring.io`
 
 以下API需要指定`X-API-SIG`HTTP头，提供用户的的EdDSA数字签名：
 
-- [查询用户ApiKey](./dex_apis/getApiKey.md)
+- [查询用户API Key](./dex_apis/getApiKey.md)
 - [取消订单](./dex_apis/cancelOrder.md)
 - [更新API Key](./dex_apis/applyApiKey.md)
 
