@@ -1,6 +1,6 @@
 
 
-# REST API介绍
+# REST APIs
 
 本文主要描述路印交易所REST API的共性部分。
 
