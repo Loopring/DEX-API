@@ -1,14 +1,13 @@
 
 
-# REST APIs
+# REST API介绍
 
 本文主要描述路印交易所REST API的共性部分。
 
-## URL
-路印API的“Base URL”为：
+## 接入URL
 
 ```
-https://api.loopring.io
+https://api.loopring.io`
 ```
 
 ## 限流
