@@ -19,6 +19,11 @@
 - ChainlinkTokenPriceProvider: [0x3B740FeE3ED82FA676286938E124A8Bb74553f93](https://etherscan.io/address/0x3B740FeE3ED82FA676286938E124A8Bb74553f93)
 - MovingAveragePriceProvider: [0x388110217e4d194d501BB52c3AB28dC709EB450d](https://etherscan.io/address/0x388110217e4d194d501BB52c3AB28dC709EB450d)
 
+#### 开源
+
+路印协议代码完全开源，包括[设计文档](https://github.com/Loopring/protocols/blob/master/packages/loopring_v3/DESIGN.md)，[智能合约代码](https://github.com/Loopring/protocols/tree/master/packages/loopring_v3/contracts)，和[电路代码](https://github.com/Loopring/protocols/tree/master/packages/loopring_v3/circuit)。如果您有任何问题，请发电邮给路印基金会 - [foundation@loopirng.org](email:foundation@looopring.org)。
+
+
 
 ## 路印交易所（beta1）
 
@@ -27,3 +32,4 @@
 - exchangeAddress: [0x944644Ea989Ec64c2Ab9eF341D383cEf586A5777](https://etherscan.io/address/0x944644Ea989Ec64c2Ab9eF341D383cEf586A5777)
 - owner: [0x4374D3d032B3c96785094ec9f384f07077792768](https://etherscan.io/address/0x4374D3d032B3c96785094ec9f384f07077792768)
 - operator: [0x4374D3d032B3c96785094ec9f384f07077792768](https://etherscan.io/address/0x4374D3d032B3c96785094ec9f384f07077792768)
+

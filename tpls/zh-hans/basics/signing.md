@@ -1,36 +1,39 @@
 # 请求签名
 
-路印API涉及到两种不同类别的签名。一种是通用的API签名，用来验证API调用已经被账号拥有者授权；另一种是对API POST到服务端的特定的数据结构做签名，用来向路印协议的电路证明该数据已经被账号拥有者授权。我们分别对这两者做个说明。
+路印API涉及到两种不同类别的签名。一种是**通用API请求签名**，用来验证API调用被用户授权；另一种是**路印协议链下请求签名**，用来向路印协议证明链下请求被用户授权。我们分别对这两种类别做个说明。
 
 
-## 通用API请求的签名
+## 通用API请求签名
 
 
 
-## 路印协议链下请求的签名
+## 路印协议链下请求签名
 
-路印协议3.1.1支持“订单”，和“链下提现”两种**链下请求**。由于这两种链下请求都会造成对交易所默克尔树的修改，通过中继API提交这是两种数据时，必须附带特殊的签名。
+路印协议3.1.1支持“订单”，和“链下提现”两种**链下请求**。由于这两种链下请求都会造成对交易所默克尔树的修改，通过路印API提交这是两种数据时，必须附带路印协议要求的特殊的签名。
 
 
 {% hint style='info' %}
-路印协议3.1.1还支持**取消订单**这个链下请求，但会在后续的3.5版本中去掉。因此路印交易所没有计划支持链下取消订单。
+路印协议3.1.1还支持“取消订单”链下请求，但会在后续的3.5版本中将其去掉。因此路印中继不会支持该链下请求。
 {% endhint %}
 
 链下请求签名包括以下步骤：
 
-1. 对请求`r`进行规整，使其变成一个字符串`s`。
-2. 计算`s`的**Poseidon**哈希值`h`（见下面章节）。
-3. 对`h`用账号的私钥`privateKey`做签名，得到三个值：`Rx`,`Ry`, 和`s`（见下面章节）。
-4。将`h`, `Rx`,`Ry`, 和`S`合并到`r`当中。
+1. 对请求`r`（JSON类型）进行规整，生成一个字符串`s`。
+1. 计算`s`的**Poseidon**哈希`h`（见下面章节）。
+1. 对`h`用账号的私钥`privateKey`做签名，得到三个值：`Rx`,`Ry`, 和`S`（见下面章节）。
+1. 将`h`、`Rx`、`Ry`、 和`S`转换成字符串后合并到`r`当中（请注意名字的改变）。
 
 ```json
-"hash": ...,
-"signatureRx": "16367919966553849834214288740952929086694704883595501207054796240908626703398",
-"signatureRy": "5706650945525714138019517276433581394702490352313697178959212750249847059862",
-"signatureS": "410675649229327911665390972834008845981102813589085982164606483611508480748"
+{
+    ...,
+    "hash": ...,
+    "signatureRx": "16367919966553849834214288740952929086694704883595501207054796240908626703398",
+    "signatureRy": "5706650945525714138019517276433581394702490352313697178959212750249847059862",
+    "signatureS": "410675649229327911665390972834008845981102813589085982164606483611508480748"
+}
 ```
 
-#### 对订单做签名
+#### 订单签名
 
 订单中一些数据项需要按照特定序列化成一个整数数组，对这个数组计算Poseidon哈希，然后对该哈希做EdDSA签名。
 
@@ -41,10 +44,10 @@
 下面我们用Python代码做示范：
 
 ```python
-def sign_int_array(privateKey, serialized, p):
+def sign_int_array(privateKey, serialized, t):
     PoseidonHashParams = poseidon_params(
         SNARK_SCALAR_FIELD,
-        p,
+        t,
         6,
         53,
         b'poseidon',
@@ -80,21 +83,21 @@ def serialize_order(order):
 
 def sign_order(privateKey, order):
 	serialized = serialize_order(order)
-	signed = sign_int_array(serialized, 14 /* 注意这个值 */)
+	signed = sign_int_array(serialized, 14 /* 注意这个t值 */)
     order.update(signed)
 ```
 {% hint style='info' %}
-如果您不使用ethsnarks代码仓库计算poseidon哈希，请一定配置好poseidon的参数，保证其与路印协议使用的参数完全一致。否则验证签名会失败。
+如果您不使用ethsnarks代码仓库计算poseidon哈希，请一定注意poseidon参数的配置，保证其与路印协议使用的参数完全一致。否则验证签名会失败。
 {% endhint %}
 
 
 
-#### 对链下提现做签名
+#### 链下提现签名
 {% hint style='danger' %}
-目前的中继API还不支持客户端提交链下提现请求。不过我们会很快增加这个API。
+目前的路印API还不支持客户端提交链下提现请求。不过我们会很快增加这个API。
 {% endhint %}
 
-下面链下提现的一个例子：
+下面是链下提现的一个例子：
 ```json
 {
     "exchangeId": 2,
@@ -108,7 +111,9 @@ def sign_order(privateKey, order):
 }
 ```
 
-用Python对其签名的代码：
+其中的`nonce`值必须从0开始，不间断增加。
+
+用Python对其签名的代码如下：
 ```python
 def serialize_offchain_withdrawal(withdrawal):
     return [
@@ -124,7 +129,7 @@ def serialize_offchain_withdrawal(withdrawal):
 
 def sign_offchain_withdrawal(privateKey, offchainWithdrawal):
     serialized = serialize_offchain_withdrawal(offchainWithdrawal)
-    signed = sign_int_array(serialized, 9 /* 注意这个值 */)
+    signed = sign_int_array(serialized, 9 /* 注意这个t值 */)
     offchainWithdrawal.update(signed)
 ```
 
