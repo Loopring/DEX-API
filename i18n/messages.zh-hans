@@ -10,8 +10,8 @@
       "ManageAPIKey": "秘钥管理",
       "HashAndSigning": "请求签名",
       "Orders": "订单模型",
-       "ExampleCode":"示范代码",
-       "DEXContracts": "智能合约"
+      "ExampleCode": "示范代码",
+      "DEXContracts": "智能合约"
     },
     "APISpec": {
       "APISpec": "API规范（2.0）",
@@ -33,7 +33,7 @@
     "retmsg": "返回说明。用来帮助调试，不应在前端显示或用于逻辑判断。",
     "model": "模型",
     "common": "公共信息",
-    "hosturl": "Base URL",
+    "hosturl": "接入URL",
     "header": "HTTP头",
     "field": "字段",
     "fdesc": "说明",
@@ -41,7 +41,7 @@
     "frequire": "必须",
     "fsample": "举例",
     "resp": "返回值结构",
-    "resultinfo":"ResultInfo结构",
+    "resultinfo": "ResultInfo结构",
     "yes": "是",
     "no": "否",
     "keydesc": "ApiKey",

@@ -33,7 +33,7 @@
     "retmsg": "Return message.  This is used for debug only. Do not show to users",
     "model": "Model",
     "common": "Common info",
-    "hosturl": "API基本网址",
+    "hosturl": "Base URL",
     "header": "Header",
     "field": "Field",
     "fdesc": "Description",

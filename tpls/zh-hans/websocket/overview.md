@@ -71,14 +71,14 @@ wss://api.loopring.io/v2/ws
 | result |    [Result](#result)   |    是    |             订阅结果             |                  /                   |
 
 
-####  Result结构
+####  <span id="result">Result结构</span>
 
 |  字段  |      类型       | 是否必现 |         说明         | 举例 |
 | :---- | :------------- | :------ | :------------------ | :-- |
 | status |     string      |    是    |     订阅是否成功     | "OK" |
 | error  | [Error](#error) |    否    | 订阅失败时的错误信息 |  /   |
 
-#### Error结构
+####   <span id="error">Error结构</span>
 
 |  字段   |  类型   | 是否必现 |   说明   |     举例     |
 | :----- | :----- | :------ | :------ | :---------- |
