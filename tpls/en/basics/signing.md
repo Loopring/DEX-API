@@ -1,4 +1,4 @@
-# 请求签名
+# Request Signing
 
 The Loopring API involves two different categories of signatures. One is the common **API request signature**, which is used to verify that the API invocations have been authenticated; the other is Loopring Protocol's **off-chain request signature**, which is used by Loopring to verify that off-chain requests have been authenticated. We will explain each of these two categories separately.
 
