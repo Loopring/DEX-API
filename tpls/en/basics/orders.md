@@ -32,34 +32,37 @@ a **buy** order that buys 500 LRC at the price of 0.03ETH/LRC can be expressed a
 As you may have noticed, UDOM does not specify trading pairs or prices explicitly.
 
 
-不过上面的模型有个小问题：对**完全成交**的判断条件没有做说明。或者说，一个订单完全成交，是按照`amountS`的实际交易额达到了指定的值做标准，还是按照`amountB`的实际交易额达到了指定的值做标准。因此我们还需引入了另一个参数`buy`来指明完全成交的判断条件。如果`buy==true`，就按照`amountB`的实际交易判断是否完全成交；否者按照`amountS`的实际交易额判断。因此这上面的卖单和买单就需要这样修改：
+
+However, there is a problem with this simplified model: the match-engine doesn't know when an order should be considered as **fully filled**. We need to introduce another parameter called `buy` for this purpose. If `buy == true`, the match-engine shall check the total fill amount of `tokenB` against `amountB` to determine if an order has been fully filled; otherwise, it shall use the total fill amount of `tokenS` against `amountS`. With this new field, the above orders will look like the following: 
 
 ```JSON
-{   // LRC-ETH市场：0.03价格卖出500个LRC的卖单
+{   // LRC-ETH: sell 500 LRC at 0.03ETH/LRC
     "tokenS": "LRC",
     "tokenB": "ETH",
     "amountS": 500,
     "amountB": 15 // = 500 * 0.03，
-    "buy": false  // 完全成交用amountS实际交易额判断
+    "buy": false  // check tokenS's fill amount against amountS
 }
 ```
 
 ```JSON
-{   // LRC-ETH市场：0.03价格买入500个LRC的买单
+{   // LRC-ETH: buy 500 LRC at 0.03ETH/LRC
     "tokenS": "ETH",
     "tokenB": "LRC",
     "amountS": 15, // = 500 * 0.03
     "amountB": 500,
-    "buy": true // 完全成交用amountB实际交易额判断
+    "buy": true // check tokenB's fill amount against amountB
 }
 ```
-注意：上面的卖单如果完全成交，实际上获得的ETH可能大于15ETH；而上面的买单如果完全成交，实际上支付的ETH可能少于15ETH。这就是`buy`这个参数对撮合引擎行为影响的结果。
 
-将上面两个订单的`buy`值反转，会有什么效果呢？答案是：LRC-ETH交易对的卖单就变成了ETH-LRC交易对的买单；而LRC-ETH交易对的买单就变成了ETH-LRC交易对的卖单。也就是说，路印协议的一个交易对，实际上等同于多数中心化交易所的LRC-ETH和ETH-LRC两个交易对，并且可以表达这个两个交易对各自的买卖单，并将其放在一起撮合。
+Note: If the above sell order is fully filled, the amount of ETH bought may be larger than 15ETH; and if the buy order is fully filled, the ETH paid may be less than 15ETH, which is the impact of the `buy` parameter on the match engine's behaviors.
+
+
+What is the effect of reversing the `buy` value in the two orders above? The sell order for the LRC-ETH trading pair becomes a buy order for the ETH-LRC trading pair, and the buy order for the LRC-ETH trading pair becomes a sell order for the ETH-LRC trading pair. It means one Loopring trading pair, such as LRC-ETH, is equivalent to two trading pairs in many centralized exchanges, i.e.,  LRC-ETH and ETH-LRC. Besides its elegancy and simplicity, Loopring's UDOM also makes it possible to implement much simpler settlement logic in ZKP circuits.
 
 
 ## 订单数据
-路印实际的订单格式要更加复杂一些。您可以通过下面的JSON来表达一个路印的限价单。具体参数细节详见[提交订单](../dex_apis/submitOrder.md)。
+Loopring's actual order format is a bit more complex. You can use the following JSON to express a limit price order. For details of specific parameters, see [Submit Order](../dex_apis/submitOrder.md).
 
 ```JSON
 newOrder = {
@@ -70,7 +73,7 @@ newOrder = {
     "buy": "false",
     "exchangeId": 2,
     "accountId": 1234,
-    "allOrNone": "false", // 目前值必须为"false"
+    "allOrNone": "false", // Must be "false" for now
     "maxFeeBips": 50,
     "label": 211,
     "validSince": 1582094327,
@@ -84,9 +87,9 @@ newOrder = {
 }
 ```
 
-接下来我们为您对其中的一些数据项做进一步说明。
+Next, we will further explain some of these data fields for you.
 
-#### 通证和数量
+#### Tokens and Amounts
 与简化模型不同，实际订单中通证不用其名字或ERC20地址表达，而是使用该通证在路印交易所的合约中注册的序号（Token ID）表达。上面的例子中，我们假设LRC和ETH的ID分别是2和0。
 实际通证配置信息可以通过[交易所支持的通证信息](../dex_apis/getTokens.md)查询。
 
@@ -97,14 +100,14 @@ newOrder = {
 请注意：订单中的`buy`和`allOrNone`的类型是字符串而不是布尔。
 {% endhint %}
 
-#### 交易手续费
+#### Trading Fee
 `maxFeeBips=50`代表该订单愿意支付给交易所的**最高手续费比例**是0.5%（`maxFeeBips`的单位是0.01%）。路印的交易手续费都是用成交获得的`tokenB`支付的。假设上面订单某次成交买入了`"10000000000000000000"`ETH（10ETH)，那么实际支付的手续费**不会超过0.05ETH**（`"10000000000000000000" * 0.5%`）。
 
 实际支付的手续费比例是由路印中继决定的。中继会根据不同的VIP等级，给不同的用户相应的交易手续费折扣。路印协议不允许实际手续费比例大于用户订单中指定的最高手续费比例。
 
 用户在特定交易对的交易手续费可以通过`/api/v2/user/feeRates`查询获得。
 
-#### 生效和过期时间
+#### Timestamps
 
 `validSince`代表订单生效时间，`validUntil`代表订单过期时间，其单位均为秒。
 
@@ -121,7 +124,7 @@ order["validSince"] = int(time.time() - 15 * 60)
 {% endhint %}
 
 
-#### 成交量与订单号
+#### Fill Status and Order ID
 
 
 路印协议3.1.1为支持的每个通证预留了16384（$$2^{14}$$）个槽位来记录**卖出该通证的**订单的成交量。如果订单ID是`N`，那么使用的槽位编号就是`N % 16384`。换言之，如果槽位编号是`m`，该槽位就可以被用来记录具有下列ID的订单：`m`，`m + 16384`，`m + 16384 * 2`，... 以此类推。
@@ -138,8 +141,6 @@ order["validSince"] = int(time.time() - 15 * 60)
 值得注意的是，同一用户在基础通证相同的多个交易对（如LRC-ETH和LRC-USDT）的所有**卖单**共享上面的16384槽位的。如果您不想在客户端维护交易对间订单ID和槽位的分配，您可以注册多个账号：一个账号参与LRC-ETH市场的交易，另一个账号参与LRC-USDT市场的交易。
 
 
-
-
 综合上述信息，我们建议：
 1. 使用从0开始逐渐递增的ID作为新订单的ID；
 2. 对于特定的卖出通证，如果某个槽位已经被某个订单占用，您需要先取消该订单，才能继续使用这个槽位追踪新订单的成交量 - 除非之前的订单已经完全成交。
@@ -150,7 +151,7 @@ order["validSince"] = int(time.time() - 15 * 60)
 {% endhint %}
 
 
-#### 其它数据项
+#### Other Fields
 
 - `exchangeId`：路印交易所在路印协议体系中的交易所序号。后续路印交易所升级智能合约后，这个`exchangeId`的值会变化。路印交易所beta1对应的`exchangeId`是2。
 - `accountId`：用户的账号ID。
