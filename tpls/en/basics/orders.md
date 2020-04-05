@@ -90,18 +90,19 @@ newOrder = {
 Next, we will further explain some of these data fields for you.
 
 #### Tokens and Amounts
-与简化模型不同，实际订单中通证不用其名字或ERC20地址表达，而是使用该通证在路印交易所的合约中注册的序号（Token ID）表达。上面的例子中，我们假设LRC和ETH的ID分别是2和0。
-实际通证配置信息可以通过[交易所支持的通证信息](../dex_apis/getTokens.md)查询。
+In an actual order,  tokens are not expressed by their names or ERC20 addresses, but by their **token ID**, the index at which the tokens have been registered in the Loopring Exchange's smart contract.  Note that the same ERC20 token may have different IDs on different exchanges built on top of the same Loopring protocol.
 
-订单中的通证数量使用通证的最小单元，通过字符串类型表达。以LRC为例，LRC的ERC20合约中decimals为18，因此1.0LRC应该表示为`"1000000000000000000"`(1后面跟18个0)。每个通证的decimals都是由其智能合约决定；ETH的decimals是18。
+In the above example, we assume that the IDs of LRC and ETH are 2 and 0, respectively.
+You can query token's information using [Token Information Supported by the Exchange](../dex_apis/getTokens.md).
 
+The amounts of tokens are in their smallest unit as strings. Taking LRC as an example, its `decimals` is 18, so 1.0LRC should be expressed as `" 1000000000000000000 "` (1 followed by 18 0s). Each token's `decimals` is coded in its smart contract; the decimals of ETH is 18.
 
 {% hint style='info' %}
-请注意：订单中的`buy`和`allOrNone`的类型是字符串而不是布尔。
+The types of `buy` and` allOrNone` in the order are strings rather than boolean.
 {% endhint %}
 
 #### Trading Fee
-`maxFeeBips=50`代表该订单愿意支付给交易所的**最高手续费比例**是0.5%（`maxFeeBips`的单位是0.01%）。路印的交易手续费都是用成交获得的`tokenB`支付的。假设上面订单某次成交买入了`"10000000000000000000"`ETH（10ETH)，那么实际支付的手续费**不会超过0.05ETH**（`"10000000000000000000" * 0.5%`）。
+`maxFeeBips=50`代表该订单愿意支付给交易所的**最高手续费比例**是0.5%(`maxFeeBips`的单位是0.01%)。路印的交易手续费都是用成交获得的`tokenB`支付的。假设上面订单某次成交买入了`"10000000000000000000"`ETH(10ETH)，那么实际支付的手续费**不会超过0.05ETH**(`"10000000000000000000" * 0.5%`)。
 
 实际支付的手续费比例是由路印中继决定的。中继会根据不同的VIP等级，给不同的用户相应的交易手续费折扣。路印协议不允许实际手续费比例大于用户订单中指定的最高手续费比例。
 
@@ -127,9 +128,9 @@ order["validSince"] = int(time.time() - 15 * 60)
 #### Fill Status and Order ID
 
 
-路印协议3.1.1为支持的每个通证预留了16384（$$2^{14}$$）个槽位来记录**卖出该通证的**订单的成交量。如果订单ID是`N`，那么使用的槽位编号就是`N % 16384`。换言之，如果槽位编号是`m`，该槽位就可以被用来记录具有下列ID的订单：`m`，`m + 16384`，`m + 16384 * 2`，... 以此类推。
+路印协议3.1.1为支持的每个通证预留了16384($$2^{14}$$)个槽位来记录**卖出该通证的**订单的成交量。如果订单ID是`N`，那么使用的槽位编号就是`N % 16384`。换言之，如果槽位编号是`m`，该槽位就可以被用来记录具有下列ID的订单：`m`，`m + 16384`，`m + 16384 * 2`，... 以此类推。
 
-每个槽位都记录了当前在追踪的订单的ID（初始值就是槽位编号），并且后续不接受订单ID比当前订单ID更小的订单。假设槽位1记录的是ID为`32769`（ `1 + 16384 * 2`）的订单的订单状态，当用户下一个订单ID为`1`或`16385`的订单的时候，下单就会失败。
+每个槽位都记录了当前在追踪的订单的ID(初始值就是槽位编号)，并且后续不接受订单ID比当前订单ID更小的订单。假设槽位1记录的是ID为`32769`( `1 + 16384 * 2`)的订单的订单状态，当用户下一个订单ID为`1`或`16385`的订单的时候，下单就会失败。
 
 
 订单ID的最大值是`1048576`，即$$2^{20}$$。到达这个ID上限后，对应的通证就无法再下任何卖单。对于普通用户，这不是大问题；但对于程序化交易，您可能需要注册一个新账号继续交易。
@@ -138,7 +139,7 @@ order["validSince"] = int(time.time() - 15 * 60)
 路印协议3.5会去除订单ID最大值的限制，但依然保留槽位的设计和数量。
 {% endhint %}
 
-值得注意的是，同一用户在基础通证相同的多个交易对（如LRC-ETH和LRC-USDT）的所有**卖单**共享上面的16384槽位的。如果您不想在客户端维护交易对间订单ID和槽位的分配，您可以注册多个账号：一个账号参与LRC-ETH市场的交易，另一个账号参与LRC-USDT市场的交易。
+值得注意的是，同一用户在基础通证相同的多个交易对(如LRC-ETH和LRC-USDT)的所有**卖单**共享上面的16384槽位的。如果您不想在客户端维护交易对间订单ID和槽位的分配，您可以注册多个账号：一个账号参与LRC-ETH市场的交易，另一个账号参与LRC-USDT市场的交易。
 
 
 综合上述信息，我们建议：

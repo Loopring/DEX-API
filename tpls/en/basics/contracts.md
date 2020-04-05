@@ -4,14 +4,14 @@ The following is a list of smart contract addresses for the Loopring Protocol an
 
 ## LRC
 
-- LRC Address: [0xBBbbCA6A901c926F240b89EacB641d8Aec7AEafD](https://etherscan.io/address/0xbbbbca6a901c926f240b89eacb641d8aec7aeafd) ([lrctoken.eth](https://etherscan.io/address/lrctoken.eth)）
+- LRC Address: [0xBBbbCA6A901c926F240b89EacB641d8Aec7AEafD](https://etherscan.io/address/0xbbbbca6a901c926f240b89eacb641d8aec7aeafd) ([lrctoken.eth](https://etherscan.io/address/lrctoken.eth))
 
 ## Loopring Protocol (3.1.1)
 
 - UniversalRegistry: [0x36F568EF555df25be4B6e15D16994F3A8374214E](https://etherscan.io/address/0x36F568EF555df25be4B6e15D16994F3A8374214E)
 - LoopringV3: [0x18dd1dda037B009F7C1024dDdD58e4Fe9F960ac7](https://etherscan.io/address/0x18dd1dda037B009F7C1024dDdD58e4Fe9F960ac7)
 - ExchangeV3: [0x730Ea81C982939931d7514CC3Fbc22eAf7D372ec](https://etherscan.io/address/0x730Ea81C982939931d7514CC3Fbc22eAf7D372ec)
-- ProtocolFeeVaultAddress: [0x4b89f8996892d137c3dE1312d1dD4E4F4fFcA171](https://etherscan.io/address/) ([feevault.lrctoken.eth](https://etherscan.io/address/feevault.lrctoken.eth)）
+- ProtocolFeeVaultAddress: [0x4b89f8996892d137c3dE1312d1dD4E4F4fFcA171](https://etherscan.io/address/) ([feevault.lrctoken.eth](https://etherscan.io/address/feevault.lrctoken.eth))
 - BlockVerifier: [0x40598B41cc17a7E56dd72F415E8223aaCCA94cF7](https://etherscan.io/address/0x40598B41cc17a7E56dd72F415E8223aaCCA94cF7) ([blockverifier.lrctoken.eth](https://etherscan.io/address/blockverifier.lrctoken.eth))
 - DowntimeCostCalculator: [0x873685f032c6Aa1572766401f3198a1f09A5C221](https://etherscan.io/address/0x873685f032c6Aa1572766401f3198a1f09A5C221)
 - UniswapTokenSellerAddress: [0xdd5102f902b0892D1bbf2D2d0fCBE11ccEA1D537](https://etherscan.io/address/0xdd5102f902b0892D1bbf2D2d0fCBE11ccEA1D537)
