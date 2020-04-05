@@ -58,10 +58,12 @@ However, there is a problem with this simplified model: the match-engine doesn't
 Note: If the above sell order is fully filled, the amount of ETH bought may be larger than 15ETH; and if the buy order is fully filled, the ETH paid may be less than 15ETH, which is the impact of the `buy` parameter on the match engine's behaviors.
 
 
-What is the effect of reversing the `buy` value in the two orders above? The sell order for the LRC-ETH trading pair becomes a buy order for the ETH-LRC trading pair, and the buy order for the LRC-ETH trading pair becomes a sell order for the ETH-LRC trading pair. It means one Loopring trading pair, such as LRC-ETH, is equivalent to two trading pairs in many centralized exchanges, i.e.,  LRC-ETH and ETH-LRC. Besides its elegancy and simplicity, Loopring's UDOM also makes it possible to implement much simpler settlement logic in ZKP circuits.
+What is the effect of reversing the `buy` value in the two orders above? The sell order for the LRC-ETH trading pair becomes a buy order for the ETH-LRC trading pair, and the buy order for the LRC-ETH trading pair becomes a sell order for the ETH-LRC trading pair. It means one Loopring trading pair, such as LRC-ETH, is equivalent to two trading pairs in many centralized exchanges, i.e.,  LRC-ETH and ETH-LRC.
+
+Besides its elegancy and simplicity, Loopring's UDOM also makes it possible to implement much simpler settlement logic in ZKP circuits.
 
 
-## 订单数据
+## Order Structure
 Loopring's actual order format is a bit more complex. You can use the following JSON to express a limit price order. For details of specific parameters, see [Submit Order](../dex_apis/submitOrder.md).
 
 ```JSON
@@ -102,26 +104,25 @@ The types of `buy` and` allOrNone` in the order are strings rather than boolean.
 {% endhint %}
 
 #### Trading Fee
-`maxFeeBips=50`代表该订单愿意支付给交易所的**最高手续费比例**是0.5%(`maxFeeBips`的单位是0.01%)。路印的交易手续费都是用成交获得的`tokenB`支付的。假设上面订单某次成交买入了`"10000000000000000000"`ETH(10ETH)，那么实际支付的手续费**不会超过0.05ETH**(`"10000000000000000000" * 0.5%`)。
+`maxFeeBips = 50` specifies that the **maximum trading fee** the order is willing to pay to the exchange is 0.5% (the unit of `maxFeeBips` is 0.01%). Loopring charges trading fees in `tokenB` as a percentage of the token bought from a trade. Assuming that the order above has bought `"10000000000000000000"` ETH (10ETH), the actual trading fee **will not exceed 0.05ETH** (`"10000000000000000000"* 0.5%`).
 
-实际支付的手续费比例是由路印中继决定的。中继会根据不同的VIP等级，给不同的用户相应的交易手续费折扣。路印协议不允许实际手续费比例大于用户订单中指定的最高手续费比例。
+Loopring's relayer offers different trading fee discounts based on the user VIP tiers. The bottom line is that the actual trading fees can never exceed the maximum orders are willing to pay, specified by `maxFeeBips`. 
 
-用户在特定交易对的交易手续费可以通过`/api/v2/user/feeRates`查询获得。
+When you place an order, you must set `maxFeeBips` to be no less than the trading fee rate in the specified trading pair for your account (based on your VIP level). This information can be obtained by querying `/api/v2/user/feeRates`. If you trust Loopring Exchange, you can also set `maxFeeBips` to 63, the maximum value allowed by the Loopring protocol.
 
 #### Timestamps
 
-`validSince`代表订单生效时间，`validUntil`代表订单过期时间，其单位均为秒。
+`validSince` specifies the order's effective timestamp, and`validUntil` specifies the order expiration timestamp, both in seconds since epoch.
 
-中继服务器收到订单时会验证订单中的这两个时间戳；路印协议的零知识证明电路代码在清算时候也需要判断这两个时间戳。由于zkRollup批处理延迟，以及以太坊上时间与服务器时间可能存在的偏差，我们强烈建议`validSince`设置得比当前时间至少早15分钟，即：
+When the relayer receives an order, it will verify these two timestamps in the order; Loopring's ZKP circuit code will also check these two timestamps during settlement. Due to the delay of zkRollup batch processing, and the possible deviation of the time on Ethereum blockchain and our servers, we strongly recommend that `validSince` be set at least 15 minutes earlier than the current time as follows:
 
 ```python
 order["validSince"] = int(time.time() - 15 * 60)
 ```
-
-我们同样建议`validSince`和`validUntil`之间的时间窗口不小于1小时，否则您的订单可能不会被撮合。
+We also recommend that the time window between `validSince` and`validUntil` is no less than 1 hour; otherwise, your order may be rejected or cancelled by the relayer.
 
 {% hint style='tip' %}
-您可以通过使用`validUntil`时间戳来让订单自动过期，避免不必要的主动取消订单操作。
+You can take advantage of the `validUntil` timestamp to avoid unnecessary proactive cancellation of orders.
 {% endhint %}
 
 
