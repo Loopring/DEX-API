@@ -141,4 +141,4 @@ You can learn more about the Poseidon hash and EdDSA signature through the follo
 4. **Poseidon Hash**：<https://www.poseidon-hash.info/>
 
 
-You can also refer to our [sample code](./examples.md) for more details.
+You can also refer to our [example code](./examples.md) for more details.
