@@ -2,9 +2,9 @@
 
 下面是路印协议和路印交易所在以太坊主网的合约列表。
 
-## LRC合约
+## LRC
 
-- LRCAddress: [0xBBbbCA6A901c926F240b89EacB641d8Aec7AEafD](https://etherscan.io/address/0xbbbbca6a901c926f240b89eacb641d8aec7aeafd)（[lrctoken.eth](https://etherscan.io/address/lrctoken.eth)）
+- LRC代币: [0xBBbbCA6A901c926F240b89EacB641d8Aec7AEafD](https://etherscan.io/address/0xbbbbca6a901c926f240b89eacb641d8aec7aeafd)（[lrctoken.eth](https://etherscan.io/address/lrctoken.eth)）
 
 ## 路印协议（3.1.1）
 

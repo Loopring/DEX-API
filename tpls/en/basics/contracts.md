@@ -4,7 +4,7 @@ The following is a list of smart contract addresses for the Loopring Protocol an
 
 ## LRC
 
-- LRCAddress: [0xBBbbCA6A901c926F240b89EacB641d8Aec7AEafD](https://etherscan.io/address/0xbbbbca6a901c926f240b89eacb641d8aec7aeafd) ([lrctoken.eth](https://etherscan.io/address/lrctoken.eth)）
+- LRC Address: [0xBBbbCA6A901c926F240b89EacB641d8Aec7AEafD](https://etherscan.io/address/0xbbbbca6a901c926f240b89eacb641d8aec7aeafd) ([lrctoken.eth](https://etherscan.io/address/lrctoken.eth)）
 
 ## Loopring Protocol (3.1.1)
 
