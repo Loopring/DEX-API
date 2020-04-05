@@ -39,7 +39,7 @@ You can change your EdDSA key pair through the "Change Password" function on Loo
 
 You can also change your ApiKey using Loopring Exchange's UI.
 
-- **TODO**马超：在UI上个更改交易密码，是不是也会更新ApiKey？如果不是，我们UI就没有能更新ApiKey的地方了。
+- **TODO**马超: 在UI上个更改交易密码, 是不是也会更新ApiKey？如果不是, 我们UI就没有能更新ApiKey的地方了.
 
 #### EdDSA Generation
 The Loopring protocol does not specify how to generate or manage  EdDSA key pairs. Loopring Exchange uses each account's **Ethereum address** and **trading password** to derive the EdDSA key pair.

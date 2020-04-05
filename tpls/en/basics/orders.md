@@ -40,7 +40,7 @@ However, there is a problem with this simplified model: the match-engine doesn't
     "tokenS": "LRC",
     "tokenB": "ETH",
     "amountS": 500,
-    "amountB": 15 // = 500 * 0.03，
+    "amountB": 15 // = 500 * 0.03, 
     "buy": false  // check tokenS's fill amount against amountS
 }
 ```
@@ -131,7 +131,7 @@ You can take advantage of the `validUntil` timestamp to avoid unnecessary proact
 
 Loopring 3.1.1 reserves 16384 ($$2 ^ {14} $$) slots for each token to track the aggregated fill amount of each order  that **sells the token**. If an order's ID is `N`, then the slot used is `N % 16384`. In other words, if the slot number is `m`, it will be used to track orders with the following IDs:  `m`, `m + 16384`, `m + 16384 * 2`, ... and so on.
 
-Each slot also remembers the ID of the current order being tracked (the initial order ID is the slot number), and subsequent orders with smaller  IDs will be rejected. Suppose that slot `1` is tracking order `32769` (` 1 + 16384 * 2`). When the user places orders with ID of `1` or` 16385`, the server will reject these orders and return errors.
+Each slot also remembers the ID of the current order being tracked (the initial order ID is the slot number), and subsequent orders with smaller  IDs will be rejected. Suppose that slot `1` is tracking order `32769` (` 1 + 16384 * 2`). When the user places orders with ID of `1` or` 16385`, the server will reject these orders and return errors. If you have more than `16384` active orders for a trading pair, you need to cancel some of them to release slots before you can submit new orders.
 
 
 The maximum value of order ID is `1048576` ($$2^{20}$$). After reaching this ID limit, you can no longer place sell orders for the corresponding token. For most users, this is not a big problem; but for trading bots,  we recommend registering multiple accounts to sell different tokens.
@@ -142,11 +142,6 @@ Loopring 3.5 will remove the limit of the maximum order ID, but still retain the
 
 It is worth noting that all **sell orders** from the same account in multiple trading pairs with the same base token (such as LRC-ETH and LRC-USDT) share the same 16384 slots. If you do not plan to maintain the allocation of order IDs and slots between trading pairs on the client-side, you can register multiple accounts, as recommended above.
 
-Based on the above information, we recommend:
-1. 使用从0开始逐渐递增的ID作为新订单的ID；
-2. 对于特定的卖出通证，如果某个槽位已经被某个订单占用，您需要先取消该订单，才能继续使用这个槽位追踪新订单的成交量 - 除非之前的订单已经完全成交。
-3. 对于做市程序，您最好在客户端维护槽位分配情况并计算新订单的ID。如果您通过路印API获取下一个订单的ID，有可能因为调用次数过多而被限制。
-
 {% hint style='info' %}
 We know the inconvenience caused by the slot design. However, this is a design decision made in the Loopring protocol itself. We hope future technological advances can remove this limitation.
 {% endhint %}
@@ -154,13 +149,13 @@ We know the inconvenience caused by the slot design. However, this is a design d
 
 #### Other Fields
 
-- `exchangeId`：路印交易所在路印协议体系中的交易所序号。后续路印交易所升级智能合约后，这个`exchangeId`的值会变化。路印交易所beta1对应的`exchangeId`是2。
-- `accountId`：用户的账号ID。
-- `allOrNone`：如果是`"true"`，要求订单要么不成交，要么就要完全成交。目前这个参数还不被撮合引擎支持，因此请先设置为`"false"`。
-- `label`: 用于在协议层标记订单。该项的值对于交易清算没有任何影响。用户会对这个值做签名，因此该值对于不同实体间的分润根据可信度。
-- `clientOrderId`: 用户客户端在协议层外标记订单，可以是任意长度小于66的字符串。该项的值对于交易清算没有任何影响。用户不会对该项做签名。
+- `exchangeId`: Loopring Exchange's unique numeric ID in the Looping protocol, currently has value `2` and is constant. This ID will change once we upgrade to a new protocol version.
+- `accountId`: User's account ID.
+- `allOrNone`: `" true "` if the order must be fully filled or canceled. This parameter is not supported yet by our matching engine, so please set it to "false" for now.
+- `label`: Used to label orders at the protocol layer but has no impact on trading. Because users will sign this field as part of the order, so it's more trustworthy for different parties to use, for example, to calculate profit-sharing.
+- `clientOrderId`: Used to label orders by the client without user awareness. It also has no impact on trading. 
 
-更多细节请参考[提交订单](../dex_apis/submitOrder.md)。
+For more details, please refer to [Submit Order](../dex_apis/submitOrder.md).
 
 
 

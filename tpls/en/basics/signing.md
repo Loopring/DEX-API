@@ -135,10 +135,10 @@ def sign_offchain_withdrawal(privateKey, offchainWithdrawal):
 ## References
 You can learn more about the Poseidon hash and EdDSA signature through the following literature and github repositories.
 
-1. **ethsnarks**：https://github.com/HarryR/ethsnarks.git
-2. **SHA256 Hash**：<https://en.wikipedia.org/wiki/SHA-2>
-3. **EdDSA**：<https://en.wikipedia.org/wiki/EdDSA>
-4. **Poseidon Hash**：<https://www.poseidon-hash.info/>
+1. **ethsnarks**: https://github.com/HarryR/ethsnarks.git
+2. **SHA256 Hash**: <https://en.wikipedia.org/wiki/SHA-2>
+3. **EdDSA**: <https://en.wikipedia.org/wiki/EdDSA>
+4. **Poseidon Hash**: <https://www.poseidon-hash.info/>
 
 
 You can also refer to our [example code](./examples.md) for more details.

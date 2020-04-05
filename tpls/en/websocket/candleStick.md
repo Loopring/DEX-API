@@ -1,6 +1,6 @@
 ### candlestick 主题
 
-订阅candlestick，获取定时推送的candlestick数据的更新消息推送。订阅该主题不需要传ApiKey信息。
+订阅candlestick, 获取定时推送的candlestick数据的更新消息推送.订阅该主题不需要传ApiKey信息.
 
 #### 订阅格式
 
