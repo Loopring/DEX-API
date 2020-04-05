@@ -1,12 +1,12 @@
-# 订单模型
+# Orders
 
 
-##单向订单模型
-与多数中心化交易所的订单模型不同，路印采用的是单向订单模型（Uni-Directional Order Model，简称UDOM）。也就是说，无论买单还是卖单，都统一用一种数据结构表示。我们先通过一个简化过的模型举几个路印限价单的例子（路印目前不支持市价单）。
+##Uni-Directional Order Model
+Unlike the order models of most centralized exchanges, Loopring uses the **Uni-Directional Order Model** (UDOM). UDOM represents buy orders and sell orders uniformly with one single data structure. Let's start with a simplified UDOM model to give you a few examples of Loopring's limit price orders (Loopring doesn't support market price orders).
 
-在LRC-ETH交易对，一个用0.03价格卖出500个LRC的**卖单**可以这样表示：
+In the LRC-ETH trading pair, a **sell** order that sells 500 LRC at the price of 0.03ETH/LRC can be expressed as:
 ```JSON
-{   // LRC-ETH市场：0.03价格卖出500个LRC的卖单
+{   // LRC-ETH: sell 500 LRC at 0.03ETH/LRC
     "tokenS": "LRC",
     "tokenB": "ETH",
     "amountS": 500,
@@ -15,13 +15,13 @@
 ```
 
 {% hint style='info' %}
-订单数据项中的的字母S代表Sell，B代表Buy。
+The letter S stands for *Sell* and letter B stands for *Buy*.
 {% endhint %}
 
 
-用0.03价格买入出500个LRC的**买单**这样表示：
+a **buy** order that buys 500 LRC at the price of 0.03ETH/LRC can be expressed as:
 ```JSON
-{   // LRC-ETH市场：0.03价格买入500个LRC的买单
+{   // LRC-ETH: buy 500 LRC at 0.03ETH/LRC
     "tokenS": "ETH",
     "tokenB": "LRC",
     "amountS": 15, // = 500 * 0.03
@@ -29,9 +29,8 @@
 }
 ```
 
+As you may have noticed, UDOM does not specify trading pairs or prices explicitly.
 
-
-单向订单模型中不显性表达交易对和价格。
 
 不过上面的模型有个小问题：对**完全成交**的判断条件没有做说明。或者说，一个订单完全成交，是按照`amountS`的实际交易额达到了指定的值做标准，还是按照`amountB`的实际交易额达到了指定的值做标准。因此我们还需引入了另一个参数`buy`来指明完全成交的判断条件。如果`buy==true`，就按照`amountB`的实际交易判断是否完全成交；否者按照`amountS`的实际交易额判断。因此这上面的卖单和买单就需要这样修改：
 
