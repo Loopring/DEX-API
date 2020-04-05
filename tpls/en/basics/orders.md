@@ -129,27 +129,26 @@ You can take advantage of the `validUntil` timestamp to avoid unnecessary proact
 #### Fill Status and Order ID
 
 
-路印协议3.1.1为支持的每个通证预留了16384($$2^{14}$$)个槽位来记录**卖出该通证的**订单的成交量。如果订单ID是`N`，那么使用的槽位编号就是`N % 16384`。换言之，如果槽位编号是`m`，该槽位就可以被用来记录具有下列ID的订单：`m`，`m + 16384`，`m + 16384 * 2`，... 以此类推。
+Loopring 3.1.1 reserves 16384 ($$2 ^ {14} $$) slots for each token to track the aggregated fill amount of each order  that **sells the token**. If an order's ID is `N`, then the slot used is `N % 16384`. In other words, if the slot number is `m`, it will be used to track orders with the following IDs:  `m`, `m + 16384`, `m + 16384 * 2`, ... and so on.
 
-每个槽位都记录了当前在追踪的订单的ID(初始值就是槽位编号)，并且后续不接受订单ID比当前订单ID更小的订单。假设槽位1记录的是ID为`32769`( `1 + 16384 * 2`)的订单的订单状态，当用户下一个订单ID为`1`或`16385`的订单的时候，下单就会失败。
+Each slot also remembers the ID of the current order being tracked (the initial order ID is the slot number), and subsequent orders with smaller  IDs will be rejected. Suppose that slot `1` is tracking order `32769` (` 1 + 16384 * 2`). When the user places orders with ID of `1` or` 16385`, the server will reject these orders and return errors.
 
 
-订单ID的最大值是`1048576`，即$$2^{20}$$。到达这个ID上限后，对应的通证就无法再下任何卖单。对于普通用户，这不是大问题；但对于程序化交易，您可能需要注册一个新账号继续交易。
+The maximum value of order ID is `1048576` ($$2^{20}$$). After reaching this ID limit, you can no longer place sell orders for the corresponding token. For most users, this is not a big problem; but for trading bots,  we recommend registering multiple accounts to sell different tokens.
 
 {% hint style='info' %}
-路印协议3.5会去除订单ID最大值的限制，但依然保留槽位的设计和数量。
+Loopring 3.5 will remove the limit of the maximum order ID, but still retain the slot design and configuration.
 {% endhint %}
 
-值得注意的是，同一用户在基础通证相同的多个交易对(如LRC-ETH和LRC-USDT)的所有**卖单**共享上面的16384槽位的。如果您不想在客户端维护交易对间订单ID和槽位的分配，您可以注册多个账号：一个账号参与LRC-ETH市场的交易，另一个账号参与LRC-USDT市场的交易。
+It is worth noting that all **sell orders** from the same account in multiple trading pairs with the same base token (such as LRC-ETH and LRC-USDT) share the same 16384 slots. If you do not plan to maintain the allocation of order IDs and slots between trading pairs on the client-side, you can register multiple accounts, as recommended above.
 
-
-综合上述信息，我们建议：
+Based on the above information, we recommend:
 1. 使用从0开始逐渐递增的ID作为新订单的ID；
 2. 对于特定的卖出通证，如果某个槽位已经被某个订单占用，您需要先取消该订单，才能继续使用这个槽位追踪新订单的成交量 - 除非之前的订单已经完全成交。
 3. 对于做市程序，您最好在客户端维护槽位分配情况并计算新订单的ID。如果您通过路印API获取下一个订单的ID，有可能因为调用次数过多而被限制。
 
 {% hint style='info' %}
-我们知道这种设计带来的不便利。不过这是路印协议设计时候做的取舍。希望后续技术的进步可以将这个限制去除。
+We know the inconvenience caused by the slot design. However, this is a design decision made in the Loopring protocol itself. We hope future technological advances can remove this limitation.
 {% endhint %}
 
 
