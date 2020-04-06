@@ -37,9 +37,7 @@ In any case, Loopring Exchange's UI and its API will never ask you for your EdDS
 
 You can change your EdDSA key pair through the "Change Password" function on Loopring Exchange. Because changing the password involves an Ethereum transaction and zero-knowledge proof generation, it will take a while for your new EdDSA key pair to becomes effective. You can get account information through the `/api/v2/account` API. If the` frozen` field is `true`, it means that your account is in the processing of applying the new EdDSA key pair, during such a period, neither your previous EdDSA key pair nor your new EdDSA key pair can be used to sign requests.
 
-You can also change your ApiKey using Loopring Exchange's UI.
-
-- **TODO**马超: 在UI上个更改交易密码, 是不是也会更新ApiKey？如果不是, 我们UI就没有能更新ApiKey的地方了.
+When you change your password on Loopring.io, your ApiKey will also be automatically updated.  You can also change your ApiKey using  API.
 
 #### EdDSA Generation
 The Loopring protocol does not specify how to generate or manage  EdDSA key pairs. Loopring Exchange uses each account's **Ethereum address** and **trading password** to derive the EdDSA key pair.
