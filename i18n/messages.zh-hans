@@ -69,7 +69,7 @@
     "trade": "订阅最新成交",
     "ticker": "订阅Ticker更新",
     "candleStick": "订阅CandleStick更新",
-    "account": "订阅用户余额更新",
+    "account": "订阅用户账号金额更新",
     "order": "订阅用户订单更新"
   }
 }

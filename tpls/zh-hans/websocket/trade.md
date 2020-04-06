@@ -1,36 +1,39 @@
 # 订阅最新成交
 
-通过订阅该主题，您可以获得特定交易对全部用户的最新成交记录。
+通过订阅该主题，您可以获得特定交易对全部用户新成交记录的数据提送。
 
 
 ## 订阅规则
 
-主题&交易对
+- `topic`需要指定交易对。如果交易对是`LRC-ETH`，那么`topic`应该拼写为：`trade&LRC-ETH`。
+- 订阅该主题不需要提供ApiKey。
+- 支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取。
 
-- 支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md) 获取
+
+
 
 ## 状态码
 
 | 状态码 |                描述                 |
 | :---- | :--------------------------------- |
-| 104109 | trade主题的订阅条件不合法或者不支持 |
+| 104109 | `topic`的值或其参数非法|
 
 ## 推送示例
 
 ```json
 {
-  "topic": "trade&LRC-ETH",
-  "ts": 1584717910000,
-  "data": {
-    [
-    "1584717910000",  //timestamp
-    "123456789",  //tradeId
-    "buy",  //side
-    "500000",  //size 
-    "0.0008",  //price
-    "100"  //fee
+    "topic": "trade&LRC-ETH",
+    "ts": 1584717910000,
+    "data": [
+        [
+            "1584717910000",  //timestamp
+            "123456789",  //tradeId
+            "buy",  //side
+            "500000",  //size 
+            "0.0008",  //price
+            "100"  //fee
+        ]
     ]
-  }
 }
 ```
 
@@ -42,7 +45,7 @@
 | :----- | :--------------------- | :------ | :-------------- | :------------- |
 |  topic  |         string          |    是    | 订阅的主题和条件 | "trade&LRC-ETH" |
 | integer |         integer         |    是    |     推送时间     |  1584717910000  |
-|  data   | [List\[string]](#trade) |    是    |     深度信息     |        /        |
+|  data   | [List[List\[string]](#trade)] （Trade列表）|    是    |     深度信息     |        /        |
 
 #### <span id="trade">Trade 数据结构</span>
 

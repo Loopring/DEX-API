@@ -1,25 +1,25 @@
-# 订阅用户余额更新
+# 订阅用户账号金额更新
 
-订阅用户的余额和冻结金额相关的信息
+
+通过订阅该主题，您可以获得用户余额和冻结金额更新的数据提送。
 
 ## 订阅规则
 
-主题即Account
-
-订阅该主题必须传Apikey
+- `topic`需要设为`account`。
+- 订阅该主题**需要提供ApiKey**。
 
 ## 推送示例
 
 ```json
- {
-  "topic": "account",
-  "ts":1584717910000,
-  "data": {
-    "accountId":1,
-    "totalAmount": "24439253519655",
-    "tokenId": 2,
-    "frezeeAmount": "0"
-  }
+{
+	"topic": "account",
+	"ts":1584717910000,
+	"data": {
+	    "accountId":1,
+	    "totalAmount": "24439253519655",
+	    "tokenId": 2,
+	    "frezeeAmount": "0"
+	}
 }
 ```
 

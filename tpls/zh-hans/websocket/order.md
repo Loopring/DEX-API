@@ -1,44 +1,42 @@
 # 订阅用户订单更新
 
-订阅用户的订单更新
+
+通过订阅该主题，您可以获得用户在指定交易对的订单状态提送。
 
 ## 订阅规则
-
-主题&交易对
-
-订阅该主题必须传apikey
-
-- 支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md) 获取
+- `topic`需要指定交易对。如果交易对是`LRC-ETH`，那么`topic`应该拼写为：`order&LRC-ETH&1`。
+- 订阅该主题**需要提供ApiKey**。
+- 支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取。
 
 ## 状态码
 
 | 状态码 |                描述                 |
 | :---- | :--------------------------------- |
-| 104110 | order主题的订阅条件不合法或者不支持 |
+| 104110 | `topic`的值或其参数非法|
 
 ## 推送示例
 
 ```json
-   {
-       "topic": "order&LRC-BTC",
-         "ts":1565844328,
-       "data": {
-         "hash": "11212",
-         "clientOrderId": "myOrder",
-         "size": "500000000",
-         "volume": "210000000",
-         "price": "0.000004",
-         "filledSize": "30000000",
-         "filledVolume": "100000",
-         "filledFee": "1000000",
-         "status": "processing",
-         "createdAt": "1494900087",
-         "validSince": "1494900087",
-         "validUntil": "1495900087",
-         "side": "buy",
-         "market": "LRC-BTC"
-       }
-     }
+{
+   "topic": "order&LRC-BTC",
+   "ts":1565844328,
+   "data": {
+        "hash": "11212",
+        "clientOrderId": "myOrder",
+        "size": "500000000",
+        "volume": "210000000",
+        "price": "0.000004",
+        "filledSize": "30000000",
+        "filledVolume": "100000",
+        "filledFee": "1000000",
+        "status": "processing",
+        "createdAt": "1494900087",
+        "validSince": "1494900087",
+        "validUntil": "1495900087",
+        "side": "buy",
+        "market": "LRC-BTC"
+    }
+}
 ```
 
 ## 模型
@@ -47,7 +45,7 @@
 
 | 字段  |      类型       | 必现 |       说明       |      举例       |
 | :--- | :------------- | :------ | :-------------- | :------------- |
-| topic |     string      |    是    | 订阅的主题和条件 | "order&lrc-eth" |
+| topic |     string      |    是    | 订阅的主题和条件 | "order&LRC-ETH" |
 |  ts   |     integer     |    是    |     推送时间     |  1584717910000  |
 | data  | [Order](#order) |    是    |     订单信息     |        /        |
 

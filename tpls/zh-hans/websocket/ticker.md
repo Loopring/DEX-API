@@ -1,38 +1,39 @@
 # 订阅Ticker更新
 
-订阅以获得定时推送的最新的ticker信息，没有更新则不推送
+通过订阅该主题，您可以获得特定交易对ticker更新的数据提送。
+
 
 ## 订阅规则
 
-主题&交易对
-
-- 支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取
+- `topic`需要指定交易对。如果交易对是`LRC-ETH`，那么`topic`应该拼写为：`ticker&LRC-ETH`。
+- 订阅该主题不需要提供ApiKey。
+- 支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取。
 
 ## 状态码
 
 | 状态码 |                 描述                 |
 | :---- | :---------------------------------- |
-| 104111 | ticker主题的订阅条件不合法或者不支持 |
+| 104111 | `topic`的值或其参数非法|
 
 ## 推送示例
 
 ```json
 {
-  "topic": "ticker&LRC-ETH",
-  "ts": 1584717910000,
-  "data": [
-    "LRC-ETH",  //market
-    "1584717910000",  //timestamp
-    "5000000",  //size
-    "1000",  //volume
-    "0.0002",  //open
-    "0.00025",  //high
-    "0.0002",  //low
-    "0.00025",  //close       
-    "5000",  //count    
-    "0.00026",  //bid
-    "0.00027"  //ask
-  ]
+    "topic": "ticker&LRC-ETH",
+    "ts": 1584717910000,
+    "data": [
+        "LRC-ETH",  //market
+        "1584717910000",  //timestamp
+        "5000000",  //size
+        "1000",  //volume
+        "0.0002",  //open
+        "0.00025",  //high
+        "0.0002",  //low
+        "0.00025",  //close       
+        "5000",  //count    
+        "0.00026",  //bid
+        "0.00027"  //ask
+    ]
 }
 ```
 
@@ -44,7 +45,7 @@
 | :----- | :--------------------- | :------ | :-------------- | :-------------- |
 |  topic  |         string          |    是    | 订阅的主题和条件 | "ticker&LRC-ETH" |
 | integer |         integer         |    是    |     推送时间     |  1584717910000   |
-|  data   | [List[string]](#ticker) |    是    |     深度信息     |        /         |
+|  data   | [List[string]](#ticker)  （Ticker）|    是    |     深度信息     |        /         |
 
 #### <span id="ticker">Ticker数据结构</span>
 
