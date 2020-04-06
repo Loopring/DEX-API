@@ -85,7 +85,8 @@ newOrder = {
     "signatureRx": "15179969700843231746888635151106024191752286977677731880613780154804077177446",
     "signatureRy": "8103765835373541952843207933665617916816772340145691265012430975846006955894",
     "signatureS" : "4462707474665244243174020779004308974607763640730341744048308145656189589982",
-    "clientOrderId": "Test01"
+    "clientOrderId": "Test01",
+    "channelId": "channel1::maker1"
 }
 ```
 
@@ -114,12 +115,7 @@ When you place an order, you must set `maxFeeBips` to be no less than the tradin
 
 `validSince` specifies the order's effective timestamp, and`validUntil` specifies the order expiration timestamp, both in seconds since epoch.
 
-When the relayer receives an order, it will verify these two timestamps in the order; Loopring's ZKP circuit code will also check these two timestamps during settlement. Due to the delay of zkRollup batch processing, and the possible deviation of the time on Ethereum blockchain and our servers, we strongly recommend that `validSince` be set at least 15 minutes earlier than the current time as follows:
-
-```python
-order["validSince"] = int(time.time() - 15 * 60)
-```
-We also recommend that the time window between `validSince` and`validUntil` is no less than 1 hour; otherwise, your order may be rejected or cancelled by the relayer.
+When the relayer receives an order, it will verify these two timestamps in the order; Loopring's ZKP circuit code will also check these two timestamps during settlement. Due to the delay of zkRollup batch processing, and the possible deviation of the time on Ethereum blockchain and our servers, we strongly recommend that `validSince` be set to the current time,and the window between `validSince` and`validUntil` is no shorter than 1 week; otherwise, your order may be rejected or cancelled by the relayer.
 
 {% hint style='tip' %}
 You can take advantage of the `validUntil` timestamp to avoid unnecessary proactive cancellation of orders.
@@ -154,6 +150,7 @@ We know the inconvenience caused by the slot design. However, this is a design d
 - `allOrNone`: `" true "` if the order must be fully filled or canceled. This parameter is not supported yet by our matching engine, so please set it to "false" for now.
 - `label`: Used to label orders at the protocol layer but has no impact on trading. Because users will sign this field as part of the order, so it's more trustworthy for different parties to use, for example, to calculate profit-sharing.
 - `clientOrderId`: Used to label orders by the client without user awareness. It also has no impact on trading. 
+- `channelId`: Used to lable order's channel.
 
 For more details, please refer to [Submit Order](../dex_apis/submitOrder.md).
 
