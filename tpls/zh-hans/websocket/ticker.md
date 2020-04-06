@@ -1,12 +1,12 @@
-# 订阅市场Ticker的更新
+# 订阅交易对Ticker更新
 
 订阅以获得定时推送的最新的ticker信息，没有更新则不推送
 
 ## 订阅规则
 
-主题&市场
+主题&交易对
 
-- 支持的市场可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取
+- 支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取
 
 ## 状态码
 
@@ -50,7 +50,7 @@
 
 | 序号  |  类型   | 必现 |         说明         |     举例      |
 | :------ | :----- | :------ | :------------------ | :----------- |
-|    1     | string  |    是    |         市场         |   "LRC-ETH"   |
+|    1     | string  |    是    |         交易对         |   "LRC-ETH"   |
 |    2     | integer |    是    |    ticker生成时间    | 1584717910000 |
 |    3     | string  |    是    |  base token的成交量  |   "5000000"   |
 |    4     | string  |    是    | quote token 的成交量 |    "1000"     |

@@ -1,14 +1,14 @@
-# 数据结构
+# 订阅用户订单更新
 
 订阅用户的订单更新
 
 ## 订阅规则
 
-主题&市场
+主题&交易对
 
 订阅该主题必须传apikey
 
-- 支持的市场可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md) 获取
+- 支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md) 获取
 
 ## 状态码
 
@@ -67,7 +67,7 @@
 |   createdAt   | integer |    是    |        订单创建时间        | 1584717910000 |
 |   updateAt    | integer |    是    |   订单最后一次的更新时间   | 1584717910000 |
 |     side      | string  |    是    |           买或卖           |     "buy"     |
-|    market     | string  |    是    |            市场            |   "LRC-ETH"   |
+|    market     | string  |    是    |            交易对            |   "LRC-ETH"   |
 
 #### 订单状态取值范围
 

@@ -1,12 +1,13 @@
-# 订阅市场交易的更新
+# 订阅交易对最新成交
 
-订阅该主题，获取定时的最新的成交信息；没有更新则不推送
+通过订阅该主题，您可以获得特定交易对全部用户的最新成交记录。
+
 
 ## 订阅规则
 
-主题&市场
+主题&交易对
 
-- 支持的市场可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md) 获取
+- 支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md) 获取
 
 ## 状态码
 
