@@ -4,7 +4,7 @@
 通过订阅该主题，您可以获得用户在指定交易对的订单状态提送。
 
 ## 订阅规则
-- `topic`需要指定交易对。如果交易对是`LRC-ETH`，那么`topic`应该拼写为：`order&LRC-ETH&1`。
+- `topic`需要指定交易对。如果交易对是`LRC-ETH`，那么`topic`应该拼写为：`order&LRC-ETH`。
 - 订阅该主题**需要提供ApiKey**。
 - 支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取。
 
