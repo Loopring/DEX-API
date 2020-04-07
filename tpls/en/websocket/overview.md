@@ -10,7 +10,7 @@ wss://api.loopring.io/v2/ws
 
 当用户连接到路印中继的WebSocket之后，中继会进行心跳检测，每30秒会发送“ping”信息，期待接收客户端的“pong”信息。2分钟未收到回复会自动断开连接。
 
-## 订阅规则
+## Subscription rules
 
 用户在与路印中继建立WebSocket连接之后，可以订阅消息。需满足以下规则：
 
@@ -22,11 +22,11 @@ wss://api.loopring.io/v2/ws
 
 ## 请求
 
-|  字段  |     类型     | 必须 |               说明               |                 举例                 |
+|  Field  |     Type     | 必须 |               Note               |                 Example                 |
 | :---- | :---------- | :------ | :------------------------------ | :---------------------------------- |
-|   op   |    string    |    是    |         订阅或者取消订阅（"sub"或者"unSub"）         |                "sub"               |
-| apiKey |    string    |    否    | 订阅要求传ApiKey的主题才是必须的 | “16M2hKHw9b5VuP21YBAJQmCd3VhuNtdDqG” |
-|  args  | list<string> |    是    |         订阅的主题及条件         | [ "depth&LRC-ETH&0","trade&LRC-ETH"] |
+|   op   |    string    |    Y    |         订阅或者取消订阅（"sub"或者"unSub"）         |                "sub"               |
+| apiKey |    string    |    N    | 订阅要求传ApiKey的主题才是必须的 | “16M2hKHw9b5VuP21YBAJQmCd3VhuNtdDqG” |
+|  args  | list<string> |    Y    |         订阅的主题及条件         | [ "depth&LRC-ETH&0","trade&LRC-ETH"] |
 
 #### 示例
 
@@ -63,31 +63,31 @@ wss://api.loopring.io/v2/ws
 
 ## 返回值
 
-|  字段  |     类型     | 必现 |               说明               |                 举例                 |
+|  Field  |     Type     | Required |               Note               |                 Example                 |
 | :---- | :---------- | :------ | :------------------------------ | :---------------------------------- |
-|   op   |    string    |    是    |         用户传送来的操作         |                "sub"                 |
-| apiKey |    string    |    否    | 订阅要求传ApiKey的主题才是必须的 | “16M2hKHw9b5VuP21YBAJQmCd3VhuNtdDqG” |
-|  args  | list<string> |    是    |         订阅的主题及条件         | [ "depth&LRC-ETH&0","trade&LRC-ETH"] |
-| result |    [Result](#result)   |    是    |             订阅结果             |                  /                   |
+|   op   |    string    |    Y    |         用户传送来的操作         |                "sub"                 |
+| apiKey |    string    |    N    | 订阅要求传ApiKey的主题才是必须的 | “16M2hKHw9b5VuP21YBAJQmCd3VhuNtdDqG” |
+|  args  | list<string> |    Y    |         订阅的主题及条件         | [ "depth&LRC-ETH&0","trade&LRC-ETH"] |
+| result |    [Result](#result)   |    Y    |             订阅结果             |                  /                   |
 
 
 ####  <span id="result">Result结构</span>
 
-|  字段  |      类型       | 必现 |         说明         | 举例 |
+|  Field  |      Type       | Required |         Note         | Example |
 | :---- | :------------- | :------ | :------------------ | :-- |
-| status |     string      |    是    |     订阅是否成功     | "OK" |
-| error  | [Error](#error) |    否    | 订阅失败时的错误信息 |  /   |
+| status |     string      |    Y    |     订阅是否成功     | "OK" |
+| error  | [Error](#error) |    N    | 订阅失败时的错误信息 |  /   |
 
 ####   <span id="error">Error结构</span>
 
-|  字段   |  类型   | 必现 |   说明   |     举例     |
+|  Field   |  Type   | Required |   Note   |     Example     |
 | :----- | :----- | :------ | :------ | :---------- |
-|  code   | integer |    是    |  状态码  |    107500    |
-| message | string  |    是    | 错误信息 | 空的订阅信息 |
+|  code   | integer |    Y    |  Status Code  |    107500    |
+| message | string  |    Y    | 错误信息 | 空的订阅信息 |
 
-#### 状态码
+#### Status Code
 
-| **状态码** |                         描述                         |
+| **Status Code** |                         Comment                         |
 | :-------- | :-------------------------------------------------- |
 |   104100   |                     空的订阅信息                     |
 |   104101   | 不支持的操作（路印中继服务器仅支持sub 和 unsub操作） |

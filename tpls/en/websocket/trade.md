@@ -3,7 +3,7 @@
 通过订阅该主题，您可以获得特定交易对全部用户新成交记录的数据推送。
 
 
-## 订阅规则
+## Subscription rules
 
 - `topic`需要指定交易对。如果交易对是`LRC-ETH`，那么`topic`应该拼写为：`trade&LRC-ETH`。
 - 订阅该主题不需要提供ApiKey。
@@ -12,13 +12,13 @@
 
 
 
-## 状态码
+## Status Code
 
-| 状态码 |                描述                 |
+| Status Code |                Comment                 |
 | :---- | :--------------------------------- |
-| 104109 | `topic`的值或其参数非法|
+| 104109 | Invalid or unsupported `topic`|
 
-## 推送示例
+## Push data example
 
 ```json
 {
@@ -37,24 +37,24 @@
 }
 ```
 
-## 模型
+## Data Model
 
-#### 推送数据结构
+#### 推送Structure
 
-|  字段   |          类型           | 必现 |       说明       |      举例       |
+|  Field   |          Type           | Required |       Note       |      Example       |
 | :----- | :--------------------- | :------ | :-------------- | :------------- |
-|  topic  |         string          |    是    | 订阅的主题和条件 | "trade&LRC-ETH" |
-| integer |         integer         |    是    |     推送时间     |  1584717910000  |
-|  data   | [List[List\[string]](#trade)] （Trade列表）|    是    |     深度信息     |        /        |
+|  topic  |         string          |    Y    | Topic and parameters | "trade&LRC-ETH" |
+| integer |         integer         |    Y    |     推送时间     |  1584717910000  |
+|  data   | [List[List\[string]](#trade)] （Trade列表）|    Y    |     深度信息     |        /        |
 
-#### <span id="trade">Trade 数据结构</span>
+#### <span id="trade">Trade Structure</span>
 
-| 序号  |  类型   | 必现 |         说明         |     举例      |
+| Index  |  Type   | Required |         Note         |     Example      |
 | :------ | :----- | :------ | :------------------ | :----------- |
-|    1     | integer |    是    |       成交时间       | 1584717910000 |
-|    2     | integer |    是    |       交易编号       |   123456789   |
-|    3     | string  |    是    |  买或者卖，指taker   |     "buy"     |
-|    4     | string  |    是    | base token的成交数量 |   "500000"    |
-|    5     | string  |    是    |       成交价格       |   "0.0008"    |
-|    6     | string  |    是    |   base token的收费   |     "100"     |
+|    1     | integer |    Y    |       成交时间       | 1584717910000 |
+|    2     | integer |    Y    |       交易编号       |   123456789   |
+|    3     | string  |    Y    |  买或者卖，指taker   |     "buy"     |
+|    4     | string  |    Y    | base token的成交数量 |   "500000"    |
+|    5     | string  |    Y    |       成交价格       |   "0.0008"    |
+|    6     | string  |    Y    |   base token的收费   |     "100"     |
 

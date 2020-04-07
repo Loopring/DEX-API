@@ -2,18 +2,18 @@
 
 通过订阅该主题，您可以获得指定交易对订单簿更新的数据推送。
 
-## 订阅规则
+## Subscription rules
 - `topic`需要指定交易对和深度聚合等级。如果交易对是`LRC-ETH`，深度聚合等级是`1`，那么`topic`应该拼写为：`depth&LRC-ETH&1`。
 - 订阅该主题不需要提供ApiKey。
 - 交易对和深度聚合等级可以通过[api/v2/exchange/markets接口](../dex_apis/getMarkets.md)获取。
 
-## 状态码
+## Status Code
 
-| 状态码 |                描述                 |
+| Status Code |                Comment                 |
 | :---- | :--------------------------------- |
-| 104107 | `topic`的值或其参数非法|
+| 104107 | Invalid or unsupported `topic`|
 
-## 推送示例
+## Push data example
 
 ```json
 {
@@ -42,21 +42,21 @@
 }
 ```
 
-## 模型
+## Data Model
 
-#### 推送数据结构
+#### 推送Structure
 
-|     字段     |      类型       | 必现 |         说明         |       举例        |
+|     Field     |      Type       | Required |         Note         |       Example        |
 | :---------- | :------------- | :------ | :------------------ | :--------------- |
-|    topic     |     string      |    是    |   订阅的主题和条件   | "depth&LRC-ETH&1" |
-|      ts      |     integer     |    是    |       推送时间       |   1584717910000   |
-| startVersion |     integer     |    是    | 该次推送的起始版本号 |      1212121      |
-|  endVersion  |     integer     |    是    | 该次推送的终结版本号 |      1212123      |
-|     data     | [Depth](#depth) |    是    |       深度信息       |         /         |
+|    topic     |     string      |    Y    |   Topic and parameters   | "depth&LRC-ETH&1" |
+|      ts      |     integer     |    Y    |       推送时间       |   1584717910000   |
+| startVersion |     integer     |    Y    | 该次推送的起始版本号 |      1212121      |
+|  endVersion  |     integer     |    Y    | 该次推送的终结版本号 |      1212123      |
+|     data     | [Depth](#depth) |    Y    |       深度信息       |         /         |
 
-####<span id="depth">Depth数据结构</span>
+####<span id="depth">DepthStructure</span>
 
-| 字段 | 类型                           | 必现 | 说明     | 举例 |
+| Field | Type                           | Required | Note     | Example |
 | :---- | :------------------------------ | :-------- | :-------- | :---- |
 | bids | [List\[List\[string\]]](#slot) （深度条目列表）| 是       | 买单深度 | /    |
 | asks | [List\[List\[string\]]](#slot) （深度条目列表）| 是       | 卖单深度 | /    |
@@ -65,7 +65,7 @@
 
 `asks`和`bids`数组中的每个子数组都是定长数组，我们称之为*深度条目*，其规范如下：
 
-| 序号  | 类型   | 必现 | 说明           | 举例       |
+| Index  | Type   | Required | Note           | Example       |
 | :------ | :------ | :-------- | :-------------- | :---------- |
 |    1     | string | 是       | 价格           | "0.002"    |
 |    2     | string | 是       | 挂单量         | "21000"    |

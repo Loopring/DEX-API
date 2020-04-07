@@ -3,19 +3,19 @@
 通过订阅该主题，您可以获得特定交易对ticker更新的数据推送。
 
 
-## 订阅规则
+## Subscription rules
 
 - `topic`需要指定交易对。如果交易对是`LRC-ETH`，那么`topic`应该拼写为：`ticker&LRC-ETH`。
 - 订阅该主题不需要提供ApiKey。
 - 支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取。
 
-## 状态码
+## Status Code
 
-| 状态码 |                 描述                 |
+| Status Code |                 Comment                 |
 | :---- | :---------------------------------- |
-| 104111 | `topic`的值或其参数非法|
+| 104111 | Invalid or unsupported `topic`|
 
-## 推送示例
+## Push data example
 
 ```json
 {
@@ -37,28 +37,28 @@
 }
 ```
 
-## 模型
+## Data Model
 
-#### 推送数据结构
+#### 推送Structure
 
-|  字段   |          类型           | 必现 |       说明       |       举例       |
+|  Field   |          Type           | Required |       Note       |       Example       |
 | :----- | :--------------------- | :------ | :-------------- | :-------------- |
-|  topic  |         string          |    是    | 订阅的主题和条件 | "ticker&LRC-ETH" |
-| integer |         integer         |    是    |     推送时间     |  1584717910000   |
-|  data   | [List[string]](#ticker)  （Ticker）|    是    |     深度信息     |        /         |
+|  topic  |         string          |    Y    | Topic and parameters | "ticker&LRC-ETH" |
+| integer |         integer         |    Y    |     推送时间     |  1584717910000   |
+|  data   | [List[string]](#ticker)  （Ticker）|    Y    |     深度信息     |        /         |
 
-#### <span id="ticker">Ticker数据结构</span>
+#### <span id="ticker">TickerStructure</span>
 
-| 序号  |  类型   | 必现 |         说明         |     举例      |
+| Index  |  Type   | Required |         Note         |     Example      |
 | :------ | :----- | :------ | :------------------ | :----------- |
-|    1     | string  |    是    |         交易对         |   "LRC-ETH"   |
-|    2     | integer |    是    |    ticker生成时间    | 1584717910000 |
-|    3     | string  |    是    |  base token的成交量  |   "5000000"   |
-|    4     | string  |    是    | quote token 的成交量 |    "1000"     |
-|    5     | string  |    是    |        开盘价        |   "0.0002"    |
-|    6     | string  |    是    |        最高价        |   0.00025"    |
-|    7     | string  |    是    |        最低价        |   "0.0002"    |
-|    8     | string  |    是    |      最新成交价      |   "0.00025"   |
-|    9     | integer |    是    |       成交笔数       |     5000      |
-|    10    | string  |    是    |      买单最高价      |   "0.00026"   |
-|    11    | string  |    是    |      卖单最低价      |   "0.00027"   |
+|    1     | string  |    Y    |         交易对         |   "LRC-ETH"   |
+|    2     | integer |    Y    |    ticker生成时间    | 1584717910000 |
+|    3     | string  |    Y    |  base token的成交量  |   "5000000"   |
+|    4     | string  |    Y    | quote token 的成交量 |    "1000"     |
+|    5     | string  |    Y    |        开盘价        |   "0.0002"    |
+|    6     | string  |    Y    |        最高价        |   0.00025"    |
+|    7     | string  |    Y    |        最低价        |   "0.0002"    |
+|    8     | string  |    Y    |      最新成交价      |   "0.00025"   |
+|    9     | integer |    Y    |       成交笔数       |     5000      |
+|    10    | string  |    Y    |      买单最高价      |   "0.00026"   |
+|    11    | string  |    Y    |      卖单最低价      |   "0.00027"   |
