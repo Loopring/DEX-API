@@ -59,7 +59,7 @@ https://api.loopring.io/api/v2/apiKey
     - `percent-encoded`参数名并将其附加到输出字符串中
     - 将' = '字符附加到输出字符串
     - `percent-encoded`参数值并将其附加到输出字符串中
-    - 如果还剩下更多的键/值对，则将' & '字符附加到输出字符串中
+    - 如果还剩下更多的键/值对，则将'&'字符附加到输出字符串中
     
 > Parameter string:
 ```
@@ -67,10 +67,11 @@ accountId=1&publicKeyX=133754509012921794171549748495717930699115173547203971250
 ```
 
 #### 生成 `signature base string`
-`signature base string`是我们按照以下顺序将之前生成的三个字符串连接起来的结果:HTTP method、`percent-encoded`的`base URL`和`percent-encoded`的`parameter string`，在相邻组件之间用' & '字符连接。
+`signature base string`是我们按照以下顺序将之前生成的三个字符串连接起来的结果:HTTP method、`percent-encoded`的`base URL`和`percent-encoded`的`parameter string`，在相邻组件之间用'&'字符连接。
 
 > Signature base string:
 ```
 GET&https%3A%2F%2Fapi.loopring.io%2Fapi%2Fv2%2FapiKey&accountId%3D1%26publicKeyX%3D13375450901292179417154974849571793069911517354720397125027633242680470075859%26publicKeyY%3D13375450901292179417154974849571793069911517354720397125027633242680470075859
 ```
-请注意，每一部分都应该是经过`percent-encoded`的，因此在生成的签名基字符串中应该正好有两个' & '字符。
+请注意，每一部分都应该是经过`percent-encoded`的，因此在生成的签名基字符串中应该正好有两个'&'字符。
+
