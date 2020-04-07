@@ -76,7 +76,7 @@
 
 3. 访问接口 [api/v1/depth](../dex_apis/getDepth.md) 获得一个全量的深度快照.
 
-4. 3中获取的快照如果version大约本地version(endVersion), 则直接覆盖, 如果小于本地version, 则相同的价格不覆盖, 不同的价格则覆盖.
+4. 3中获取的快照如果version大于本地version(endVersion), 则直接覆盖, 如果小于本地version, 则相同的价格不覆盖, 不同的价格则覆盖.
 
 5. 将深度快照中的内容更新到本地orderbook副本中, 并从websocket接收到的第一个startVersion <=本地 version+1 且 endVersion >= 本地version 的event开始继续更新本地副本.
 
