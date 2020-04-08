@@ -1,21 +1,21 @@
-# 账号金额更新
+# Account
 
 
-通过订阅该主题，您可以获得用户余额和冻结金额更新的数据推送。
+通过订阅该主题, 您可以获得用户余额和冻结金额更新的数据推送.
 
 ## 订阅规则
 
-- `topic`字符串：`account`。
-- 订阅该主题**需要**提供ApiKey。
+- `topic` string:`account`.
+- ApiKey **required**.
 
 
 
-## 参数列表
+## Parameters
 
-该主题不支持任何参数。
+该主题不支持任何参数.
 
 
-## 推送示例
+## Push Examples
 
 ```json
 {
@@ -32,22 +32,22 @@
 }
 ```
 
-## 模型
+# Data Model
 
-#### 推送消息数据结构
+# Push data structure
 
-| 字段  |        类型         | 必现 |       说明       |     
+| Field  |        Type         | Required |       Note       |     
 | :--- | :----------------- | :------ | :-------------- | 
-| topic |       JSON        |    是    | 订阅的主题和参数 |  
-|  ts   |       integer       |    是    |     推送时间     | 
-| data  | [Balance](#balance) |    是    |     余额信息     |     
+| topic |       JSON        |    Y    | 订阅的主题和参数 |  
+|  ts   |       integer       |    Y    |     推送时间     | 
+| data  | [Balance](#balance) |    Y    |     余额信息     |     
 
 #### <span id= "balance">Balance数据结构</span> 
 
-|     字段     |  类型   | 必现 |    说明    |     
+|     Field     |  Type   | Required |    Note    |     
 | :---------- | :----- | :------ | :-------- | 
-|  accountId   | integer |    是    |   用户Id   |     
-|   tokenId    | integer |    是    |   通证Id   |     
-| totalAmount  | string  |    是    |  用户余额  | 
-| aamountLocked | string  |    是    | 冻结的余额 |    
+|  accountId   | integer |    Y    |   用户Id   |     
+|   tokenId    | integer |    Y    |   通证Id   |     
+| totalAmount  | string  |    Y    |  用户余额  | 
+| aamountLocked | string  |    Y    | 冻结的余额 |    
 

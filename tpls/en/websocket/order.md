@@ -1,27 +1,27 @@
 # 用户订单更新
 
 
-通过订阅该主题，您可以获得用户在指定交易对的订单状态提送。
+通过订阅该主题, 您可以获得用户在指定交易对的订单状态提送.
 
 ## 订阅规则
 
-- `topic`字符串：`order`。
-- 订阅该主题**需要**提供ApiKey。
+- `topic` string:`order`.
+- ApiKey **required**.
 
 
-## 参数列表
+## Parameters
 
-| 参数名|  必现|              描述                 |
+|  Parameter |   Required |              Note                |
 | :---- | :--- | :--------------------------------- |
-| market | 是 | 交易对（支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取）|
+| market | Y | 交易对（支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取）|
 
-## 状态码
+## Status code
 
-| 状态码 |                描述                 |
+| Value |                Note                |
 | :---- | :--------------------------------- |
-| 104110 | `topic`的值或其参数非法|
+| 104110 | invalid `topic` or parameters|
 
-## 推送示例
+## Push Examples
 
 ```json
 {
@@ -49,39 +49,39 @@
 }
 ```
 
-## 模型
+# Data Model
 
-#### 推送消息数据结构
+# Push data structure
 
-| 字段  |      类型       | 必现 |       说明       |     
+| Field  |      Type       | Required |       Note       |     
 | :--- | :------------- | :------ | :-------------- | 
-| topic |       JSON        |    是    | 订阅的主题和参数 |  
-|  ts   |     integer     |    是    |     推送时间     |  
-| data  | [Order](#order) |    是    |     订单数据     |    
+| topic |       JSON        |    Y    | 订阅的主题和参数 |  
+|  ts   |     integer     |    Y    |     推送时间     |  
+| data  | [Order](#order) |    Y    |     订单数据     |    
 
 #### <span id="order">Order数据结构</span>
 
-|     字段      |  类型   | 必现 |            说明            |    
+|     Field      |  Type   | Required |            Note            |    
 | :----------- | :----- | :------ | :------------------------ | 
-|     hash      | string  |    是    |          订单哈希          |    
-| clientOrderId | string  |    是    |        用户自定义id        |  
-|     size      | string  |    是    |     base token 的数量      | 
-|    volume     | string  |    是    |     quote token 的数量     | 
-|     price     | string  |    是    |          订单价格          |  
-|  filledSize   | string  |    是    | 已经成交的basetoken的数量  |  
-| filledVolume  | string  |    是    | 已经成交的quotetoken的数量 |   
-|   filledFee   | string  |    是    |       已支付的手续费       | 
-|    status     | string  |    是    |          订单状态          | 
-|   createdAt   | integer |    是    |        订单创建时间        | 
-|   updateAt    | integer |    是    |   订单最后一次的更新时间   | 
-|     side      | string  |    是    |           买或卖           |    
-|    market     | string  |    是    |            交易对            |  
+|     hash      | string  |    Y    |          订单哈希          |    
+| clientOrderId | string  |    Y    |        用户自定义id        |  
+|     size      | string  |    Y    |     base token 的数量      | 
+|    volume     | string  |    Y    |     quote token 的数量     | 
+|     price     | string  |    Y    |          订单价格          |  
+|  filledSize   | string  |    Y    | 已经成交的basetoken的数量  |  
+| filledVolume  | string  |    Y    | 已经成交的quotetoken的数量 |   
+|   filledFee   | string  |    Y    |       已支付的手续费       | 
+|    status     | string  |    Y    |          订单状态          | 
+|   createdAt   | integer |    Y    |        订单创建时间        | 
+|   updateAt    | integer |    Y    |   订单最后一次的更新时间   | 
+|     side      | string  |    Y    |           买或卖           |    
+|    market     | string  |    Y    |            交易对            |  
 
 #### 订单状态取值范围
 
-|    状态    |                    说明                    |
+|    状态    |                    Note                    |
 | :-------- | :---------------------------------------- |
-| processing | 订单进行中，订单等待成交或者已经成交一部分 |
+| processing | 订单进行中, 订单等待成交或者已经成交一部分 |
 | processed  |                订单完全成交                |
 | cancelling |                   取消中                   |
 | cancelled  |                  订单取消                  |

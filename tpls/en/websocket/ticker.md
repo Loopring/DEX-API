@@ -1,31 +1,31 @@
 # Ticker更新
 
-通过订阅该主题，您可以获得特定交易对ticker更新的数据推送。
+通过订阅该主题, 您可以获得特定交易对ticker更新的数据推送.
 
 
 
 
 ## 订阅规则
 
-- `topic`字符串：`ticker`。
-- 订阅该主题**不需要**提供ApiKey。
+- `topic` string:`ticker`.
+- ApiKey **not required**.
 
 
-## 参数列表
+## Parameters
 
-| 参数名| 必现|              描述                 |
+|  Parameter |  Required |              Note                |
 | :---- | :--- |:--------------------------------- |
-| market | 是 | 交易对（支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取）|
+| market | Y | 交易对（支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取）|
 
 
 
-## 状态码
+## Status code
 
-| 状态码 |                 描述                 |
+| Value |                 Note                |
 | :---- | :---------------------------------- |
-| 104111 | `topic`的值或其参数非法|
+| 104111 | invalid `topic` or parameters|
 
-## 推送示例
+## Push Examples
 
 ```json
 {
@@ -50,28 +50,28 @@
 }
 ```
 
-## 模型
+# Data Model
 
-#### 推送消息数据结构
+# Push data structure
 
-|  字段   |          类型           | 必现 |       说明       |    
+|  Field   |          Type           | Required |       Note       |    
 | :----- | :--------------------- | :------ | :-------------- | 
-| topic |       JSON        |    是    | 订阅的主题和参数 |  
-| integer |         integer         |    是    |     推送时间     |  
-|  data   | [List[string]](#ticker) |    是    |     Ticker数组列表          |
+| topic |       JSON        |    Y    | 订阅的主题和参数 |  
+| integer |         integer         |    Y    |     推送时间     |  
+|  data   | [List[string]](#ticker) |    Y    |     Ticker数组列表          |
 
-#### <span id="ticker">Ticker数组</span>
+#### <span id="ticker">Ticker array</span>
 
-| 序号  |  类型   | 必现 |         说明         |    
+| 序号  |  Type   | Required |         Note         |    
 | :------ | :----- | :------ | :------------------ | 
-|    1     | string  |    是    |         交易对         | 
-|    2     | integer |    是    |    ticker生成时间    | 
-|    3     | string  |    是    |  base token的成交量  |  
-|    4     | string  |    是    | quote token 的成交量 |    
-|    5     | string  |    是    |        开盘价        |  
-|    6     | string  |    是    |        最高价        |  
-|    7     | string  |    是    |        最低价        | 
-|    8     | string  |    是    |      最新成交价      |  
-|    9     | integer |    是    |       成交笔数       |    
-|    10    | string  |    是    |      买单最高价      |  
-|    11    | string  |    是    |      卖单最低价      |   
+|    1     | string  |    Y    |         交易对         | 
+|    2     | integer |    Y    |    ticker生成时间    | 
+|    3     | string  |    Y    |  base token的成交量  |  
+|    4     | string  |    Y    | quote token 的成交量 |    
+|    5     | string  |    Y    |        开盘价        |  
+|    6     | string  |    Y    |        最高价        |  
+|    7     | string  |    Y    |        最低价        | 
+|    8     | string  |    Y    |      最新成交价      |  
+|    9     | integer |    Y    |       成交笔数       |    
+|    10    | string  |    Y    |      买单最高价      |  
+|    11    | string  |    Y    |      卖单最低价      |   

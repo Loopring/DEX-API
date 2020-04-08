@@ -1,29 +1,29 @@
 # 订单簿更新
 
-通过订阅该主题，您可以获得指定交易对订单簿更新的数据推送。
+通过订阅该主题, 您可以获得指定交易对订单簿更新的数据推送.
 
 ## 订阅规则
 
-- `topic`字符串：`depth`。
-- 订阅该主题**不需要**提供ApiKey。
+- `topic` string:`depth`.
+- ApiKey **not required**.
 
 
-## 参数列表
+## Parameters
 
-| 参数名|  必现 |             描述                 |
+|  Parameter |  Required |             Note                |
 | :---- | :------ |:--------------------------------- |
-| market | 是 | 交易对（支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取）|
-| level | 是 | 深度聚合级别 |
-| count | 是 | 买卖深度条目数量，值不可以超过50。 |
-| snapshot |否 | 默认为false。 如果该值为true，count不可以大于20，并且当深度条目有任何一条变化，那么指定数量的深度条目会被全量推送给客户端。 |
+| market | Y | 交易对（支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取）|
+| level | Y | 深度聚合级别 |
+| count | Y | 买卖深度条目数量, 值不可以超过50. |
+| snapshot |否 | 默认为false. 如果该值为true, count不可以大于20, 并且当深度条目有任何一条变化, 那么指定数量的深度条目会被全量推送给客户端. |
 
-## 状态码
+## Status code
 
-| 状态码 |                描述                 |
+| Value |                Note                |
 | :---- | :--------------------------------- |
-| 104107 | `topic`的值或其参数非法|
+| 104107 | invalid `topic` or parameters|
 
-## 推送示例
+## Push Examples
 
 ```json
 {
@@ -57,47 +57,47 @@
 }
 ```
 
-## 模型
+# Data Model
 
-#### 推送消息数据结构
+# Push data structure
 
-|     字段     |      类型       | 必现 |         说明         |    
+|     Field     |      Type       | Required |         Note         |    
 | :---------- | :------------- | :------ | :------------------ | 
-| topic |       JSON        |    是    | 订阅的主题和参数 |  
-|      ts      |     integer     |    是    |       推送时间       |  
-| startVersion |     integer     |    是    | 该次推送的起始版本号 |     
-|  endVersion  |     integer     |    是    | 该次推送的终结版本号 |     
-|     data     | [Depth](#depth) |    是    |       深度信息       |     
+| topic |       JSON        |    Y    | 订阅的主题和参数 |  
+|      ts      |     integer     |    Y    |       推送时间       |  
+| startVersion |     integer     |    Y    | 该次推送的起始版本号 |     
+|  endVersion  |     integer     |    Y    | 该次推送的终结版本号 |     
+|     data     | [Depth](#depth) |    Y    |       深度信息       |     
 
 ####<span id="depth">Depth数据结构</span>
 
-| 字段 | 类型                           | 必现 | 说明     | 
+| Field | Type                           | Required | Note     | 
 | :---- | :------------------------------ | :-------- | :-------- |
-| bids | [List\[List\[string\]]](#slot) | 是       | 代表买单深度的DepthItem数组列表 |
-| asks | [List\[List\[string\]]](#slot)| 是       | 代表卖单深度的DepthItem数组列表 | 
+| bids | [List\[List\[string\]]](#slot) | Y       | 代表买单深度的DepthItem数组列表 |
+| asks | [List\[List\[string\]]](#slot)| Y       | 代表卖单深度的DepthItem数组列表 | 
 
-#### <span id = "slot">DepthItem数组</span>
+#### <span id = "slot">DepthItem array</span>
 
-`asks`和`bids`数组中的每个子数组都是定长数组，我们称之为*深度条目*，其规范如下：
+`asks`和`bids`数组中的每个子数组都是定长数组, 我们称之为*深度条目*, 其规范如下：
 
-| 序号  | 类型   | 必现 | 说明           | 
+| 序号  | Type   | Required | Note           | 
 | :------ | :------ | :-------- | :-------------- | :
-|    1     | string | 是       | 价格           | 
-|    2     | string | 是       | 数量（基础通证的数量）         | 
-|    3     | string | 是       | 成交额（ 计价通证的数量）  |
-|    4     | string | 是       | 聚合的订单数目 | 
+|    1     | string | Y       | 价格           | 
+|    2     | string | Y       | 数量（基础通证的数量）         | 
+|    3     | string | Y       | 成交额（ 计价通证的数量）  |
+|    4     | string | Y       | 聚合的订单数目 | 
 
 
-需要注意的是，每一个推送中的数量和成交额代表这个价格目前的数量和成交额的绝对值，而不是相对变化。
+需要注意的是, 每一个推送中的数量和成交额代表这个价格目前的数量和成交额的绝对值, 而不是相对变化.
 
 ## 构建本地订单簿
 
 您可以通过下列步骤构建本地订单簿：
 
-1. 订阅 depth主题。
-2. 开始缓存收到的更新。同一个价位，后收到的更新覆盖前面的。
-3. 访问接口 [api/v1/depth](../dex_apis/getDepth.md) 获得一个全量的深度快照。
-4. 3中获取的快照如果`version`大于本地`version`（`endVersion`），则直接覆盖，如果小于本地version，则相同的价格不覆盖，不同的价格则覆盖。
-5. 将深度快照中的内容更新到本地订单簿副本中，并从WebSocket接收到的第一个`startVersion` <=本地 `version + 1` 且 endVersion >= 本地version 的event开始继续更新本地副本。
-6. 每一个新推送的`startVersion`应该恰好等于上一个event的`endVersion + 1`，否则可能出现了丢包，请从step3重新进行初始化。
-7. 如果某个价格对应的挂单量为0，表示该价位的挂单已经撤单或者被吃，应该移除这个价位。
+1. 订阅 depth主题.
+2. 开始缓存收到的更新.同一个价位, 后收到的更新覆盖前面的.
+3. 访问接口 [api/v1/depth](../dex_apis/getDepth.md) 获得一个全量的深度快照.
+4. 3中获取的快照如果`version`大于本地`version`（`endVersion`）, 则直接覆盖, 如果小于本地version, 则相同的价格不覆盖, 不同的价格则覆盖.
+5. 将深度快照中的内容更新到本地订单簿副本中, 并从WebSocket接收到的第一个`startVersion` <=本地 `version + 1` 且 endVersion >= 本地version 的event开始继续更新本地副本.
+6. 每一个新推送的`startVersion`应该恰好等于上一个event的`endVersion + 1`, 否则可能出现了丢包, 请从step3重新进行初始化.
+7. 如果某个价格对应的挂单量为0, 表示该价位的挂单已经撤单或者被吃, 应该移除这个价位.

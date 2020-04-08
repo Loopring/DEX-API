@@ -1,25 +1,25 @@
 # Candlestick更新
 
 
-通过订阅该主题，您可以获得特定交易对Candlestick更新的数据推送。
+通过订阅该主题, 您可以获得特定交易对Candlestick更新的数据推送.
 
 
 ## 订阅规则
 
-- `topic`字符串：`candlestick`。
-- 订阅该主题**不需要**提供ApiKey。
+- `topic` string:`candlestick`.
+- ApiKey **not required**.
 
 
-## 参数列表
+## Parameters
 
-| 参数名| 必现 |                描述                 |
+|  Parameter | Required |                Note                |
 | :---- | :---| :--------------------------------- |
-| market | 是|交易对（支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取）| 
-| interval | 是|时间间隔|
+| market |  Y |交易对（支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取）| 
+| interval |  Y |时间间隔|
 
 #### 时间间隔
 
-| 间隔  |  说明  |
+| 间隔  |  Note  |
 | :--- | :---- |
 | 1min  | 1分钟  |
 | 5min  | 5分钟  |
@@ -34,13 +34,13 @@
 
 
 
-## 状态码
+## Status code
 
-| 状态码 |                   描述                    |
+| Value |                   Note                   |
 | :---- | :--------------------------------------- |
-| 104106 | `topic`的值或其参数非法|
+| 104106 | invalid `topic` or parameters|
 
-## 推送示例
+## Push Examples
 
 ```json
 {
@@ -59,25 +59,25 @@
 }
 ```
 
-## 模型
+# Data Model
 
-#### 推送消息数据结构
+# Push data structure
 
-| 字段  |             类型              | 必现 |       说明       |    
+| Field  |             Type              | Required |       Note       |    
 | :--- | :--------------------------- | :------ | :-------------- | 
-| topic |       JSON        |    是    | 订阅的主题和参数 |  
+| topic |       JSON        |    Y    | 订阅的主题和参数 |  
 |  ts   |            integer            |    时    | 推送时间（毫秒） |      
-| data  | [List\[string]](#candlestick) （`Candlestick`列表）|    是    | cCandlestick数组 |      
+| data  | [List\[string]](#candlestick) （`Candlestick`列表）|    Y    | cCandlestick数组 |      
 
-####<span id= "candlestick">Candlestick数组</span>
+####<span id= "candlestick">Candlestick array</span>
 
-| 序号  |  类型   | 必现 |               说明                |        
+| 序号  |  Type   | Required |               Note                |        
 | :------ | :----- | :------ | :------------------------------- | 
-|    1     | integer |    是    |            指开盘时间             |     
-|    2     | integer |    是    |             成交笔数              |         
-|    3     | string  |    是    |             开盘价格              |      
-|    4     | string  |    是    |             收盘价格              |       
-|    5     | string  |    是    |              最高价               |       
-|    6     | string  |    是    |              最低价               |      
-|    7     | string  |    是    | 为wei为单位的base token的成交数量 | 
-|    8     | string  |    是    | 为wei为单位 quote token的成交数量 | 
+|    1     | integer |    Y    |            指开盘时间             |     
+|    2     | integer |    Y    |             成交笔数              |         
+|    3     | string  |    Y    |             开盘价格              |      
+|    4     | string  |    Y    |             收盘价格              |       
+|    5     | string  |    Y    |              最高价               |       
+|    6     | string  |    Y    |              最低价               |      
+|    7     | string  |    Y    | 为wei为单位的base token的成交数量 | 
+|    8     | string  |    Y    | 为wei为单位 quote token的成交数量 | 

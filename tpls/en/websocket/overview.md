@@ -43,11 +43,11 @@ wss://ws.loopring.io/v2/ws
 ```
 
 
-1. 在一次订阅中，如果`topics`中任何一个主题需要ApiKey，那么本次操作就必须包含ApiKey。
-1. 在一次订阅中，相同的主题可以出现多次，但同一个主题的相同的配置只可以出现一次。
-1. 在一次订阅中，如果有任何参数错误，则全部订阅都会失败。
-1. 如果`unsubscribeAll`是`true`，订阅前会先订退之前订阅的所有主题。
-1. 订阅时客户端可以指定一个`sequence`代表序列号，后台返回结果也会附带同样的序列号。
+1. 在一次订阅中, 如果`topics`中任何一个主题需要ApiKey, 那么本次操作就必须包含ApiKey.
+1. 在一次订阅中, 相同的主题可以出现多次, 但同一个主题的相同的配置只可以出现一次.
+1. 在一次订阅中, 如果有任何参数错误, 则全部订阅都会失败.
+1. 如果`unsubscribeAll`是`true`, 订阅前会先订退之前订阅的所有主题.
+1. 订阅时客户端可以指定一个`sequence`代表序列号, 后台返回结果也会附带同样的序列号.
 
 
 
@@ -81,44 +81,44 @@ wss://ws.loopring.io/v2/ws
 ```
 
 
-1. 在一次订退中，如果`topics`中任何一个主题需要ApiKey，那么本次操作就必须包含ApiKey。
-1. 在一次订退中，相同的主题可以出现多次，但同一个主题的相同的配置只可以出现一次。
-1. 在一次订退中，如果有任何参数错误，则全部订阅都会失败。
-1. 如果`unsubscribeAll`是`true`，所有主题都会被订退；如果在某个主题内将`unsubscribeAll`设置为`true`，那么该主题的所有配置都会被订退。
-1. 订退时客户端可以指定一个`sequence`代表序列号，后台返回结果也会附带同样的序列号。
+1. 在一次订退中, 如果`topics`中任何一个主题需要ApiKey, 那么本次操作就必须包含ApiKey.
+1. 在一次订退中, 相同的主题可以出现多次, 但同一个主题的相同的配置只可以出现一次.
+1. 在一次订退中, 如果有任何参数错误, 则全部订阅都会失败.
+1. 如果`unsubscribeAll`是`true`, 所有主题都会被订退；如果在某个主题内将`unsubscribeAll`设置为`true`, 那么该主题的所有配置都会被订退.
+1. 订退时客户端可以指定一个`sequence`代表序列号, 后台返回结果也会附带同样的序列号.
 
 #### 心跳
 
-WebSocket链接建立后，中继会每30秒会发送“ping”消息给客户端做心跳检测。如果客户端在最近2分钟内都没有任何“pong”消息，中继会断开WebSocket链接。如果客户端的“pong”消息数量超过服务端发送的“ping”消息数量，中继也会断开WebSocket链接。
+WebSocket链接建立后, 中继会每30秒会发送“ping”消息给客户端做心跳检测.如果客户端在最近2分钟内都没有任何“pong”消息, 中继会断开WebSocket链接.如果客户端的“pong”消息数量超过服务端发送的“ping”消息数量, 中继也会断开WebSocket链接.
 
 
 ## 返回值
 
-|  字段  |     类型     | 必现 |               说明               |      
+|  Field  |     Type     | Required |               Note               |      
 | :---- | :---------- | :------ | :------------------------------ |
-|   op   |    string    |    是    |         订阅（"sub"）或订退（unSub"）         |    
-|   sequence   |    integer    |    否    |        操作序列号        |   
-| topic |   JSON  |    是    |             订阅主题和参数            | 
-| result |    [Result](#result)   |    是    |             订阅结果             |            
+|   op   |    string    |    Y    |         订阅（"sub"）或订退（unSub"）         |    
+|   sequence   |    integer    |    N    |        操作序列号        |   
+| topic |   JSON  |    Y    |             订阅主题和参数            | 
+| result |    [Result](#result)   |    Y    |             订阅结果             |            
 
 
 ####  <span id="result">Result结构</span>
 
-|  字段  |      类型       | 必现 |         说明         | 
+|  Field  |      Type       | Required |         Note         | 
 | :---- | :------------- | :------ | :------------------ |
-| status |     string      |    是    |     订阅是否成功     | 
-| error  | [Error](#error) |    否    | 订阅失败时的错误信息 | 
+| status |     string      |    Y    |     订阅是否成功     | 
+| error  | [Error](#error) |    N    | 订阅失败时的错误信息 | 
 
 ####   <span id="error">Error结构</span>
 
-|  字段   |  类型   | 必现 |   说明   |     
+|  Field   |  Type   | Required |   Note   |     
 | :----- | :----- | :------ | :------ | 
-|  code   | integer |    是    |  状态码  |  
-| message | string  |    是    | 错误信息 | 
+|  code   | integer |    Y    |  Value  |  
+| message | string  |    Y    | 错误信息 | 
 
-#### 状态码
+#### Status code
 
-| **状态码** |                         描述                         |
+| **Value** |                         Note                        |
 | :-------- | :-------------------------------------------------- |
 |   104100   |                     空的订阅信息                     |
 |   104101   | 不支持的操作（路印中继服务器仅支持sub 和 unsub操作） |
