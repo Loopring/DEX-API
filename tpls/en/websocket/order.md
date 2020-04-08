@@ -19,7 +19,7 @@ Subscribe to this topic to receive changes on orders for the specific trading pa
 
 ```json
 {
-   "topic": "order&LRC-BTC",
+   "topic": "order&LRC-ETH",
    "ts":1565844328,
    "data": {
         "hash": "11212",
@@ -35,7 +35,7 @@ Subscribe to this topic to receive changes on orders for the specific trading pa
         "validSince": "1494900087",
         "validUntil": "1495900087",
         "side": "buy",
-        "market": "LRC-BTC"
+        "market": "LRC-ETH"
     }
 }
 ```

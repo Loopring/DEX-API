@@ -1,52 +1,50 @@
 # WebSocket APIs
 
-## 接入URL
+## Base URL
 
 ```
-wss://api.loopring.io/v2/ws
+wss://ws.loopring.io/v2/ws
 ```
 
-## 心跳
+## Rules
 
-当用户连接到路印中继的WebSocket之后，中继会进行心跳检测，每30秒会发送“ping”信息，期待接收客户端的“pong”信息。2分钟未收到回复会自动断开连接。
+1. The client can subscribe to multiple topics in one operation (batch subscription). If at least one topic requires the ApiKey, the batch subscription will need to provide the ApiKey.
+1. Multiple subscriptions to the same topic in a batch subscription are not allowed.
+1. The client can subscribe to the same topic with different parameters, but only the latest subscription will become active, all previous subscriptions of the same topic will be canceled automatically.
+1. Unsubscription also requires the ApiKey if the corresponding subscription requires the ApiKey. This rule also applies to batch unsubscriptions.
 
-## Subscription
+## Heartbeat
 
-用户在与路印中继建立WebSocket连接之后，可以订阅消息。需满足以下规则：
-
-1. 用户可以一次订阅或者取消订阅多个主题，如果订阅的多个主题中有需要ApiKey的，则必须包含ApiKey。
-1. 用户可以重复订阅相同的主题，最新的订阅条件会覆盖之前的订阅条件。
-1. 用户在一次订阅中，不允许订阅相同的主题
-1. 用户在取消订阅需要ApiKey的主题时，必须包含订阅该主题时所使用的ApiKey。
+After establishing a WebSocket connection with the client, the relayer will perform heartbeat detection by sending a "ping" message every 30 seconds and expecting to receive the client's "pong" message. If the relayer have't received a "Pong" after 4 "ping" messages (2 minutes), the relayer will terminate the connection.
 
 
 ## 请求
 
 |  Field  |     Type     | Required |               Note               |                 Example                 |
 | :---- | :---------- | :------ | :------------------------------ | :---------------------------------- |
-|   op   |    string    |    Y    |         订阅或者取消订阅("sub"或者"unSub")         |                "sub"               |
+|   op   |    string    |    Y    |         订阅或订退("sub"或者"unSub")         |                "sub"               |
 | apiKey |    string    |    N    | 订阅要求传ApiKey的主题才是必须的 | “16M2hKHw9b5VuP21YBAJQmCd3VhuNtdDqG” |
 |  args  | list<string> |    Y    |         订阅的主题及条件         | [ "depth&LRC-ETH&0","trade&LRC-ETH"] |
 
-#### 示例
+#### Examples
 
 
-订阅请求示例
+Subscribtion request:
 
 ```json
 {
     "op": "sub",
     "args": [
-        "candlestick&LRC-BTC&1Hour",
-        "depth&LRC-BTC&1",
-        "depth10&LRC-BTC&1",
-        "trade&LRC-BTC",
-        "ticker&LRC-BTC"
+        "candlestick&LRC-ETH&1Hour",
+        "depth&LRC-ETH&1",
+        "depth10&LRC-ETH&1",
+        "trade&LRC-ETH",
+        "ticker&LRC-ETH"
     ]
 }
 ```
 
-取消订阅请求示例
+Unsubscribtion request:
 
 ```json
 {
@@ -96,7 +94,7 @@ wss://api.loopring.io/v2/ws
 |   104104   |                    缺少ApiKey信息                    |
 |   104105   |              与之前订阅使用的ApiKey不符              |
 |   104112   |                    不合法的ApiKey                    |
-|   104113   |               取消订阅未曾订阅过的主题               |
+|   104113   |               订退未曾订阅过的主题               |
 |   104114   |             无法通过APiKey找到对应的用户             |
 |   104115   |                  无法识别的订阅消息                  |
 
@@ -120,7 +118,7 @@ wss://api.loopring.io/v2/ws
 }
 ```
 
-订阅条件不合法的失败示例
+订阅参数不合法的失败示例
 
 ```json
 {
@@ -139,7 +137,7 @@ wss://api.loopring.io/v2/ws
 }
 ```
 
-订阅条件无法解析的失败示例
+订阅参数无法解析的失败示例
 
 ```json
 {

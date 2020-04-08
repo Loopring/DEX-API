@@ -5,11 +5,15 @@
 
 ## 订阅规则
 
-- `topic`需要指定交易对。如果交易对是`LRC-ETH`，那么`topic`应该拼写为：`trade&LRC-ETH`。
-- 订阅该主题不需要提供ApiKey。
-- 支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取。
+- `topic`字符串：`trade`。
+- 订阅该主题**不需要**提供ApiKey。
 
 
+## 参数列表
+
+| 参数名|   必现|             描述                 |
+| :---- | :---|:--------------------------------- |
+| market | 是|交易对（支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取）|
 
 
 ## 状态码
@@ -22,7 +26,7 @@
 
 ```json
 {
-    "topic": "trade&LRC-ETH",
+    "topics": "trade%3Fmarket%3DLRC-ETH",
     "ts": 1584717910000,
     "data": [
         [
@@ -41,20 +45,20 @@
 
 #### `data`数据结构
 
-|  字段   |          类型           | 必现 |       说明       |      举例       |
-| :----- | :--------------------- | :------ | :-------------- | :------------- |
-|  topic  |         string          |    是    | 订阅的主题和条件 | "trade&LRC-ETH" |
-| integer |         integer         |    是    |     推送时间     |  1584717910000  |
-|  data   | [List[List\[string]](#trade)] （`Trade`列表）|    是    |     深度信息     |        /        |
+|  字段   |          类型           | 必现 |       说明       |    
+| :----- | :--------------------- | :------ | :-------------- |
+|  topic  |         string          |    是    | 订阅的主题和条件 | 
+| integer |         integer         |    是    |     推送时间     | 
+|  data   | [List[List\[string]](#trade)] （`Trade`列表）|    是    |     深度信息     |  
 
 #### <span id="trade">`Trade`数据结构</span>
 
-| 序号  |  类型   | 必现 |         说明         |     举例      |
-| :------ | :----- | :------ | :------------------ | :----------- |
-|    1     | integer |    是    |       成交时间       | 1584717910000 |
-|    2     | integer |    是    |       交易编号       |   123456789   |
-|    3     | string  |    是    |  买或者卖，指taker   |     "buy"     |
-|    4     | string  |    是    | base token的成交数量 |   "500000"    |
-|    5     | string  |    是    |       成交价格       |   "0.0008"    |
-|    6     | string  |    是    |   base token的收费   |     "100"     |
+| 序号  |  类型   | 必现 |         说明         |  
+| :------ | :----- | :------ | :------------------ | 
+|    1     | integer |    是    |       成交时间       | 
+|    2     | integer |    是    |       交易编号       |   
+|    3     | string  |    是    |  买或者卖，指taker   |    
+|    4     | string  |    是    | base token的成交数量 |  
+|    5     | string  |    是    |       成交价格       |   
+|    6     | string  |    是    |   base token的收费   |    
 
