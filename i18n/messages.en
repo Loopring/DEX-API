@@ -65,7 +65,6 @@
   },
   "websocket": {
     "depth": "Orderbooks",
-    "depth10": "Top 10 Bids & Asks",
     "trade": "Trades",
     "ticker": "Tickers",
     "candlestick": "Candlesticks",

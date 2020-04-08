@@ -65,7 +65,6 @@
   },
   "websocket": {
     "depth": "订单簿更新",
-    "depth10": "前10买卖单全量推送",
     "trade": "最新成交",
     "ticker": "Ticker更新",
     "candlestick": "Candlestick更新",
