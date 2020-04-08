@@ -22,10 +22,8 @@
 
 * [{{ l.summary.APISpec.WebSocketAPIs}}](websocket/overview.md)
     * [{{l.websocket.account}}](websocket/account.md)
-    * [{{l.websocket.orders}}](websocket/orders.md)
-    * [{{l.websocket.orderbooks}}](websocket/orderbooks.md)
-    * [{{l.websocket.top10orders}}](websocket/top10orders.md)
-    * [{{l.websocket.trades}}](websocket/trades.md)
-    * [{{l.websocket.tickers}}](websocket/tickers.md)
-    * [{{l.websocket.candlesticks}}](websocket/candlesticks.md)
+    * [{{l.websocket.order}}](websocket/order.md)
+    * [{{l.websocket.trade}}](websocket/trade.md)
+    * [{{l.websocket.ticker}}](websocket/ticker.md)
+    * [{{l.websocket.candlestick}}](websocket/candlestick.md)
 

@@ -6,7 +6,7 @@ Subscribe to this topic to receive changes on orders for the specific trading pa
 
 ## Subscription
 - `topic` must specify a trading pair。If the traidng pair is `LRC-ETH`，then `topic` should be：`"order&LRC-ETH"`。
-- You need to provide your ApiKey.
+- You DO NOT need to provide your ApiKey.
 - You can get the list of supported trading pairs through [api/v2/exchange/markets](../dex_apis/getMarkets.md).
 
 ## Status code

@@ -64,12 +64,12 @@
     "claim": "This file is generated automatically. Please do not modify."
   },
   "websocket": {
-    "orderbooks": "Orderbooks",
-    "top10orders": "Top 10 Bids & Asks",
-    "trades": "Recent Trades",
-    "tickers": "Tickers",
-    "candlesticks": "Candlesticks",
+    "depth": "Orderbooks",
+    "depth10": "Top 10 Bids & Asks",
+    "trade": "Trades",
+    "ticker": "Tickers",
+    "candlestick": "Candlesticks",
     "account": "Account",
-    "orders": "Orders"
+    "order": "Orders"
   }
 }

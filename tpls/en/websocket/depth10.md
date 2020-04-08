@@ -1,12 +1,14 @@
-# 订阅前10买卖单全量推送
+# Top 10 Bids & Asks  (WIP)
 
-通过订阅该主题，您可以每1秒获得指定交易对前10条卖单和买单的**全量**数据推送 - 即使数据没有任何变化。
+Subscribe to this topic to receive the top 10 bids and asks **every second** for the specific trading pair, even if there is no changes in these orders.
+
 
 ## Subscription
 
-- `topic`需要指定交易对和深度聚合等级。如果交易对是`LRC-ETH`，深度聚合等级是`1`，那么`topic`应该拼写为：`depth10&LRC-ETH&1`。
-- 订阅该主题不需要提供ApiKey。
-- 交易对和深度聚合等级可以通过[api/v2/exchange/markets接口](../dex_apis/getMarkets.md)获取。
+- `topic` must specify a trading pair and the aggretation level。If the traidng pair is `LRC-ETH`，and the aggretation level is `1`, then `topic` should be：`"depth10&LRC-ETH&1"`.
+- You DO NOT need to provide your ApiKey.
+- You can get the list of supported trading pairs through [api/v2/exchange/markets](../dex_apis/getMarkets.md).
+
 
 
 ## Status code
