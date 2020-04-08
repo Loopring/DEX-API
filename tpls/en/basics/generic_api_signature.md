@@ -3,7 +3,7 @@
 - Initialize `signatureBase` to an empty string.
 - Append the API's  HTTP method to `signatureBase`.
 - Append `'＆'` to `signatureBase`.
-- Append *percent-encoded* complete URL (with `?` or any query parameters) to `signatureBase`.
+- Append *percent-encoded* full URL (without `?` or any query parameters) to `signatureBase`.
 - Append `'&'` to `signatureBase`.
 - Initialize `parameterString` to an empty string.
 - For GET / DELETE requests:
@@ -21,7 +21,7 @@
 
 #### HTTP Method and URL
 
-Please make sure you use only the following HTTP methods, in uppper case letters.
+Please make sure you use only the following HTTP methods, in upper case letters.
 - GET
 - POST
 - PUT
