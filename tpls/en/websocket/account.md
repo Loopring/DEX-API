@@ -1,12 +1,13 @@
-# 订阅用户账号金额更新
+# Account
+
+Subscribe to this topic to receive changes on account balances.
 
 
-通过订阅该主题，您可以获得用户余额和冻结金额更新的数据推送。
 
-## Subscription rules
+## Subscription
 
-- `topic`需要设为`account`。
-- 订阅该主题**需要提供ApiKey**。
+- `topic` should be exactly `"account"`。
+- You need to provide your ApiKey.
 
 ## Push data example
 
@@ -23,22 +24,22 @@
 }
 ```
 
-## Data Model
+## Model
 
-#### Data Structure
+#### `data` object
 
 | Field  |        Type         | Required |       Note       |     Example      |
 | :--- | :----------------- | :------ | :-------------- | :----------- |
 | topic |       string        |    Y    | Topic and parameters |   "account"   |
-|  ts   |       integer       |    Y    |     推送时间     | 1584717910000 |
-| data  | [Balance](#balance) |    Y    |     余额信息     |       /       |
+|  ts   |       integer       |    Y    |     Time of change     | 1584717910000 |
+| data  | [Balance](#balance) |    Y    |     Balance data     |       /       |
 
-#### <span id= "balance">BalanceStructure</span> 
+#### <span id= "balance">`Balance` object</span> 
 
 |     Field     |  Type   | Required |    Note    |       Example       |
 | :---------- | :----- | :------ | :-------- | :-------------- |
-|  accountId   | integer |    Y    |   用户Id   |        1         |
-|   tokenId    | integer |    Y    |   通证Id   |        2         |
-| totalAmount  | string  |    Y    |  用户余额  | "24439253519655" |
-| frezeeAmount | string  |    Y    | 冻结的余额 |       "0"        |
+|  accountId   | integer |    Y    |   Account Id   |        1         |
+|   tokenId    | integer |    Y    |   Token Id   |        2         |
+| totalAmount  | string  |    Y    |  Token's total balance  | "24439253519655" |
+| frezeeAmount | string  |    Y    | Token's balance locked by orders |       "0"        |
 

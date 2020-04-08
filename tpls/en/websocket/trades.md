@@ -3,18 +3,18 @@
 通过订阅该主题，您可以获得特定交易对全部用户新成交记录的数据推送。
 
 
-## Subscription rules
+## Subscription
 
 - `topic`需要指定交易对。如果交易对是`LRC-ETH`，那么`topic`应该拼写为：`trade&LRC-ETH`。
 - 订阅该主题不需要提供ApiKey。
-- 支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取。
+- You can get the list of supported trading pairs through [api/v2/exchange/markets](../dex_apis/getMarkets.md).
 
 
 
 
 ## Status code
 
-| Value |                Comment                 |
+| Value |                Note                 |
 | :---- | :--------------------------------- |
 | 104109 | Invalid or unsupported `topic`|
 
@@ -37,17 +37,17 @@
 }
 ```
 
-## Data Model
+## Model
 
-#### Data Structure
+#### Data object
 
 |  Field   |          Type           | Required |       Note       |      Example       |
 | :----- | :--------------------- | :------ | :-------------- | :------------- |
 |  topic  |         string          |    Y    | Topic and parameters | "trade&LRC-ETH" |
 | integer |         integer         |    Y    |     推送时间     |  1584717910000  |
-|  data   | [List[List\[string]](#trade)] （Trade列表）|    Y    |     深度信息     |        /        |
+|  data   | [List[List\[string]](#trade)] (Trade列表)|    Y    |     深度信息     |        /        |
 
-#### <span id="trade">Trade Structure</span>
+#### <span id="trade">Trade object</span>
 
 | Index  |  Type   | Required |         Note         |     Example      |
 | :------ | :----- | :------ | :------------------ | :----------- |

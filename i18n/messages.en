@@ -65,11 +65,11 @@
   },
   "websocket": {
     "orderbooks": "Orderbooks",
-    "top10orders": "Top 10 Bids/Asks",
+    "top10orders": "Top 10 Bids & Asks",
     "trades": "Recent Trades",
     "tickers": "Tickers",
     "candlesticks": "Candlesticks",
-    "account": "Balances",
+    "account": "Account",
     "orders": "Orders"
   }
 }

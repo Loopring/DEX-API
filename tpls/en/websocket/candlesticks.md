@@ -1,15 +1,15 @@
-# 订阅CandleStick更新
+# 订阅Candlestick更新
 
 
-通过订阅该主题，您可以获得特定交易对CandleStick更新的数据推送。
+通过订阅该主题，您可以获得特定交易对Candlestick更新的数据推送。
 
 
-## Subscription rules
+## Subscription
 
 - `topic`需要指定交易对和时间间隔。如果交易对是`LRC-ETH`，时间间隔是1小时，那么`topic`应该拼写为：`candlestick&LRC-ETH&1hr`。
 - 订阅该主题不需要提供ApiKey。
-- 支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取。
-- 支持的间隔（interval）为1min, 5min, 15min, 30min, 1hr, 2hr, 4hr, 12hr, 1d, 1w
+- You can get the list of supported trading pairs through [api/v2/exchange/markets](../dex_apis/getMarkets.md).
+- 支持的间隔(interval)为1min, 5min, 15min, 30min, 1hr, 2hr, 4hr, 12hr, 1d, 1w
 
 | 间隔  |  Note  |
 | :--- | :---- |
@@ -27,7 +27,7 @@
 
 ## Status code
 
-| Value |                   Comment                    |
+| Value |                   Note                    |
 | :---- | :--------------------------------------- |
 | 104106 | Invalid or unsupported `topic`|
 
@@ -50,17 +50,17 @@
 }
 ```
 
-## Data Model
+## Model
 
-#### Data Structure
+#### Data object
 
 | Field  |             Type              | Required |       Note       |           Example            |
 | :--- | :--------------------------- | :------ | :-------------- | :----------------------- |
 | topic |            string             |    Y    | Topic and parameters | "candlestick&LRC-ETH&1hr" |
-|  ts   |            integer            |    时    | 推送时间（毫秒） |       1584717910000       |
-| data  | [List\[string]](#candlestick) （CandleStick列表）|    Y    | candlestick数据  |             /             |
+|  ts   |            integer            |    时    | 推送时间(毫秒) |       1584717910000       |
+| data  | [List\[string]](#candlestick) (Candlestick列表)|    Y    | candlestick数据  |             /             |
 
-####<span id= "candlestick">CandleStick结构</span>
+####<span id= "candlestick">Candlestick结构</span>
 
 | Index  |  Type   | Required |               Note                |         Example          |
 | :------ | :----- | :------ | :------------------------------- | :------------------- |

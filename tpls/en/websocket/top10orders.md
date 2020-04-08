@@ -1,8 +1,8 @@
-# 订阅买卖前10全量推送
+# 订阅前10买卖单全量推送
 
 通过订阅该主题，您可以每1秒获得指定交易对前10条卖单和买单的**全量**数据推送 - 即使数据没有任何变化。
 
-## Subscription rules
+## Subscription
 
 - `topic`需要指定交易对和深度聚合等级。如果交易对是`LRC-ETH`，深度聚合等级是`1`，那么`topic`应该拼写为：`depth10&LRC-ETH&1`。
 - 订阅该主题不需要提供ApiKey。
@@ -11,7 +11,7 @@
 
 ## Status code
 
-| Value |                 Comment                  |
+| Value |                 Note                  |
 | :---- | :----------------------------------- |
 | 104108 | Invalid or unsupported `topic`|
 
@@ -42,22 +42,22 @@
 }
 ```
 
-## Data Model
+## Model
 
-#### Data Structure
+#### Data object
 
 | Field  |      Type       | Required |       Note       |        Example         |
 | :--- | :------------- | :------ | :-------------- | :----------------- |
 | topic |     string      |    Y    | Topic and parameters | "depth10&LRC-ETH&1" |
-|  ts   |     integer     |    Y    |     推送时间     |    1584717910000    |
-| data  | [Depth](#depth) |    Y    |     深度信息     |          /          |
+|  ts   |     integer     |    Y    |     Time of change     |    1584717910000    |
+| data  | [Depth](#depth) |    Y    |     Orderbook data     |          /          |
 
-####<span id="depth">DepthStructure</span>
+####<span id="depth">Depthobject</span>
 
 | Field | Type                           | Required | Note     | Example |
 | :---- | :------------------------------ | :-------- | :-------- | :---- |
-| bids | [List\[List\[string\]]](#slot)  （深度条目列表）| 是       | 买单深度 | /    |
-| asks | [List\[List\[string\]]](#slot)  （深度条目列表）| 是       | 卖单深度 | /    |
+| bids | [List\[List\[string\]]](#slot) (深度条目列表)| Y       | Changed bids | /    |
+| asks | [List\[List\[string\]]](#slot) (深度条目列表)| Y       | Changed asks | /    |
 
 ### <span id = "slot">深度条目</span>
 
@@ -65,7 +65,7 @@
 
 | Index  | Type   | Required | Note           | Example       |
 | :------ | :------ | :-------- | :-------------- | :---------- |
-|    1     | string | 是       | 价格           | "0.002"    |
-|    2     | string | 是       | 挂单量         | "21000"    |
-|    3     | string | 是       | 挂单总量       | "33220000" |
-|    4     | string | 是       | 聚合的订单数目 | "4"        |
+|    1     | string | Y       | Price           | "0.002"    |
+|    2     | string | Y       | Quantity of base token         | "21000"    |
+|    3     | string | Y       | Quantity of quote token       | "33220000" |
+|    4     | string | Y       | Number of orders aggregated | "4"        |

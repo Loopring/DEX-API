@@ -10,7 +10,7 @@ wss://api.loopring.io/v2/ws
 
 当用户连接到路印中继的WebSocket之后，中继会进行心跳检测，每30秒会发送“ping”信息，期待接收客户端的“pong”信息。2分钟未收到回复会自动断开连接。
 
-## Subscription rules
+## Subscription
 
 用户在与路印中继建立WebSocket连接之后，可以订阅消息。需满足以下规则：
 
@@ -22,9 +22,9 @@ wss://api.loopring.io/v2/ws
 
 ## 请求
 
-|  Field  |     Type     | 必须 |               Note               |                 Example                 |
+|  Field  |     Type     | Required |               Note               |                 Example                 |
 | :---- | :---------- | :------ | :------------------------------ | :---------------------------------- |
-|   op   |    string    |    Y    |         订阅或者取消订阅（"sub"或者"unSub"）         |                "sub"               |
+|   op   |    string    |    Y    |         订阅或者取消订阅("sub"或者"unSub")         |                "sub"               |
 | apiKey |    string    |    N    | 订阅要求传ApiKey的主题才是必须的 | “16M2hKHw9b5VuP21YBAJQmCd3VhuNtdDqG” |
 |  args  | list<string> |    Y    |         订阅的主题及条件         | [ "depth&LRC-ETH&0","trade&LRC-ETH"] |
 
@@ -90,7 +90,7 @@ wss://api.loopring.io/v2/ws
 | **Status code** |                         Comment                         |
 | :-------- | :-------------------------------------------------- |
 |   104100   |                     空的订阅信息                     |
-|   104101   | 不支持的操作（路印中继服务器仅支持sub 和 unsub操作） |
+|   104101   | 不支持的操作(路印中继服务器仅支持sub 和 unsub操作) |
 |   104102   |                     不支持的主题                     |
 |   104103   |                    重复的订阅主题                    |
 |   104104   |                    缺少ApiKey信息                    |

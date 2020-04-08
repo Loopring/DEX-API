@@ -1,7 +1,7 @@
-# 订阅CandleStick更新
+# Candlestick更新
 
 
-通过订阅该主题，您可以获得特定交易对CandleStick更新的数据推送。
+通过订阅该主题，您可以获得特定交易对Candlestick更新的数据推送。
 
 
 ## 订阅规则
@@ -52,15 +52,15 @@
 
 ## 模型
 
-#### 推送数据结构
+#### `data`数据结构
 
 | 字段  |             类型              | 必现 |       说明       |           举例            |
 | :--- | :--------------------------- | :------ | :-------------- | :----------------------- |
 | topic |            string             |    是    | 订阅的主题和条件 | "candlestick&LRC-ETH&1hr" |
 |  ts   |            integer            |    时    | 推送时间（毫秒） |       1584717910000       |
-| data  | [List\[string]](#candlestick) （CandleStick列表）|    是    | candlestick数据  |             /             |
+| data  | [List\[string]](#candlestick) （`Candlestick`列表）|    是    | candlestick数据  |             /             |
 
-####<span id= "candlestick">CandleStick结构</span>
+####<span id= "candlestick">`Candlestick`数据结构</span>
 
 | 序号  |  类型   | 必现 |               说明                |         举例          |
 | :------ | :----- | :------ | :------------------------------- | :------------------- |
