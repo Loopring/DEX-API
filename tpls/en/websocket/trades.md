@@ -12,9 +12,9 @@
 
 
 
-## Status Code
+## Status code
 
-| Status Code |                Comment                 |
+| Value |                Comment                 |
 | :---- | :--------------------------------- |
 | 104109 | Invalid or unsupported `topic`|
 
@@ -39,7 +39,7 @@
 
 ## Data Model
 
-#### 推送Structure
+#### Data Structure
 
 |  Field   |          Type           | Required |       Note       |      Example       |
 | :----- | :--------------------- | :------ | :-------------- | :------------- |

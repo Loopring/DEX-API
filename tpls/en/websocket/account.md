@@ -25,7 +25,7 @@
 
 ## Data Model
 
-#### 推送Structure
+#### Data Structure
 
 | Field  |        Type         | Required |       Note       |     Example      |
 | :--- | :----------------- | :------ | :-------------- | :----------- |

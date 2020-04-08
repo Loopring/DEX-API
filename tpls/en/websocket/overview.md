@@ -82,12 +82,12 @@ wss://api.loopring.io/v2/ws
 
 |  Field   |  Type   | Required |   Note   |     Example     |
 | :----- | :----- | :------ | :------ | :---------- |
-|  code   | integer |    Y    |  Status Code  |    107500    |
+|  code   | integer |    Y    |  Status code  |    107500    |
 | message | string  |    Y    | 错误信息 | 空的订阅信息 |
 
-#### Status Code
+#### Status code
 
-| **Status Code** |                         Comment                         |
+| **Status code** |                         Comment                         |
 | :-------- | :-------------------------------------------------- |
 |   104100   |                     空的订阅信息                     |
 |   104101   | 不支持的操作（路印中继服务器仅支持sub 和 unsub操作） |

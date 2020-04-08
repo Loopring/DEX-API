@@ -25,9 +25,9 @@
 |  1w   |  1周   |
 
 
-## Status Code
+## Status code
 
-| Status Code |                   Comment                    |
+| Value |                   Comment                    |
 | :---- | :--------------------------------------- |
 | 104106 | Invalid or unsupported `topic`|
 
@@ -52,7 +52,7 @@
 
 ## Data Model
 
-#### 推送Structure
+#### Data Structure
 
 | Field  |             Type              | Required |       Note       |           Example            |
 | :--- | :--------------------------- | :------ | :-------------- | :----------------------- |

@@ -9,9 +9,9 @@
 - 订阅该主题不需要提供ApiKey。
 - 支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取。
 
-## Status Code
+## Status code
 
-| Status Code |                 Comment                 |
+| Value |                 Comment                 |
 | :---- | :---------------------------------- |
 | 104111 | Invalid or unsupported `topic`|
 
@@ -39,7 +39,7 @@
 
 ## Data Model
 
-#### 推送Structure
+#### Data Structure
 
 |  Field   |          Type           | Required |       Note       |       Example       |
 | :----- | :--------------------- | :------ | :-------------- | :-------------- |

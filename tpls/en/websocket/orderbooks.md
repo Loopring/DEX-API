@@ -1,4 +1,4 @@
-# 订阅订单簿更新
+# Orderbook Update
 
 通过订阅该主题，您可以获得指定交易对订单簿更新的数据推送。
 
@@ -7,9 +7,9 @@
 - 订阅该主题不需要提供ApiKey。
 - 交易对和深度聚合等级可以通过[api/v2/exchange/markets接口](../dex_apis/getMarkets.md)获取。
 
-## Status Code
+## Status code
 
-| Status Code |                Comment                 |
+| Value |                Comment                 |
 | :---- | :--------------------------------- |
 | 104107 | Invalid or unsupported `topic`|
 
@@ -44,7 +44,7 @@
 
 ## Data Model
 
-#### 推送Structure
+#### Data Structure
 
 |     Field     |      Type       | Required |         Note         |       Example        |
 | :---------- | :------------- | :------ | :------------------ | :--------------- |
@@ -54,7 +54,7 @@
 |  endVersion  |     integer     |    Y    | 该次推送的终结版本号 |      1212123      |
 |     data     | [Depth](#depth) |    Y    |       深度信息       |         /         |
 
-####<span id="depth">DepthStructure</span>
+####<span id="depth">Depth Structure</span>
 
 | Field | Type                           | Required | Note     | Example |
 | :---- | :------------------------------ | :-------- | :-------- | :---- |

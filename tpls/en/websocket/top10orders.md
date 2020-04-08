@@ -9,9 +9,9 @@
 - 交易对和深度聚合等级可以通过[api/v2/exchange/markets接口](../dex_apis/getMarkets.md)获取。
 
 
-## Status Code
+## Status code
 
-| Status Code |                 Comment                  |
+| Value |                 Comment                  |
 | :---- | :----------------------------------- |
 | 104108 | Invalid or unsupported `topic`|
 
@@ -44,7 +44,7 @@
 
 ## Data Model
 
-#### 推送Structure
+#### Data Structure
 
 | Field  |      Type       | Required |       Note       |        Example         |
 | :--- | :------------- | :------ | :-------------- | :----------------- |
