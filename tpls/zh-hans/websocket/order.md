@@ -25,7 +25,10 @@
 
 ```json
 {
-   "topics": "order%3Fmarket%3DLRC-ETH",
+   "topic": {
+        "topic": "order",
+        "market": "LRC-ETH"
+   },
    "ts":1565844328,
    "data": {
         "hash": "11212",
@@ -48,15 +51,15 @@
 
 ## 模型
 
-#### `data`数据结构
+#### 推送消息数据结构
 
 | 字段  |      类型       | 必现 |       说明       |     
 | :--- | :------------- | :------ | :-------------- | 
-| topics |     string      |    是    | 订阅的主题和条件 |
+| topic |       JSON        |    是    | 订阅的主题和参数 |  
 |  ts   |     integer     |    是    |     推送时间     |  
-| data  | [Order](#order) |    是    |     `Order`列表     |    
+| data  | [Order](#order) |    是    |     订单数据     |    
 
-#### <span id="order">`Order`数据结构</span>
+#### <span id="order">Order数据结构</span>
 
 |     字段      |  类型   | 必现 |            说明            |    
 | :----------- | :----- | :------ | :------------------------ | 

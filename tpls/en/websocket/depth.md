@@ -15,7 +15,7 @@
 | market | 是 | 交易对（支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取）|
 | level | 是 | 深度聚合级别 |
 | count | 是 | 买卖深度条目数量其，值不可以超过50。 |
-| snapshot |否 | 默认为false。 如果该值为true，count不可以大于20，并且当深度条目有任何一条变化，那么指定数量的深度条目都会被推送给客户端。 |
+| snapshot |否 | 默认为false。 如果该值为true，count不可以大于20，并且当深度条目有任何一条变化，那么指定数量的深度条目会被全量推送给客户端。 |
 
 ## 状态码
 
@@ -27,7 +27,12 @@
 
 ```json
 {
-    "topics": "depth%3Fmarket%3DLRC-ETH%26level%3D1%26count%3D10",
+    "topic": {
+        "topic:": "depth",
+        "market": "LRC-USDT",
+        "count": 20,
+        "snapshot": true
+    },
     "ts": 1584717910000,
     "startVersion": 1212121,
     "endVersion": "1212123",
@@ -54,24 +59,24 @@
 
 ## 模型
 
-#### `data`数据结构
+#### 推送消息数据结构
 
 |     字段     |      类型       | 必现 |         说明         |    
 | :---------- | :------------- | :------ | :------------------ | 
-|    topic     |     string      |    是    |   订阅的主题和条件   | 
+| topic |       JSON        |    是    | 订阅的主题和参数 |  
 |      ts      |     integer     |    是    |       推送时间       |  
 | startVersion |     integer     |    是    | 该次推送的起始版本号 |     
 |  endVersion  |     integer     |    是    | 该次推送的终结版本号 |     
 |     data     | [Depth](#depth) |    是    |       深度信息       |     
 
-####<span id="depth">`Depth`数据结构</span>
+####<span id="depth">Depth数据结构</span>
 
 | 字段 | 类型                           | 必现 | 说明     | 
 | :---- | :------------------------------ | :-------- | :-------- |
-| bids | [List\[List\[string\]]](#slot) （`DepthItem`列表）| 是       | 买单深度 |
-| asks | [List\[List\[string\]]](#slot) （`DepthItem`列表）| 是       | 卖单深度 | 
+| bids | [List\[List\[string\]]](#slot) | 是       | 代表买单深度的DepthItem数组列表 |
+| asks | [List\[List\[string\]]](#slot)| 是       | 代表卖单深度的DepthItem数组列表 | 
 
-#### <span id = "slot">`DepthItem`数据结构</span>
+#### <span id = "slot">DepthItem数组</span>
 
 `asks`和`bids`数组中的每个子数组都是定长数组，我们称之为*深度条目*，其规范如下：
 

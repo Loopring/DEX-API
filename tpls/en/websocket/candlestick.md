@@ -17,7 +17,7 @@
 | market | 是|交易对（支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取）| 
 | interval | 是|时间间隔|
 
-#### `interval`的取值
+#### 时间间隔
 
 | 间隔  |  说明  |
 | :--- | :---- |
@@ -44,7 +44,7 @@
 
 ```json
 {
-    "topics": "candlestick%3Fmarket%3DLRC-ETH%26interval%3D1hr",
+    "topic": "candlestick%3Fmarket%3DLRC-ETH%26interval%3D1hr",
     "ts":1584717910000,
     "data": [
         "1584717910000",  //start
@@ -61,15 +61,15 @@
 
 ## 模型
 
-#### `data`数据结构
+#### 推送消息数据结构
 
 | 字段  |             类型              | 必现 |       说明       |    
 | :--- | :--------------------------- | :------ | :-------------- | 
-| topics |            string             |    是    | 订阅的主题和条件 |
+| topic |       JSON        |    是    | 订阅的主题和参数 |  
 |  ts   |            integer            |    时    | 推送时间（毫秒） |      
-| data  | [List\[string]](#candlestick) （`Candlestick`列表）|    是    | candlestick数据  |      
+| data  | [List\[string]](#candlestick) （`Candlestick`列表）|    是    | cCandlestick数组 |      
 
-####<span id= "candlestick">`Candlestick`数据结构</span>
+####<span id= "candlestick">Candlestick数组</span>
 
 | 序号  |  类型   | 必现 |               说明                |        
 | :------ | :----- | :------ | :------------------------------- | 

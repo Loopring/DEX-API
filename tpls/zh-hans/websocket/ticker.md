@@ -29,7 +29,10 @@
 
 ```json
 {
-    "topics": "ticker%3Fmarket%3DLRC-ETH",
+    "topic": {
+        "topic": "ticker",
+        "market": "LRC-ETH"
+    },
     "ts": 1584717910000,
     "data": [
         "LRC-ETH",  //market
@@ -49,15 +52,15 @@
 
 ## 模型
 
-#### `data`数据结构
+#### 推送消息数据结构
 
 |  字段   |          类型           | 必现 |       说明       |    
 | :----- | :--------------------- | :------ | :-------------- | 
-|  topic  |         string          |    是    | 订阅的主题和条件 | 
+| topic |       JSON        |    是    | 订阅的主题和参数 |  
 | integer |         integer         |    是    |     推送时间     |  
-|  data   | [List[string]](#ticker)  （`Ticker`）|    是    |     深度信息          |
+|  data   | [List[string]](#ticker) |    是    |     Ticker数组列表          |
 
-#### <span id="ticker">`Ticker`数据结构</span>
+#### <span id="ticker">Ticker数组</span>
 
 | 序号  |  类型   | 必现 |         说明         |    
 | :------ | :----- | :------ | :------------------ | 

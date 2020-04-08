@@ -65,10 +65,10 @@
   },
   "websocket": {
     "depth": "订单簿更新",
-    "trade": "最新成交",
+    "trade": "最新成交更新",
     "ticker": "Ticker更新",
     "candlestick": "Candlestick更新",
-    "account": "用户账号金额更新",
+    "account": "账号金额更新",
     "order": "用户订单更新"
   }
 }
