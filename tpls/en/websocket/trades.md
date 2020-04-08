@@ -39,15 +39,15 @@
 
 ## Model
 
-#### Data object
+#### `data` object
 
 |  Field   |          Type           | Required |       Note       |      Example       |
 | :----- | :--------------------- | :------ | :-------------- | :------------- |
 |  topic  |         string          |    Y    | Topic and parameters | "trade&LRC-ETH" |
-| integer |         integer         |    Y    |     推送时间     |  1584717910000  |
-|  data   | [List[List\[string]](#trade)] (Trade列表)|    Y    |     深度信息     |        /        |
+| integer |         integer         |    Y    |     Time of change     |  1584717910000  |
+|  data   | [List[List\[string]](#trade)]|    Y    |     a list of  `Trade`s    |        /        |
 
-#### <span id="trade">Trade object</span>
+#### <span id="trade">`Trade` object</span>
 
 | Index  |  Type   | Required |         Note         |     Example      |
 | :------ | :----- | :------ | :------------------ | :----------- |

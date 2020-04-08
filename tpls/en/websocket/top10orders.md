@@ -44,7 +44,7 @@
 
 ## Model
 
-#### Data object
+#### `data` object
 
 | Field  |      Type       | Required |       Note       |        Example         |
 | :--- | :------------- | :------ | :-------------- | :----------------- |
@@ -52,20 +52,23 @@
 |  ts   |     integer     |    Y    |     Time of change     |    1584717910000    |
 | data  | [Depth](#depth) |    Y    |     Orderbook data     |          /          |
 
-####<span id="depth">Depthobject</span>
+####<span id="depth">`Depth` object</span>
 
 | Field | Type                           | Required | Note     | Example |
 | :---- | :------------------------------ | :-------- | :-------- | :---- |
-| bids | [List\[List\[string\]]](#slot) (深度条目列表)| Y       | Changed bids | /    |
-| asks | [List\[List\[string\]]](#slot) (深度条目列表)| Y       | Changed asks | /    |
+| bids | [List\[List\[string\]]](#slot) | Y       | a list of `DepthItem`s representing bids | /    |
+| asks | [List\[List\[string\]]](#slot) | Y       | a list of `DepthItem`s representing adks| /    |
 
-### <span id = "slot">深度条目</span>
+#### <span id = "slot">`DepthItem` array</span>
 
-`asks`和`bids`数组中的每个子数组都是定长数组，我们称之为*深度条目*，其规范如下：
+Each array in `asks` and `bids` is a fix-size array we called *DepthItem* which contains the following items：
 
 | Index  | Type   | Required | Note           | Example       |
 | :------ | :------ | :-------- | :-------------- | :---------- |
 |    1     | string | Y       | Price           | "0.002"    |
-|    2     | string | Y       | Quantity of base token         | "21000"    |
-|    3     | string | Y       | Quantity of quote token       | "33220000" |
+|    2     | string | Y       | Amount (quantity of base token)         | "21000"    |
+|    3     | string | Y       | Total (quantity of quote token)    | "33220000" |
 |    4     | string | Y       | Number of orders aggregated | "4"        |
+
+Note the amount and total are the new values, not the delta between new and old values.
+

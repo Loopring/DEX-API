@@ -39,15 +39,15 @@
 
 ## Model
 
-#### Data object
+#### `data` object
 
 |  Field   |          Type           | Required |       Note       |       Example       |
 | :----- | :--------------------- | :------ | :-------------- | :-------------- |
 |  topic  |         string          |    Y    | Topic and parameters | "ticker&LRC-ETH" |
 | integer |         integer         |    Y    |     推送时间     |  1584717910000   |
-|  data   | [List[string]](#ticker)  (Ticker)|    Y    |     深度信息     |        /         |
+|  data   | [List[string]](#ticker) |    Y    |    A list of `Ticker`s     |        /         |
 
-#### <span id="ticker">Tickerobject</span>
+#### <span id="ticker">`Ticker` object</span>
 
 | Index  |  Type   | Required |         Note         |     Example      |
 | :------ | :----- | :------ | :------------------ | :----------- |

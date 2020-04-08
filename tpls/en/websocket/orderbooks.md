@@ -50,7 +50,7 @@ Subscribe to this topic to receive changes on the orderbook for the specific tra
 
 ## Model
 
-#### Data object
+#### `data` object
 
 |     Field     |      Type       | Required |         Note         |       Example        |
 | :---------- | :------------- | :------ | :------------------ | :--------------- |
@@ -64,22 +64,21 @@ Subscribe to this topic to receive changes on the orderbook for the specific tra
 
 | Field | Type                           | Required | Note     | Example |
 | :---- | :------------------------------ | :-------- | :-------- | :---- |
-| bids | [List\[List\[string\]]](#slot) (a list of `DepthItem`)| Y       | 买单深度 | /    |
-| asks | [List\[List\[string\]]](#slot) (a list of `DepthItem`)| Y       | 卖单深度 | /    |
+| bids | [List\[List\[string\]]](#slot) | Y       | a list of `DepthItem`s representing bids | /    |
+| asks | [List\[List\[string\]]](#slot) | Y       | a list of `DepthItem`s representing adks| /    |
 
 #### <span id = "slot">`DepthItem` array</span>
 
-`asks`和`bids`数组中的每个子数组都是定长数组，我们称之为*DepthItem*，其规范如下：
+Each array in `asks` and `bids` is a fix-size array we called *DepthItem* which contains the following items：
 
 | Index  | Type   | Required | Note           | Example       |
 | :------ | :------ | :-------- | :-------------- | :---------- |
 |    1     | string | Y       | Price           | "0.002"    |
-|    2     | string | Y       | Amount (Quantity of base token)         | "21000"    |
-|    3     | string | Y       | Total (Quantity of quote token)    | "33220000" |
-|    4     | string | Y       | 聚合的订单数目 | "4"        |
+|    2     | string | Y       | Amount (quantity of base token)         | "21000"    |
+|    3     | string | Y       | Total (quantity of quote token)    | "33220000" |
+|    4     | string | Y       | Number of orders aggregated | "4"        |
 
-
-需要注意的是，每一个推送中的数量和成交额代表这个价格目前的数量和成交额的绝对值，而不是相对变化。
+Note the amount and total are the new values, not the delta between new and old values.
 
 
 ## 构建本地订单簿
