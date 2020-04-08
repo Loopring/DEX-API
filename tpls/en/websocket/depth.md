@@ -1,29 +1,33 @@
-# Orderbooks (WIP)
+# 订单簿更新
 
-Subscribe to this topic to receive changes on the orderbook for the specific trading pair.
+通过订阅该主题，您可以获得指定交易对订单簿更新的数据推送。
 
+## 订阅规则
 
-
-
-## Subscription
-
-- `topic` must specify a trading pair and the aggretation level。If the traidng pair is `LRC-ETH`，and the aggretation level is `1`, then `topic` should be：`"depth&LRC-ETH&1"`.
-- You need to provide your ApiKey.
-- You can get the list of supported trading pairs through [api/v2/exchange/markets](../dex_apis/getMarkets.md).
+- `topic`字符串：`depth`。
+- 订阅该主题**不需要**提供ApiKey。
 
 
+## 参数列表
 
-## Status code
+| 参数名|  必现 |             描述                 |
+| :---- | :------ |:--------------------------------- |
+| market | 是 | 交易对（支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取）|
+| level | 是 | 深度聚合级别 |
+| count | 是 | 买卖深度条目数量其，值不可以超过50。 |
+| snapshot |否 | 默认为false。 如果该值为true，count不可以大于20，并且当深度条目有任何一条变化，那么指定数量的深度条目都会被推送给客户端。 |
 
-| Value |                Note                 |
+## 状态码
+
+| 状态码 |                描述                 |
 | :---- | :--------------------------------- |
-| 104107 | Invalid or unsupported `topic`|
+| 104107 | `topic`的值或其参数非法|
 
-## Push data example
+## 推送示例
 
 ```json
 {
-    "topic": "depth&LRC-ETH&1",
+    "topics": "depth%3Fmarket%3DLRC-ETH%26level%3D1%26count%3D10",
     "ts": 1584717910000,
     "startVersion": 1212121,
     "endVersion": "1212123",
@@ -48,38 +52,38 @@ Subscribe to this topic to receive changes on the orderbook for the specific tra
 }
 ```
 
-## Model
+## 模型
 
-#### `data` object
+#### `data`数据结构
 
-|     Field     |      Type       | Required |         Note         |       Example        |
-| :---------- | :------------- | :------ | :------------------ | :--------------- |
-|    topic     |     string      |    Y    |   Topic and parameters   | "depth&LRC-ETH&1" |
-|      ts      |     integer     |    Y    |       Time of change       |   1584717910000   |
-| startVersion |     integer     |    Y    | Previous verion |      1212121      |
-|  endVersion  |     integer     |    Y    | Current version |      1212123      |
-|     data     | [Depth](#depth) |    Y    |        Orderbook changes     |         /         |
+|     字段     |      类型       | 必现 |         说明         |    
+| :---------- | :------------- | :------ | :------------------ | 
+|    topic     |     string      |    是    |   订阅的主题和条件   | 
+|      ts      |     integer     |    是    |       推送时间       |  
+| startVersion |     integer     |    是    | 该次推送的起始版本号 |     
+|  endVersion  |     integer     |    是    | 该次推送的终结版本号 |     
+|     data     | [Depth](#depth) |    是    |       深度信息       |     
 
-####<span id="depth">`Depth` object</span>
+####<span id="depth">`Depth`数据结构</span>
 
-| Field | Type                           | Required | Note     | Example |
-| :---- | :------------------------------ | :-------- | :-------- | :---- |
-| bids | [List\[List\[string\]]](#slot) | Y       | a list of `DepthItem`s representing bids | /    |
-| asks | [List\[List\[string\]]](#slot) | Y       | a list of `DepthItem`s representing adks| /    |
+| 字段 | 类型                           | 必现 | 说明     | 
+| :---- | :------------------------------ | :-------- | :-------- |
+| bids | [List\[List\[string\]]](#slot) （`DepthItem`列表）| 是       | 买单深度 |
+| asks | [List\[List\[string\]]](#slot) （`DepthItem`列表）| 是       | 卖单深度 | 
 
-#### <span id = "slot">`DepthItem` array</span>
+#### <span id = "slot">`DepthItem`数据结构</span>
 
-Each array in `asks` and `bids` is a fix-size array we called *DepthItem* which contains the following items：
+`asks`和`bids`数组中的每个子数组都是定长数组，我们称之为*深度条目*，其规范如下：
 
-| Index  | Type   | Required | Note           | Example       |
-| :------ | :------ | :-------- | :-------------- | :---------- |
-|    1     | string | Y       | Price           | "0.002"    |
-|    2     | string | Y       | Amount (quantity of base token)         | "21000"    |
-|    3     | string | Y       | Total (quantity of quote token)    | "33220000" |
-|    4     | string | Y       | Number of orders aggregated | "4"        |
+| 序号  | 类型   | 必现 | 说明           | 
+| :------ | :------ | :-------- | :-------------- | :
+|    1     | string | 是       | 价格           | 
+|    2     | string | 是       | 数量（基础通证的数量）         | 
+|    3     | string | 是       | 成交额（ 计价通证的数量）  |
+|    4     | string | 是       | 聚合的订单数目 | 
 
-Note the amount and total are the new values, not the delta between new and old values.
 
+需要注意的是，每一个推送中的数量和成交额代表这个价格目前的数量和成交额的绝对值，而不是相对变化。
 
 ## 构建本地订单簿
 
@@ -88,7 +92,7 @@ Note the amount and total are the new values, not the delta between new and old 
 1. 订阅 depth主题。
 2. 开始缓存收到的更新。同一个价位，后收到的更新覆盖前面的。
 3. 访问接口 [api/v1/depth](../dex_apis/getDepth.md) 获得一个全量的深度快照。
-4. 3中获取的快照如果`version`大于本地`version`(`endVersion`)，则直接覆盖，如果小于本地version，则相同的价格不覆盖，不同的价格则覆盖。
+4. 3中获取的快照如果`version`大于本地`version`（`endVersion`），则直接覆盖，如果小于本地version，则相同的价格不覆盖，不同的价格则覆盖。
 5. 将深度快照中的内容更新到本地订单簿副本中，并从WebSocket接收到的第一个`startVersion` <=本地 `version + 1` 且 endVersion >= 本地version 的event开始继续更新本地副本。
 6. 每一个新推送的`startVersion`应该恰好等于上一个event的`endVersion + 1`，否则可能出现了丢包，请从step3重新进行初始化。
 7. 如果某个价格对应的挂单量为0，表示该价位的挂单已经撤单或者被吃，应该移除这个价位。

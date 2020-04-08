@@ -1,19 +1,25 @@
-# Account
-
-Subscribe to this topic to receive changes on account balances.
+# 用户账号金额更新
 
 
+通过订阅该主题，您可以获得用户余额和冻结金额更新的数据推送。
 
-## Subscription
+## 订阅规则
 
-- `topic` should be exactly `"account"`。
-- You need to provide your ApiKey.
+- `topic`字符串：`account`。
+- 订阅该主题**需要**提供ApiKey。
 
-## Push data example
+
+
+## 参数列表
+
+该主题不支持任何参数。
+
+
+## 推送示例
 
 ```json
 {
-	"topic": "account",
+	"topics": "account",
 	"ts":1584717910000,
 	"data": {
 	    "accountId":1,
@@ -24,22 +30,22 @@ Subscribe to this topic to receive changes on account balances.
 }
 ```
 
-## Model
+## 模型
 
-#### `data` object
+#### `data`数据结构
 
-| Field  |        Type         | Required |       Note       |     Example      |
-| :--- | :----------------- | :------ | :-------------- | :----------- |
-| topic |       string        |    Y    | Topic and parameters |   "account"   |
-|  ts   |       integer       |    Y    |     Time of change     | 1584717910000 |
-| data  | [Balance](#balance) |    Y    |     Balance data     |       /       |
+| 字段  |        类型         | 必现 |       说明       |     
+| :--- | :----------------- | :------ | :-------------- | 
+| topics |       string        |    是    | 订阅的主题和条件 |  
+|  ts   |       integer       |    是    |     推送时间     | 
+| data  | [Balance](#balance) |    是    |     余额信息     |     
 
-#### <span id= "balance">`Balance` object</span> 
+#### <span id= "balance">`Balance`数据结构</span> 
 
-|     Field     |  Type   | Required |    Note    |       Example       |
-| :---------- | :----- | :------ | :-------- | :-------------- |
-|  accountId   | integer |    Y    |   Account Id   |        1         |
-|   tokenId    | integer |    Y    |   Token Id   |        2         |
-| totalAmount  | string  |    Y    |  Token's total balance  | "24439253519655" |
-| frezeeAmount | string  |    Y    | Token's balance locked by orders |       "0"        |
+|     字段     |  类型   | 必现 |    说明    |     
+| :---------- | :----- | :------ | :-------- | 
+|  accountId   | integer |    是    |   用户Id   |     
+|   tokenId    | integer |    是    |   通证Id   |     
+| totalAmount  | string  |    是    |  用户余额  | 
+| frezeeAmount | string  |    是    | 冻结的余额 |    
 

@@ -1,25 +1,31 @@
-# Orders
-
-Subscribe to this topic to receive changes on orders for the specific trading pair.
+# 用户订单更新
 
 
+通过订阅该主题，您可以获得用户在指定交易对的订单状态提送。
 
-## Subscription
-- `topic` must specify a trading pair。If the traidng pair is `LRC-ETH`，then `topic` should be：`"order&LRC-ETH"`。
-- You DO NOT need to provide your ApiKey.
-- You can get the list of supported trading pairs through [api/v2/exchange/markets](../dex_apis/getMarkets.md).
+## 订阅规则
 
-## Status code
+- `topic`字符串：`order`。
+- 订阅该主题**需要**提供ApiKey。
 
-| Value |                Note                 |
+
+## 参数列表
+
+| 参数名|  必现|              描述                 |
+| :---- | :--- | :--------------------------------- |
+| market | 是 | 交易对（支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取）|
+
+## 状态码
+
+| 状态码 |                描述                 |
 | :---- | :--------------------------------- |
-| 104110 | Invalid or unsupported `topic`|
+| 104110 | `topic`的值或其参数非法|
 
-## Push data example
+## 推送示例
 
 ```json
 {
-   "topic": "order&LRC-ETH",
+   "topics": "order%3Fmarket%3DLRC-ETH",
    "ts":1565844328,
    "data": {
         "hash": "11212",
@@ -40,41 +46,41 @@ Subscribe to this topic to receive changes on orders for the specific trading pa
 }
 ```
 
-## Model
+## 模型
 
-#### `data` object
+#### `data`数据结构
 
-| Field  |      Type       | Required |       Note       |      Example       |
-| :--- | :------------- | :------ | :-------------- | :------------- |
-| topic |     string      |    Y    | Topic and parameters | "order&LRC-ETH" |
-|  ts   |     integer     |    Y    |     Time of change     |  1584717910000  |
-| data  | [Order](#order) |    Y    |     Order data     |        /        |
+| 字段  |      类型       | 必现 |       说明       |     
+| :--- | :------------- | :------ | :-------------- | 
+| topics |     string      |    是    | 订阅的主题和条件 |
+|  ts   |     integer     |    是    |     推送时间     |  
+| data  | [Order](#order) |    是    |     `Order`列表     |    
 
-#### <span id="order">`Order` object</span>
+#### <span id="order">`Order`数据结构</span>
 
-|     Field      |  Type   | Required |            Note            |     Example      |
-| :----------- | :----- | :------ | :------------------------ | :----------- |
-|     hash      | string  |    Y    |          Order's hash          |    "11212"    |
-| clientOrderId | string  |    Y    |        Order's clientOrderId        |   "myOrder"   |
-|     size      | string  |    Y    |     Order's base token quantity      |  "500000000"  |
-|    volume     | string  |    Y    |     Order's quote token quantity     |  "210000000"  |
-|     price     | string  |    Y    |          Order's price          |  "0.000004"   |
-|  filledSize   | string  |    Y    | Filled amount of the base token  |  "30000000"   |
-| filledVolume  | string  |    Y    | Filled amount of the quote token |   "100000"    |
-|   filledFee   | string  |    Y    |      Trading fees paid       |   "1000000"   |
-|    status     | string  |    Y    |          Order status         | "processing"  |
-|   createdAt   | integer |    Y    |        Order submission timestamp      | 1584717910000 |
-|   updateAt    | integer |    Y    |   Order's last update timestamp   | 1584717910000 |
-|     side      | string  |    Y    |           Buy or sell          |     "buy"     |
-|    market     | string  |    Y    |           the trading pair           |   "LRC-ETH"   |
+|     字段      |  类型   | 必现 |            说明            |    
+| :----------- | :----- | :------ | :------------------------ | 
+|     hash      | string  |    是    |          订单哈希          |    
+| clientOrderId | string  |    是    |        用户自定义id        |  
+|     size      | string  |    是    |     base token 的数量      | 
+|    volume     | string  |    是    |     quote token 的数量     | 
+|     price     | string  |    是    |          订单价格          |  
+|  filledSize   | string  |    是    | 已经成交的basetoken的数量  |  
+| filledVolume  | string  |    是    | 已经成交的quotetoken的数量 |   
+|   filledFee   | string  |    是    |       已支付的手续费       | 
+|    status     | string  |    是    |          订单状态          | 
+|   createdAt   | integer |    是    |        订单创建时间        | 
+|   updateAt    | integer |    是    |   订单最后一次的更新时间   | 
+|     side      | string  |    是    |           买或卖           |    
+|    market     | string  |    是    |            交易对            |  
 
-#### Order status
+#### 订单状态取值范围
 
-|    Value    |                    Note                    |
+|    状态    |                    说明                    |
 | :-------- | :---------------------------------------- |
-| processing | Order is active and not fully filled |
-| processed  |                Order has been fully filled                |
-| cancelling |                   Order is being cancelled                   |
-| cancelled  |                  Order has been cancelled                 |
-|  expired   |                  Order has expired                  |
-|  waiting   |                Order hasn't becomen active yet                |
+| processing | 订单进行中，订单等待成交或者已经成交一部分 |
+| processed  |                订单完全成交                |
+| cancelling |                   取消中                   |
+| cancelled  |                  订单取消                  |
+|  expired   |                  订单过期                  |
+|  waiting   |                订单还未生效                |

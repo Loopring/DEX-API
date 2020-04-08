@@ -120,7 +120,7 @@ WebSocket链接建立后，中继会每30秒会发送“ping”消息给客户�
     "topics": "topic1%3Fk1%3Dv1%26k2%3Dv2&topic2%3Fk3%3Dv3%26k4%3Dv4",
     "result": {
         "status": "failed",
-            "error": {
+        "error": {
             "code": 104106,
             "message": "receive illegal arg for candlestick:lrc-eth"
         }
