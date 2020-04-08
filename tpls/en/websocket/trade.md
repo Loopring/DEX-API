@@ -3,7 +3,7 @@
 通过订阅该主题, 您可以获得特定交易对全部用户新成交记录的数据推送.
 
 
-## 订阅规则
+## Rules
 
 - `topic` string:`trade`.
 - ApiKey **not required**.
@@ -13,7 +13,7 @@
 
 |  Parameter |   Required |             Note                |
 | :---- | :---|:--------------------------------- |
-| market |  Y |交易对（支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取）|
+| market |  Y |[Trading pair](../dex_apis/getMarkets.md)|
 
 
 ## Status code
@@ -22,7 +22,7 @@
 | :---- | :--------------------------------- |
 | 104109 | invalid `topic` or parameters|
 
-## Push Examples
+## Push data examples
 
 ```json
 {
@@ -50,13 +50,13 @@
 
 |  Field   |          Type           | Required |       Note       |    
 | :----- | :--------------------- | :------ | :-------------- |
-| topic |       JSON        |    Y    | 订阅的主题和参数 |  
-| integer |         integer         |    Y    |     推送时间     | 
-|  data   | [List[List\[string]](#trade)] |    Y    |    Trade数组列表     |  
+| topic |       JSON        |    Y    | Topic and parameters |  
+| integer |         integer         |    Y    |     Push timestamp     | 
+|  data   | [List[List\[string]](#trade)] |    Y    |    Trade array list     |  
 
 #### <span id="trade">Trade array</span>
 
-| 序号  |  Type   | Required |         Note         |  
+| Index  |  Type   | Required |         Note         |  
 | :------ | :----- | :------ | :------------------ | 
 |    1     | integer |    Y    |       成交时间       | 
 |    2     | integer |    Y    |       交易编号       |   

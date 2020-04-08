@@ -5,7 +5,7 @@
 
 
 
-## 订阅规则
+## Rules
 
 - `topic` string:`ticker`.
 - ApiKey **not required**.
@@ -15,7 +15,7 @@
 
 |  Parameter |  Required |              Note                |
 | :---- | :--- |:--------------------------------- |
-| market | Y | 交易对（支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取）|
+| market | Y | [Trading pair](../dex_apis/getMarkets.md)|
 
 
 
@@ -25,7 +25,7 @@
 | :---- | :---------------------------------- |
 | 104111 | invalid `topic` or parameters|
 
-## Push Examples
+## Push data examples
 
 ```json
 {
@@ -56,13 +56,13 @@
 
 |  Field   |          Type           | Required |       Note       |    
 | :----- | :--------------------- | :------ | :-------------- | 
-| topic |       JSON        |    Y    | 订阅的主题和参数 |  
-| integer |         integer         |    Y    |     推送时间     |  
-|  data   | [List[string]](#ticker) |    Y    |     Ticker数组列表          |
+| topic |       JSON        |    Y    | Topic and parameters |  
+| integer |         integer         |    Y    |     Push timestamp     |  
+|  data   | [List[string]](#ticker) |    Y    |     Ticker array list          |
 
 #### <span id="ticker">Ticker array</span>
 
-| 序号  |  Type   | Required |         Note         |    
+| Index  |  Type   | Required |         Note         |    
 | :------ | :----- | :------ | :------------------ | 
 |    1     | string  |    Y    |         交易对         | 
 |    2     | integer |    Y    |    ticker生成时间    | 

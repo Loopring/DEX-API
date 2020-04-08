@@ -4,7 +4,7 @@
 通过订阅该主题, 您可以获得特定交易对Candlestick更新的数据推送.
 
 
-## 订阅规则
+## Rules
 
 - `topic` string:`candlestick`.
 - ApiKey **not required**.
@@ -14,23 +14,23 @@
 
 |  Parameter | Required |                Note                |
 | :---- | :---| :--------------------------------- |
-| market |  Y |交易对（支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取）| 
-| interval |  Y |时间间隔|
+| market |  Y |[Trading pair](../dex_apis/getMarkets.md)| 
+| interval |  Y |Time interval|
 
-#### 时间间隔
+#### Time intervals
 
-| 间隔  |  Note  |
+| Value  |  Note  |
 | :--- | :---- |
-| 1min  | 1分钟  |
-| 5min  | 5分钟  |
-| 15min | 15分钟 |
-| 30min | 30分钟 |
-|  1hr  | 1小时  |
-|  2hr  | 2小时  |
-|  4hr  | 4小时  |
-| 12hr  | 12小时 |
-|  1d   |  1天   |
-|  1w   |  1周   |
+| 1min  | 1 minute  |
+| 5min  | 5 minutes  |
+| 15min | 15 minutes |
+| 30min | 30 minutes |
+|  1hr  | 1 hour  |
+|  2hr  | 2 hours  |
+|  4hr  | 4 hours |
+| 12hr  | 12 hours |
+|  1d   |  1 day   |
+|  1w   |  1 week   |
 
 
 
@@ -40,7 +40,7 @@
 | :---- | :--------------------------------------- |
 | 104106 | invalid `topic` or parameters|
 
-## Push Examples
+## Push data examples
 
 ```json
 {
@@ -65,13 +65,13 @@
 
 | Field  |             Type              | Required |       Note       |    
 | :--- | :--------------------------- | :------ | :-------------- | 
-| topic |       JSON        |    Y    | 订阅的主题和参数 |  
-|  ts   |            integer            |    时    | 推送时间（毫秒） |      
+| topic |       JSON        |    Y    | Topic and parameters |  
+|  ts   |            integer            |    时    | Push timestamp（毫秒） |      
 | data  | [List\[string]](#candlestick) （`Candlestick`列表）|    Y    | cCandlestick数组 |      
 
 ####<span id= "candlestick">Candlestick array</span>
 
-| 序号  |  Type   | Required |               Note                |        
+| Index  |  Type   | Required |               Note                |        
 | :------ | :----- | :------ | :------------------------------- | 
 |    1     | integer |    Y    |            指开盘时间             |     
 |    2     | integer |    Y    |             成交笔数              |         

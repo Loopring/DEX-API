@@ -2,7 +2,7 @@
 
 通过订阅该主题, 您可以获得指定交易对订单簿更新的数据推送.
 
-## 订阅规则
+## Rules
 
 - `topic` string:`depth`.
 - ApiKey **not required**.
@@ -12,7 +12,7 @@
 
 |  Parameter |  Required |             Note                |
 | :---- | :------ |:--------------------------------- |
-| market | Y | 交易对（支持的交易对可以通过api接口[api/v2/exchange/markets](../dex_apis/getMarkets.md)获取）|
+| market | Y | [Trading pair](../dex_apis/getMarkets.md)|
 | level | Y | 深度聚合级别 |
 | count | Y | 买卖深度条目数量, 值不可以超过50. |
 | snapshot |否 | 默认为false. 如果该值为true, count不可以大于20, 并且当深度条目有任何一条变化, 那么指定数量的深度条目会被全量推送给客户端. |
@@ -23,7 +23,7 @@
 | :---- | :--------------------------------- |
 | 104107 | invalid `topic` or parameters|
 
-## Push Examples
+## Push data examples
 
 ```json
 {
@@ -63,8 +63,8 @@
 
 |     Field     |      Type       | Required |         Note         |    
 | :---------- | :------------- | :------ | :------------------ | 
-| topic |       JSON        |    Y    | 订阅的主题和参数 |  
-|      ts      |     integer     |    Y    |       推送时间       |  
+| topic |       JSON        |    Y    | Topic and parameters |  
+|      ts      |     integer     |    Y    |       Push timestamp       |  
 | startVersion |     integer     |    Y    | 该次推送的起始版本号 |     
 |  endVersion  |     integer     |    Y    | 该次推送的终结版本号 |     
 |     data     | [Depth](#depth) |    Y    |       深度信息       |     
@@ -73,14 +73,14 @@
 
 | Field | Type                           | Required | Note     | 
 | :---- | :------------------------------ | :-------- | :-------- |
-| bids | [List\[List\[string\]]](#slot) | Y       | 代表买单深度的DepthItem数组列表 |
-| asks | [List\[List\[string\]]](#slot)| Y       | 代表卖单深度的DepthItem数组列表 | 
+| bids | [List\[List\[string\]]](#slot) | Y       | 代表买单深度的DepthItem array list |
+| asks | [List\[List\[string\]]](#slot)| Y       | 代表卖单深度的DepthItem array list | 
 
 #### <span id = "slot">DepthItem array</span>
 
 `asks`和`bids`数组中的每个子数组都是定长数组, 我们称之为*深度条目*, 其规范如下：
 
-| 序号  | Type   | Required | Note           | 
+| Index  | Type   | Required | Note           | 
 | :------ | :------ | :-------- | :-------------- | :
 |    1     | string | Y       | 价格           | 
 |    2     | string | Y       | 数量（基础通证的数量）         | 

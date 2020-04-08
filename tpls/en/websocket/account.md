@@ -3,7 +3,7 @@
 
 通过订阅该主题, 您可以获得用户余额和冻结金额更新的数据推送.
 
-## 订阅规则
+## Rules
 
 - `topic` string:`account`.
 - ApiKey **required**.
@@ -12,10 +12,10 @@
 
 ## Parameters
 
-该主题不支持任何参数.
+This topic doesn't support any parameter.
 
 
-## Push Examples
+## Push data examples
 
 ```json
 {
@@ -38,8 +38,8 @@
 
 | Field  |        Type         | Required |       Note       |     
 | :--- | :----------------- | :------ | :-------------- | 
-| topic |       JSON        |    Y    | 订阅的主题和参数 |  
-|  ts   |       integer       |    Y    |     推送时间     | 
+| topic |       JSON        |    Y    | Topic and parameters |  
+|  ts   |       integer       |    Y    |     Push timestamp     | 
 | data  | [Balance](#balance) |    Y    |     余额信息     |     
 
 #### <span id= "balance">Balance数据结构</span> 
