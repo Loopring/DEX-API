@@ -27,7 +27,7 @@ This topic doesn't support any parameter.
 	    "accountId":1,
 	    "totalAmount": "24439253519655",
 	    "tokenId": 2,
-	    "aamountLocked": "0"
+	    "amountLocked": "0"
 	}
 }
 ```
@@ -49,5 +49,5 @@ This topic doesn't support any parameter.
 |  accountId   | integer |    Y    |   Account ID   |     
 |   tokenId    | integer |    Y    |   Token ID   |     
 | totalAmount  | string  |    Y    |  Total token balance  | 
-| aamountLocked | string  |    Y    | Token balance locked by orders |    
+| amountLocked | string  |    Y    | Token balance locked by orders |    
 

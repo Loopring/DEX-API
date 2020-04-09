@@ -43,7 +43,10 @@
 
 ```json
 {
-    "topic": "candlestick%3Fmarket%3DLRC-ETH%26interval%3D1hr",
+    "topic": {
+        "topic": "candlestick",
+        "interval": "2hr"
+    },
     "ts":1584717910000,
     "data": [
         "1584717910000",  //start

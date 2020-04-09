@@ -26,7 +26,7 @@
 	    "accountId":1,
 	    "totalAmount": "24439253519655",
 	    "tokenId": 2,
-	    "aamountLocked": "0"
+	    "amountLocked": "0"
 	}
 }
 ```
@@ -48,5 +48,5 @@
 |  accountId   | integer |    是    |   账户ID   |     
 |   tokenId    | integer |    是    |   通证ID   |     
 | totalAmount  | string  |    是    |  用户余额  | 
-| aamountLocked | string  |    是    | 冻结的余额 |    
+| amountLocked | string  |    是    | 冻结的余额 |    
 
