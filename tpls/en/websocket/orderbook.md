@@ -87,16 +87,3 @@ Subscribe to this topic to receive notifications about orderbook updates for spe
 
 
 Note that amount and total are the curent values, not the delta between the current and the previous values.
-
-## Reconstruction of Local Orderbooks
-
-You can reconstruct local orderbooks through the following steps:
-
-
-1. Subscript to the *orderbook* topic for a given trading pair.
-2. Start caching the orderbook notifications, for any given price, later received data should replace the ealier ones.
-3. Use [api/v1/depth](../dex_apis/getDepth.md) to get a orderbook snapshot.
-4. If the `endVersion` of the data received in step 3 is greater than the `endVersion` of the cached data, 3中获取的快照如果`version`大于本地`version`（`endVersion`）, 则直接覆盖, 如果小于本地version, 则相同的价格不覆盖, 不同的价格则覆盖.
-5. 将深度快照中的内容更新到本地订单簿副本中, 并从WebSocket接收到的第一个`startVersion` <=本地 `version + 1` 且 endVersion >= 本地version 的event开始继续更新本地副本.
-6. 每一个新推送的`startVersion`应该恰好等于上一个event的`endVersion + 1`, 否则可能出现了丢包, 请从step3重新进行初始化.
-7. 如果某个价格对应的挂单量为0, 表示该价位的挂单已经撤单或者被吃, 应该移除这个价位.
