@@ -1,4 +1,4 @@
-# Orderbook
+# Orderbooks
 
 Subscribe to this topic to receive notifications about orderbook updates for specific trading pairs.
 
@@ -64,7 +64,7 @@ Subscribe to this topic to receive notifications about orderbook updates for spe
 |     Field     |      Type       | Required |         Note         |    
 | :---------- | :------------- | :------ | :------------------ | 
 | topic |       JSON        |    Y    | Topic and parameters |  
-|      ts      |     integer     |    Y    |       Push timestamp (milliseconds)       |  
+|      ts      |     integer     |    Y    |       Notification timestamp (milliseconds)       |  
 | startVersion |     integer     |    Y    | Previous version number |     
 |  endVersion  |     integer     |    Y    | Updated versionnumber |     
 |     data     | [OrderBook](#orderbook) |    Y    |       The orderbook       |     
@@ -73,26 +73,26 @@ Subscribe to this topic to receive notifications about orderbook updates for spe
 
 | Field | Type                           | Required | Note     | 
 | :---- | :------------------------------ | :-------- | :-------- |
-| bids | [List\[List\[string\]]](#slot) | Y       | PriceSlot array for bids |
-| asks | [List\[List\[string\]]](#slot)| Y       | PriceSlot array for asks  | 
+| bids | List\[List\[string\]] | Y       | [PriceSlot](#slot) array for bids |
+| asks | List\[List\[string\]]| Y       | [PriceSlot](#slot) array for asks  | 
 
 #### <span id = "slot">PriceSlot</span>
 
 | Index  | Type   | Required | Note           | 
 | :------ | :------ | :-------- | :-------------- | :
 |    1     | string | Y       | Price           | 
-|    2     | string | Y       | Amount (Quantity of base token)         | 
-|    3     | string | Y       | Total (Quantity of quote token)    |
+|    2     | string | Y       | Amount (quantity of base token)         | 
+|    3     | string | Y       | Total (quantity of quote token)    |
 |    4     | string | Y       | Number of orders at this price | 
 
 
-需要注意的是, 每一个推送中的数量和成交额代表这个价格目前的数量和成交额的绝对值, 而不是相对变化.
+Note that amount and total are the curent values, not the delta between the current and the previous values.
 
-## 构建本地订单簿
+## Reconstruction of Local Orderbooks
 
 您可以通过下列步骤构建本地订单簿：
 
-1. 订阅 depth主题.
+1. 订阅 orderbook主题.
 2. 开始缓存收到的更新.同一个价位, 后收到的更新覆盖前面的.
 3. 访问接口 [api/v1/depth](../dex_apis/getDepth.md) 获得一个全量的深度快照.
 4. 3中获取的快照如果`version`大于本地`version`（`endVersion`）, 则直接覆盖, 如果小于本地version, 则相同的价格不覆盖, 不同的价格则覆盖.

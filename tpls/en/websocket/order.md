@@ -1,4 +1,4 @@
-# 用户订单更新
+# Orders
 
 
 Subscribe to this topic to receive notifications about order updates for specific trading pairs.
@@ -56,7 +56,7 @@ ApiKey requred: Yes
 | Field  |      Type       | Required |       Note       |     
 | :--- | :------------- | :------ | :-------------- | 
 | topic |       JSON        |    Y    | Topic and parameters |  
-|  ts   |     integer     |    Y    |     Push timestamp (milliseconds)     |  
+|  ts   |     integer     |    Y    |     Notification timestamp (milliseconds)     |  
 | data  | [Order](#order) |    Y    |     The order     |    
 
 #### <span id="order">Order</span>
@@ -65,8 +65,8 @@ ApiKey requred: Yes
 | :----------- | :----- | :------ | :------------------------ | 
 |     hash      | string  |    Y    |          Order hash         |    
 | clientOrderId | string  |    Y    |        Client defined order ID        |  
-|     size      | string  |    Y    |    Amount of base token      | 
-|    volume     | string  |    Y    |    Amount of quote token     | 
+|     size      | string  |    Y    |    Amount (quantity of base token)      | 
+|    volume     | string  |    Y    |    Total (quantity of quote token)     | 
 |     price     | string  |    Y    |          Order price          |  
 |  filledSize   | string  |    Y    | Filled amount of base token  |  
 | filledVolume  | string  |    Y    | Filled amount of quote token |   
@@ -75,13 +75,13 @@ ApiKey requred: Yes
 |   createdAt   | integer |    Y    |        Order creation timestamp      | 
 |   updateAt    | integer |    Y    |   Order last update timestamp   | 
 |     side      | string  |    Y    |           Buy or sell           |    
-|    market     | string  |    Y    |            trading pair           |  
+|    market     | string  |    Y    |            Trading pair           |  
 
 #### Order status
 
 |    Value   |                    Note                    |
 | :-------- | :---------------------------------------- |
-| processing | active (may be partially filled) |
+| processing | Active (aka Open, may be partially filled) |
 | processed  |                Fully filled                |
 | cancelling |                   Being canceled                   |
 | cancelled  |                 Canceled                  |

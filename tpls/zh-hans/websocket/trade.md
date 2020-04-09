@@ -58,8 +58,8 @@
 | 序号  |  类型   | 必现 |         说明         |  
 | :------ | :----- | :------ | :------------------ | 
 |    1     | integer |    是    |       成交时间       | 
-|    2     | integer |    是    |       交易编号       |   
-|    3     | string  |    是    |  买或者卖，指taker   |    
+|    2     | integer |    是    |       成交记录的编号       |   
+|    3     | string  |    是    |  Taker的方向（买或卖）   |    
 |    4     | string  |    是    | Base Token的成交数量 |  
 |    5     | string  |    是    |       成交价格       |   
 |    6     | string  |    是    |   Base Token的收费   |    

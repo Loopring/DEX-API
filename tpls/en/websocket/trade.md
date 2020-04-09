@@ -1,4 +1,4 @@
-# 最新成交更新
+# Trades
 
 Subscribe to this topic to receive notifications about bew trades for specific trading pairs.
 
@@ -50,17 +50,17 @@ Subscribe to this topic to receive notifications about bew trades for specific t
 |  Field   |          Type           | Required |       Note       |    
 | :----- | :--------------------- | :------ | :-------------- |
 | topic |       JSON        |    Y    | Topic and parameters |  
-| ts |         integer         |    Y    |     Push timestamp (milliseconds)     | 
+| ts |         integer         |    Y    |     Notification timestamp (milliseconds)     | 
 |  data   | [List[List\[string]](#trade)] |    Y    |    Trade array list     |  
 
 #### <span id="trade">Trade</span>
 
 | Index  |  Type   | Required |         Note         |  
 | :------ | :----- | :------ | :------------------ | 
-|    1     | integer |    Y    |       成交时间       | 
-|    2     | integer |    Y    |       交易编号       |   
-|    3     | string  |    Y    |  买或者卖, 指taker   |    
-|    4     | string  |    Y    | base token的成交数量 |  
-|    5     | string  |    Y    |       成交价格       |   
-|    6     | string  |    Y    |   base token的收费   |    
+|    1     | integer |    Y    |       Trade timestamp       | 
+|    2     | integer |    Y    |       Fill sequence number      |   
+|    3     | string  |    Y    |  Taker's side (buy or sell)   |    
+|    4     | string  |    Y    | Filled amount of base token |  
+|    5     | string  |    Y    |       Fill price       |   
+|    6     | string  |    Y    |   Fee paid in base token   |    
 

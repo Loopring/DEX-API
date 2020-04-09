@@ -39,7 +39,7 @@ This topic doesn't support any parameter.
 | Field  |        Type         | Required |       Note       |     
 | :--- | :----------------- | :------ | :-------------- | 
 | topic |       JSON        |    Y    | Topic and parameters |  
-|  ts   |       integer       |    Y    |     Push timestamp (milliseconds)     | 
+|  ts   |       integer       |    Y    |     Notification timestamp (milliseconds)     | 
 | data  | [Balance](#balance) |    Y    |     User's new balances   |     
 
 #### <span id= "balance">Balance</span> 

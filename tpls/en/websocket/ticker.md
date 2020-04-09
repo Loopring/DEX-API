@@ -1,4 +1,4 @@
-# Ticker更新
+# Tickers
 
 
 Subscribe to this topic to receive notifications about ticker updates for specific trading pairs.
@@ -55,21 +55,21 @@ Subscribe to this topic to receive notifications about ticker updates for specif
 |  Field   |          Type           | Required |       Note       |    
 | :----- | :--------------------- | :------ | :-------------- | 
 | topic |       JSON        |    Y    | Topic and parameters |  
-| ts |         integer         |    Y    |     Push timestamp (milliseconds)     |  
+| ts |         integer         |    Y    |     Notification timestamp (milliseconds)     |  
 |  data   | [List[string]](#ticker) |    Y    |     Ticker array        |
 
 #### <span id="ticker">Ticker</span>
 
 | Index  |  Type   | Required |         Note         |    
 | :------ | :----- | :------ | :------------------ | 
-|    1     | string  |    Y    |         交易对         | 
-|    2     | integer |    Y    |    ticker生成时间    | 
-|    3     | string  |    Y    |  base token的成交量  |  
-|    4     | string  |    Y    | quote token 的成交量 |    
-|    5     | string  |    Y    |        开盘价        |  
-|    6     | string  |    Y    |        最高价        |  
-|    7     | string  |    Y    |        最低价        | 
-|    8     | string  |    Y    |      最新成交价      |  
-|    9     | integer |    Y    |       成交笔数       |    
-|    10    | string  |    Y    |      买单最高价      |  
-|    11    | string  |    Y    |      卖单最低价      |   
+|    1     | string  |    Y    |         Trading pair         | 
+|    2     | integer |    Y    |    Ticker update timestamp    | 
+|    3     | string  |    Y    |  Amount (quantity of base token)  |  
+|    4     | string  |    Y    | Total (quantity of quote token) |    
+|    5     | string  |    Y    |        Open price        |  
+|    6     | string  |    Y    |        Highest price        |  
+|    7     | string  |    Y    |        Lowest price        | 
+|    8     | string  |    Y    |      Latest price      |  
+|    9     | integer |    Y    |       Number of trades       |    
+|    10    | string  |    Y    |      Highest bid price      |  
+|    11    | string  |    Y    |      Lowest ask price      |   

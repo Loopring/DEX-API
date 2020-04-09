@@ -1,4 +1,4 @@
-# Candlestick
+# Candlesticks
 
 Subscribe to this topic to receive notifications about candlestick updates for specific trading pairs.
 
@@ -66,7 +66,7 @@ Subscribe to this topic to receive notifications about candlestick updates for s
 | Field  |             Type              | Required |       Note       |    
 | :--- | :--------------------------- | :------ | :-------------- | 
 | topic |       JSON        |    Y    | Topic and parameters |  
-|  ts   |            integer            |    Y    | Push timestamp (milliseconds) |      
+|  ts   |            integer            |    Y    | Notification timestamp (milliseconds) |      
 | data  | List\[string]|    Y    | [`Candlestick` array](#candlestick) |      
 
 ####<span id= "candlestick">Candlestick</span>

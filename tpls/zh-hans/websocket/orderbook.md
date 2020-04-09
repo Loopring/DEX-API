@@ -75,8 +75,8 @@
 
 | 字段 | 类型                           | 必现 | 说明     | 
 | :---- | :------------------------------ | :-------- | :-------- |
-| bids | [List\[List\[string\]]](#slot) | 是       | 代表买单深度的PriceSlot数组列表 |
-| asks | [List\[List\[string\]]](#slot)| 是       | 代表卖单深度的PriceSlot数组列表 | 
+| bids | List\[List\[string\]] | 是       | 代表买单深度的[PriceSlot](#slot)数组列表 |
+| asks | List\[List\[string\]]| 是       | 代表卖单深度的[PriceSlot](#slot)t数组列表 | 
 
 #### <span id = "slot">PriceSlot数组</span>
 
@@ -94,7 +94,7 @@
 
 您可以通过下列步骤构建本地订单簿：
 
-1. 订阅 depth主题。
+1. 订阅 orderbook主题。
 2. 开始缓存收到的更新。同一个价位，后收到的更新覆盖前面的。
 3. 访问接口 [api/v1/depth](../dex_apis/getDepth.md) 获得一个全量的深度快照。
 4. 3中获取的快照如果`version`大于本地`version`（`endVersion`），则直接覆盖，如果小于本地version，则相同的价格不覆盖，不同的价格则覆盖。
