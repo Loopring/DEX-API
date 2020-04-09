@@ -1,13 +1,12 @@
 # Candlestick更新
 
-
-通过订阅该主题，您可以获得特定交易对Candlestick更新的数据推送。
+订阅此主题以接收特定交易对Candlestick更新的通知。
 
 
 ## 订阅规则
 
-- `topic`字符串：`candlestick`。
-- 订阅该主题**不需要**提供ApiKey。
+- 主题名称：`candlestick`
+- 订阅该主题是否需要提供ApiKey：否
 
 
 ## 参数列表
@@ -38,7 +37,7 @@
 
 | 状态码 |                   描述                    |
 | :---- | :--------------------------------------- |
-| 104106 | `topic`的值或其参数非法|
+| 104106 | 主题或参数非法|
 
 ## 推送示例
 
@@ -65,8 +64,8 @@
 
 | 字段  |             类型              | 必现 |       说明       |    
 | :--- | :--------------------------- | :------ | :-------------- | 
-| topic |       JSON        |    是    | 订阅的主题和参数 |  
-|  ts   |            integer            |    时    | 推送时间（毫秒） |      
+| topic |       JSON        |    是    | 主题和参数 |  
+|  ts   |            integer            |    是    | 推送时间（毫秒） |      
 | data  | [List\[string]](#candlestick) （`Candlestick`列表）|    是    | cCandlestick数组 |      
 
 ####<span id= "candlestick">Candlestick数组</span>
@@ -79,5 +78,5 @@
 |    4     | string  |    是    |             收盘价格              |       
 |    5     | string  |    是    |              最高价               |       
 |    6     | string  |    是    |              最低价               |      
-|    7     | string  |    是    | 为wei为单位的base token的成交数量 | 
-|    8     | string  |    是    | 为wei为单位 quote token的成交数量 | 
+|    7     | string  |    是    | 为wei为单位的Base Token的成交数量 | 
+|    8     | string  |    是    | 为wei为单位 Quote Token的成交数量 | 

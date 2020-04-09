@@ -1,11 +1,11 @@
-# 订单簿更新
+# Orderbook
 
-通过订阅该主题, 您可以获得指定交易对订单簿更新的数据推送.
+Subscribe to this topic to receive notifications about orderbook updates for specific trading pairs.
 
 ## Rules
 
-- `topic` string:`depth`.
-- ApiKey **not required**.
+- Topic name: `orderbook`
+- ApiKey requred: No
 
 
 ## Parameters
@@ -21,14 +21,14 @@
 
 | Value |                Note                |
 | :---- | :--------------------------------- |
-| 104107 | invalid `topic` or parameters|
+| 104107 | Invalid topic or parameters|
 
-## Push data examples
+## Notification example
 
 ```json
 {
     "topic": {
-        "topic:": "depth",
+        "topic:": "orderbook",
         "market": "LRC-USDT",
         "count": 20,
         "snapshot": true
@@ -57,26 +57,26 @@
 }
 ```
 
-# Data Model
+## Data Model
 
-# Push data structure
+#### Notification
 
 |     Field     |      Type       | Required |         Note         |    
 | :---------- | :------------- | :------ | :------------------ | 
 | topic |       JSON        |    Y    | Topic and parameters |  
-|      ts      |     integer     |    Y    |       Push timestamp       |  
+|      ts      |     integer     |    Y    |       Push timestamp (milliseconds)       |  
 | startVersion |     integer     |    Y    | 该次推送的起始版本号 |     
 |  endVersion  |     integer     |    Y    | 该次推送的终结版本号 |     
 |     data     | [Depth](#depth) |    Y    |       深度信息       |     
 
-####<span id="depth">Depth数据结构</span>
+####<span id="depth">Depth</span>
 
 | Field | Type                           | Required | Note     | 
 | :---- | :------------------------------ | :-------- | :-------- |
 | bids | [List\[List\[string\]]](#slot) | Y       | 代表买单深度的DepthItem array list |
 | asks | [List\[List\[string\]]](#slot)| Y       | 代表卖单深度的DepthItem array list | 
 
-#### <span id = "slot">DepthItem array</span>
+#### <span id = "slot">DepthItem</span>
 
 `asks`和`bids`数组中的每个子数组都是定长数组, 我们称之为*深度条目*, 其规范如下：
 

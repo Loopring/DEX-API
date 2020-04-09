@@ -1,12 +1,12 @@
 # 用户订单更新
 
 
-通过订阅该主题，您可以获得用户在指定交易对的订单状态提送。
+订阅此主题以接收特定交易对定单更新的通知。
 
 ## 订阅规则
 
-- `topic`字符串：`order`。
-- 订阅该主题**需要**提供ApiKey。
+- 主题名称：`order`
+- 订阅该主题是否需要提供ApiKey：是
 
 
 ## 参数列表
@@ -19,7 +19,7 @@
 
 | 状态码 |                描述                 |
 | :---- | :--------------------------------- |
-| 104110 | `topic`的值或其参数非法|
+| 104110 | 主题或参数非法|
 
 ## 推送示例
 
@@ -55,8 +55,8 @@
 
 | 字段  |      类型       | 必现 |       说明       |     
 | :--- | :------------- | :------ | :-------------- | 
-| topic |       JSON        |    是    | 订阅的主题和参数 |  
-|  ts   |     integer     |    是    |     推送时间     |  
+| topic |       JSON        |    是    | 主题和参数 |  
+|  ts   |     integer     |    是    |     推送时间（毫秒）     |  
 | data  | [Order](#order) |    是    |     订单数据     |    
 
 #### <span id="order">Order数据结构</span>
@@ -64,12 +64,12 @@
 |     字段      |  类型   | 必现 |            说明            |    
 | :----------- | :----- | :------ | :------------------------ | 
 |     hash      | string  |    是    |          订单哈希          |    
-| clientOrderId | string  |    是    |        用户自定义id        |  
-|     size      | string  |    是    |     base token 的数量      | 
-|    volume     | string  |    是    |     quote token 的数量     | 
+| clientOrderId | string  |    是    |        用户自定义ID        |  
+|     size      | string  |    是    |     Base Token 的数量      | 
+|    volume     | string  |    是    |     Quote Token 的数量     | 
 |     price     | string  |    是    |          订单价格          |  
-|  filledSize   | string  |    是    | 已经成交的basetoken的数量  |  
-| filledVolume  | string  |    是    | 已经成交的quotetoken的数量 |   
+|  filledSize   | string  |    是    | 已经成交的Base Token的数量  |  
+| filledVolume  | string  |    是    | 已经成交的Quote Token的数量 |   
 |   filledFee   | string  |    是    |       已支付的手续费       | 
 |    status     | string  |    是    |          订单状态          | 
 |   createdAt   | integer |    是    |        订单创建时间        | 

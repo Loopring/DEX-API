@@ -1,12 +1,12 @@
 # Account
 
+Subscribe to this topic to receive notifications about user balance update.
 
-通过订阅该主题, 您可以获得用户余额和冻结金额更新的数据推送.
 
 ## Rules
 
-- `topic` string:`account`.
-- ApiKey **required**.
+- Topic name: `account`
+ApiKey requred: Yes
 
 
 
@@ -15,7 +15,7 @@
 This topic doesn't support any parameter.
 
 
-## Push data examples
+## Notification example
 
 ```json
 {
@@ -32,22 +32,22 @@ This topic doesn't support any parameter.
 }
 ```
 
-# Data Model
+## Data Model
 
-# Push data structure
+#### Notification
 
 | Field  |        Type         | Required |       Note       |     
 | :--- | :----------------- | :------ | :-------------- | 
 | topic |       JSON        |    Y    | Topic and parameters |  
-|  ts   |       integer       |    Y    |     Push timestamp     | 
-| data  | [Balance](#balance) |    Y    |     余额信息     |     
+|  ts   |       integer       |    Y    |     Push timestamp (milliseconds)     | 
+| data  | [Balance](#balance) |    Y    |     User's new balances   |     
 
-#### <span id= "balance">Balance数据结构</span> 
+#### <span id= "balance">Balance</span> 
 
 |     Field     |  Type   | Required |    Note    |     
 | :---------- | :----- | :------ | :-------- | 
-|  accountId   | integer |    Y    |   用户Id   |     
-|   tokenId    | integer |    Y    |   通证Id   |     
-| totalAmount  | string  |    Y    |  用户余额  | 
-| aamountLocked | string  |    Y    | 冻结的余额 |    
+|  accountId   | integer |    Y    |   Account ID   |     
+|   tokenId    | integer |    Y    |   Token ID   |     
+| totalAmount  | string  |    Y    |  Total token balance  | 
+| aamountLocked | string  |    Y    | Token balance locked by orders |    
 

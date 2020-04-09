@@ -1,13 +1,13 @@
-# Candlestick更新
+# Candlestick
 
+Subscribe to this topic to receive notifications about candlestick updates for specific trading pairs.
 
-通过订阅该主题, 您可以获得特定交易对Candlestick更新的数据推送.
 
 
 ## Rules
 
-- `topic` string:`candlestick`.
-- ApiKey **not required**.
+- Topic name: `candlestick`
+- ApiKey requred: No
 
 
 ## Parameters
@@ -38,16 +38,16 @@
 
 | Value |                   Note                   |
 | :---- | :--------------------------------------- |
-| 104106 | invalid `topic` or parameters|
+| 104106 | Invalid topic or parameters|
 
-## Push data examples
+## Notification example
 
 ```json
 {
     "topic": "candlestick%3Fmarket%3DLRC-ETH%26interval%3D1hr",
     "ts":1584717910000,
     "data": [
-        "1584717910000",  //start
+        "1584717910000",  //open timestamp (ms)
         "5000",  //count
         "3997.3",  //open
         "3998.7",  //close
@@ -59,25 +59,25 @@
 }
 ```
 
-# Data Model
+## Data Model
 
-# Push data structure
+#### Notification
 
 | Field  |             Type              | Required |       Note       |    
 | :--- | :--------------------------- | :------ | :-------------- | 
 | topic |       JSON        |    Y    | Topic and parameters |  
-|  ts   |            integer            |    时    | Push timestamp（毫秒） |      
-| data  | [List\[string]](#candlestick) （`Candlestick`列表）|    Y    | cCandlestick数组 |      
+|  ts   |            integer            |    Y    | Push timestamp (milliseconds) |      
+| data  | List\[string]|    Y    | [`Candlestick` array](#candlestick) |      
 
-####<span id= "candlestick">Candlestick array</span>
+####<span id= "candlestick">Candlestick</span>
 
 | Index  |  Type   | Required |               Note                |        
 | :------ | :----- | :------ | :------------------------------- | 
-|    1     | integer |    Y    |            指开盘时间             |     
-|    2     | integer |    Y    |             成交笔数              |         
-|    3     | string  |    Y    |             开盘价格              |      
-|    4     | string  |    Y    |             收盘价格              |       
-|    5     | string  |    Y    |              最高价               |       
-|    6     | string  |    Y    |              最低价               |      
-|    7     | string  |    Y    | 为wei为单位的base token的成交数量 | 
-|    8     | string  |    Y    | 为wei为单位 quote token的成交数量 | 
+|    1     | integer |    Y    |            Open timestamp             |     
+|    2     | integer |    Y    |             Nubmer of trades              |         
+|    3     | string  |    Y    |             Open price              |      
+|    4     | string  |    Y    |             Close price              |       
+|    5     | string  |    Y    |              Highest price               |       
+|    6     | string  |    Y    |              Lowest price               |      
+|    7     | string  |    Y    | Traded amount of Base Tokens (in Wei)| 
+|    8     | string  |    Y    | Traded amount of quote Tokens (in Wei) | 

@@ -1,12 +1,12 @@
 # 用户订单更新
 
 
-通过订阅该主题, 您可以获得用户在指定交易对的订单状态提送.
+Subscribe to this topic to receive notifications about order updates for specific trading pairs.
 
 ## Rules
 
-- `topic` string:`order`.
-- ApiKey **required**.
+- Topic name: `order`
+ApiKey requred: Yes
 
 
 ## Parameters
@@ -19,9 +19,9 @@
 
 | Value |                Note                |
 | :---- | :--------------------------------- |
-| 104110 | invalid `topic` or parameters|
+| 104110 | Invalid topic or parameters|
 
-## Push data examples
+## Notification example
 
 ```json
 {
@@ -49,17 +49,17 @@
 }
 ```
 
-# Data Model
+## Data Model
 
-# Push data structure
+#### Notification
 
 | Field  |      Type       | Required |       Note       |     
 | :--- | :------------- | :------ | :-------------- | 
 | topic |       JSON        |    Y    | Topic and parameters |  
-|  ts   |     integer     |    Y    |     Push timestamp     |  
+|  ts   |     integer     |    Y    |     Push timestamp (milliseconds)     |  
 | data  | [Order](#order) |    Y    |     订单数据     |    
 
-#### <span id="order">Order数据结构</span>
+#### <span id="order">Order</span>
 
 |     Field      |  Type   | Required |            Note            |    
 | :----------- | :----- | :------ | :------------------------ | 
@@ -77,7 +77,7 @@
 |     side      | string  |    Y    |           买或卖           |    
 |    market     | string  |    Y    |            交易对            |  
 
-#### 订单状态取值范围
+#### Order status
 
 |    状态    |                    Note                    |
 | :-------- | :---------------------------------------- |

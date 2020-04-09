@@ -1,14 +1,12 @@
 # Ticker更新
 
-通过订阅该主题, 您可以获得特定交易对ticker更新的数据推送.
 
-
-
+Subscribe to this topic to receive notifications about ticker updates for specific trading pairs.
 
 ## Rules
 
-- `topic` string:`ticker`.
-- ApiKey **not required**.
+- Topic name: `ticker`
+- ApiKey requred: No
 
 
 ## Parameters
@@ -23,9 +21,9 @@
 
 | Value |                 Note                |
 | :---- | :---------------------------------- |
-| 104111 | invalid `topic` or parameters|
+| 104111 | Invalid topic or parameters|
 
-## Push data examples
+## Notification example
 
 ```json
 {
@@ -50,17 +48,17 @@
 }
 ```
 
-# Data Model
+## Data Model
 
-# Push data structure
+#### Notification
 
 |  Field   |          Type           | Required |       Note       |    
 | :----- | :--------------------- | :------ | :-------------- | 
 | topic |       JSON        |    Y    | Topic and parameters |  
-| integer |         integer         |    Y    |     Push timestamp     |  
-|  data   | [List[string]](#ticker) |    Y    |     Ticker array list          |
+| ts |         integer         |    Y    |     Push timestamp (milliseconds)     |  
+|  data   | [List[string]](#ticker) |    Y    |     Ticker array        |
 
-#### <span id="ticker">Ticker array</span>
+#### <span id="ticker">Ticker</span>
 
 | Index  |  Type   | Required |         Note         |    
 | :------ | :----- | :------ | :------------------ | 

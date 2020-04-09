@@ -64,7 +64,7 @@
     "claim": "This file is generated automatically. Please do not modify."
   },
   "websocket": {
-    "depth": "Orderbooks",
+    "orderbook": "Orderbooks",
     "trade": "Trades",
     "ticker": "Tickers",
     "candlestick": "Candlesticks",

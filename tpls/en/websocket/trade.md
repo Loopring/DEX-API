@@ -1,12 +1,11 @@
 # 最新成交更新
 
-通过订阅该主题, 您可以获得特定交易对全部用户新成交记录的数据推送.
-
+Subscribe to this topic to receive notifications about bew trades for specific trading pairs.
 
 ## Rules
 
-- `topic` string:`trade`.
-- ApiKey **not required**.
+- Topic name: `trade`
+- ApiKey requred: No
 
 
 ## Parameters
@@ -20,9 +19,9 @@
 
 | Value |                Note                |
 | :---- | :--------------------------------- |
-| 104109 | invalid `topic` or parameters|
+| 104109 | Invalid topic or parameters|
 
-## Push data examples
+## Notification example
 
 ```json
 {
@@ -44,17 +43,17 @@
 }
 ```
 
-# Data Model
+## Data Model
 
-# Push data structure
+#### Notification
 
 |  Field   |          Type           | Required |       Note       |    
 | :----- | :--------------------- | :------ | :-------------- |
 | topic |       JSON        |    Y    | Topic and parameters |  
-| integer |         integer         |    Y    |     Push timestamp     | 
+| ts |         integer         |    Y    |     Push timestamp (milliseconds)     | 
 |  data   | [List[List\[string]](#trade)] |    Y    |    Trade array list     |  
 
-#### <span id="trade">Trade array</span>
+#### <span id="trade">Trade</span>
 
 | Index  |  Type   | Required |         Note         |  
 | :------ | :----- | :------ | :------------------ | 
