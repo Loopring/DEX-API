@@ -1,4 +1,4 @@
-# Candlesticks
+# Candlestick Notification
 
 Subscribe to this topic to receive notifications about candlestick updates for specific trading pairs.
 

@@ -1,4 +1,4 @@
-# Orderbooks
+# Orderbook Notification
 
 Subscribe to this topic to receive notifications about orderbook updates for specific trading pairs.
 

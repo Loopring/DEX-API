@@ -1,4 +1,4 @@
-# Account
+# Account Notification
 
 Subscribe to this topic to receive notifications about user balance update.
 

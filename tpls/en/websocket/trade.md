@@ -1,4 +1,4 @@
-# Trades
+# Trade Notification
 
 Subscribe to this topic to receive notifications about bew trades for specific trading pairs.
 

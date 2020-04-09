@@ -1,4 +1,4 @@
-# Tickers
+# Ticker Notification
 
 
 Subscribe to this topic to receive notifications about ticker updates for specific trading pairs.
