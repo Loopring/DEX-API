@@ -98,23 +98,23 @@ WebSocket链接建立后, 中继会每30秒会发送“ping”消息给客户端
 | :---- | :---------- | :------ | :------------------------------ |
 |   op   |    string    |    Y    |         订阅（"sub"）或订退（unSub"）         |    
 |   sequence   |    integer    |    N    |        操作序列号        |   
-| topic |   JSON  |    Y    |             订阅主题和参数            | 
-| result |    [Result](#result)   |    Y    |             订阅结果             |            
+| topics |   JSON  |    Y    |             Topics and their configurations            | 
+| result |    [Result](#result)   |    Y    |             Subscription result             |            
 
 
 ####  <span id="result">Result结构</span>
 
 |  Field  |      Type       | Required |         Note         | 
 | :---- | :------------- | :------ | :------------------ |
-| status |     string      |    Y    |     订阅是否成功     | 
-| error  | [Error](#error) |    N    | 订阅失败时的错误信息 | 
+| status |     string      |    Y    |     Status code     | 
+| error  | [Error](#error) |    N    | Error | 
 
 ####   <span id="error">Error结构</span>
 
 |  Field   |  Type   | Required |   Note   |     
 | :----- | :----- | :------ | :------ | 
 |  code   | integer |    Y    |  Value  |  
-| message | string  |    Y    | 错误信息 | 
+| message | string  |    Y    | Error message | 
 
 #### Status code
 
@@ -131,9 +131,9 @@ WebSocket链接建立后, 中继会每30秒会发送“ping”消息给客户端
 |   104114   |             无法通过APiKey找到对应的用户             |
 |   104115   |                  无法识别的订阅消息                  |
 
-#### 示例
+#### Examples
 
-订阅成功示例：
+A successful subscription：
 
 ```json
 {
@@ -150,7 +150,7 @@ WebSocket链接建立后, 中继会每30秒会发送“ping”消息给客户端
 }
 ```
 
-订阅参数不合法的失败示例：
+A failed subscription：
 
 ```json
 {
@@ -171,7 +171,7 @@ WebSocket链接建立后, 中继会每30秒会发送“ping”消息给客户端
 }
 ```
 
-订阅参数无法解析的失败示例：
+Another failed subscription：
 
 ```json
 {

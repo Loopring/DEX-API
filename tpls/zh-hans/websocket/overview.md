@@ -98,7 +98,7 @@ WebSocket链接建立后，中继会每30秒会发送“ping”消息给客户�
 | :---- | :---------- | :------ | :------------------------------ |
 |   op   |    string    |    是    |         订阅（"sub"）或订退（unSub"）         |    
 |   sequence   |    integer    |    否    |        操作序列号        |   
-| topic |   JSON  |    是    |             订阅主题和参数            | 
+| topics |   JSON  |    是    |             订阅主题和参数            | 
 | result |    [Result](#result)   |    是    |             订阅结果             |            
 
 
