@@ -13,9 +13,9 @@ Subscribe to this topic to receive notifications about orderbook updates for spe
 |  Parameter |  Required |             Note                |
 | :---- | :------ |:--------------------------------- |
 | market | Y | [Trading pair](../dex_apis/getMarkets.md)|
-| level | Y | 深度聚合级别 |
-| count | Y | 买卖深度条目数量, 值不可以超过50. |
-| snapshot |否 | 默认为false. 如果该值为true, count不可以大于20, 并且当深度条目有任何一条变化, 那么指定数量的深度条目会被全量推送给客户端. |
+| level | Y | Price aggregation level |
+| count | Y | Number of bids/ask price slots |
+| snapshot |N | Default to false. If true, `count` can not be larger than 20, and the client will receive full notification with up to `count` bid/ask price slots when at least one slot has update.|
 
 ## Status code
 
@@ -65,27 +65,25 @@ Subscribe to this topic to receive notifications about orderbook updates for spe
 | :---------- | :------------- | :------ | :------------------ | 
 | topic |       JSON        |    Y    | Topic and parameters |  
 |      ts      |     integer     |    Y    |       Push timestamp (milliseconds)       |  
-| startVersion |     integer     |    Y    | 该次推送的起始版本号 |     
-|  endVersion  |     integer     |    Y    | 该次推送的终结版本号 |     
-|     data     | [Depth](#depth) |    Y    |       深度信息       |     
+| startVersion |     integer     |    Y    | Previous version number |     
+|  endVersion  |     integer     |    Y    | Updated versionnumber |     
+|     data     | [OrderBook](#orderbook) |    Y    |       The orderbook       |     
 
-####<span id="depth">Depth</span>
+####<span id="orderbook">OrderBook</span>
 
 | Field | Type                           | Required | Note     | 
 | :---- | :------------------------------ | :-------- | :-------- |
-| bids | [List\[List\[string\]]](#slot) | Y       | 代表买单深度的DepthItem array list |
-| asks | [List\[List\[string\]]](#slot)| Y       | 代表卖单深度的DepthItem array list | 
+| bids | [List\[List\[string\]]](#slot) | Y       | PriceSlot array for bids |
+| asks | [List\[List\[string\]]](#slot)| Y       | PriceSlot array for asks  | 
 
-#### <span id = "slot">DepthItem</span>
-
-`asks`和`bids`数组中的每个子数组都是定长数组, 我们称之为*深度条目*, 其规范如下：
+#### <span id = "slot">PriceSlot</span>
 
 | Index  | Type   | Required | Note           | 
 | :------ | :------ | :-------- | :-------------- | :
-|    1     | string | Y       | 价格           | 
-|    2     | string | Y       | 数量（基础通证的数量）         | 
-|    3     | string | Y       | 成交额（ 计价通证的数量）  |
-|    4     | string | Y       | 聚合的订单数目 | 
+|    1     | string | Y       | Price           | 
+|    2     | string | Y       | Amount (Quantity of base token)         | 
+|    3     | string | Y       | Total (Quantity of quote token)    |
+|    4     | string | Y       | Number of orders at this price | 
 
 
 需要注意的是, 每一个推送中的数量和成交额代表这个价格目前的数量和成交额的绝对值, 而不是相对变化.

@@ -69,18 +69,16 @@
 |      ts      |     integer     |    是    |       推送时间（毫秒）       |  
 | startVersion |     integer     |    是    | 该次推送的起始版本号 |     
 |  endVersion  |     integer     |    是    | 该次推送的终结版本号 |     
-|     data     | [Depth](#depth) |    是    |       深度信息       |     
+|     data     | [Orderbook](#orderbook) |    是    |       订单簿信息       |     
 
-####<span id="depth">Depth数据结构</span>
+####<span id="orderbook">Orderbook数据结构</span>
 
 | 字段 | 类型                           | 必现 | 说明     | 
 | :---- | :------------------------------ | :-------- | :-------- |
-| bids | [List\[List\[string\]]](#slot) | 是       | 代表买单深度的DepthItem数组列表 |
-| asks | [List\[List\[string\]]](#slot)| 是       | 代表卖单深度的DepthItem数组列表 | 
+| bids | [List\[List\[string\]]](#slot) | 是       | 代表买单深度的PriceSlot数组列表 |
+| asks | [List\[List\[string\]]](#slot)| 是       | 代表卖单深度的PriceSlot数组列表 | 
 
-#### <span id = "slot">DepthItem数组</span>
-
-`asks`和`bids`数组中的每个子数组都是定长数组，我们称之为*深度条目*，其规范如下：
+#### <span id = "slot">PriceSlot数组</span>
 
 | 序号  | 类型   | 必现 | 说明           | 
 | :------ | :------ | :-------- | :-------------- | :

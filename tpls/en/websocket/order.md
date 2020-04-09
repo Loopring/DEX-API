@@ -57,33 +57,33 @@ ApiKey requred: Yes
 | :--- | :------------- | :------ | :-------------- | 
 | topic |       JSON        |    Y    | Topic and parameters |  
 |  ts   |     integer     |    Y    |     Push timestamp (milliseconds)     |  
-| data  | [Order](#order) |    Y    |     订单数据     |    
+| data  | [Order](#order) |    Y    |     The order     |    
 
 #### <span id="order">Order</span>
 
 |     Field      |  Type   | Required |            Note            |    
 | :----------- | :----- | :------ | :------------------------ | 
-|     hash      | string  |    Y    |          订单哈希          |    
-| clientOrderId | string  |    Y    |        用户自定义id        |  
-|     size      | string  |    Y    |     base token 的数量      | 
-|    volume     | string  |    Y    |     quote token 的数量     | 
-|     price     | string  |    Y    |          订单价格          |  
-|  filledSize   | string  |    Y    | 已经成交的basetoken的数量  |  
-| filledVolume  | string  |    Y    | 已经成交的quotetoken的数量 |   
-|   filledFee   | string  |    Y    |       已支付的手续费       | 
-|    status     | string  |    Y    |          订单状态          | 
-|   createdAt   | integer |    Y    |        订单创建时间        | 
-|   updateAt    | integer |    Y    |   订单最后一次的更新时间   | 
-|     side      | string  |    Y    |           买或卖           |    
-|    market     | string  |    Y    |            交易对            |  
+|     hash      | string  |    Y    |          Order hash         |    
+| clientOrderId | string  |    Y    |        Client defined order ID        |  
+|     size      | string  |    Y    |    Amount of base token      | 
+|    volume     | string  |    Y    |    Amount of quote token     | 
+|     price     | string  |    Y    |          Order price          |  
+|  filledSize   | string  |    Y    | Filled amount of base token  |  
+| filledVolume  | string  |    Y    | Filled amount of quote token |   
+|   filledFee   | string  |    Y    |      Fees paid      | 
+|    status     | string  |    Y    |          Order status         | 
+|   createdAt   | integer |    Y    |        Order creation timestamp      | 
+|   updateAt    | integer |    Y    |   Order last update timestamp   | 
+|     side      | string  |    Y    |           Buy or sell           |    
+|    market     | string  |    Y    |            trading pair           |  
 
 #### Order status
 
-|    状态    |                    Note                    |
+|    Value   |                    Note                    |
 | :-------- | :---------------------------------------- |
-| processing | 订单进行中, 订单等待成交或者已经成交一部分 |
-| processed  |                订单完全成交                |
-| cancelling |                   取消中                   |
-| cancelled  |                  订单取消                  |
-|  expired   |                  订单过期                  |
-|  waiting   |                订单还未生效                |
+| processing | active (may be partially filled) |
+| processed  |                Fully filled                |
+| cancelling |                   Being canceled                   |
+| cancelled  |                 Canceled                  |
+|  expired   |                  Expired                  |
+|  waiting   |                Pending active                |
