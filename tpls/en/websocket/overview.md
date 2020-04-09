@@ -6,8 +6,8 @@
 wss://ws.loopring.io/v2/ws
 ```
 
-## 订阅
-用户可以通过发送JSON数据订阅多个主题：
+## Subscription
+Clients can send JSON to subscribe to multiple topics:
 
 ```JSON
  {
@@ -43,16 +43,16 @@ wss://ws.loopring.io/v2/ws
 ```
 
 
-1. 在一次订阅中, 如果`topics`中任何一个主题需要ApiKey, 那么本次操作就必须包含ApiKey.
-1. 在一次订阅中, 相同的主题可以出现多次, 但同一个主题的相同的配置只可以出现一次.
-1. 在一次订阅中, 如果有任何参数错误, 则全部订阅都会失败.
-1. 如果`unsubscribeAll`是`true`, 订阅前会先订退之前订阅的所有主题.
-1. 订阅时客户端可以指定一个`sequence`代表序列号, 后台返回结果也会附带同样的序列号.
+1. In one subscription request, if at least one topic requires the ApiKey, then the `apiKey` filed is required;
+1. In one subscription request, the same topic configuration can only occur once;
+1. In one subscription request, if there are any configuration errors, the entire subscription request fails;
+1. If `unsubscribeAll` is `true`, all previous subscriptions will be canceled;
+1. If `sequence` is provided, the relayer will use the same sequence number in its response.
 
 
 
-## 订退
-用户可以通过发送JSON数据订退多个主题：
+## Unsubscription
+Clients can send JSON to unsubscribe from multiple topics:
 
 ```JSON
  {
@@ -81,11 +81,11 @@ wss://ws.loopring.io/v2/ws
 ```
 
 
-1. 在一次订退中, 如果`topics`中任何一个主题需要ApiKey, 那么本次操作就必须包含ApiKey.
-1. 在一次订退中, 相同的主题可以出现多次, 但同一个主题的相同的配置只可以出现一次.
-1. 在一次订退中, 如果有任何参数错误, 则全部订阅都会失败.
-1. 如果`unsubscribeAll`是`true`, 所有主题都会被订退；如果在某个主题内将`unsubscribeAll`设置为`true`, 那么该主题的所有配置都会被订退.
-1. 订退时客户端可以指定一个`sequence`代表序列号, 后台返回结果也会附带同样的序列号.
+1. In one unsubscription request, if at least one topic requires the ApiKey, then the `apiKey` filed is required;
+1. In one unsubscription request, the same topic configuration can only occur once;
+1. In one unsubscription request, if there are any configuration errors, the entire unsubscription request fails;
+1. If the top-level `unsubscribeAll` is `true`, all previous subscriptions will be canceled; if the per-topic `unsubscribeAll` is `true`, then all subscriptions to that topic will be canceled;
+1. If `sequence` is provided, the relayer will use the same sequence number in its response.
 
 #### 心跳
 

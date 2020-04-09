@@ -7,7 +7,7 @@ wss://ws.loopring.io/v2/ws
 ```
 
 ## 订阅
-用户可以通过发送JSON数据订阅多个主题：
+客户端可以通过发送JSON数据订阅多个主题：
 
 ```JSON
  {
@@ -52,7 +52,7 @@ wss://ws.loopring.io/v2/ws
 
 
 ## 订退
-用户可以通过发送JSON数据订退多个主题：
+客户端可以通过发送JSON数据订退多个主题：
 
 ```JSON
  {
