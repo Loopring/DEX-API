@@ -39,7 +39,8 @@
         "/api/v2/user/balances",
         "/api/v2/user/deposits",
         "/api/v2/user/withdrawals",
-        "/api/v2/user/trades"
+        "/api/v2/user/trades",
+        "/api/v2/user/feeRates"
     ],
     "no_key": ["getApiKey"],
     "has_sig": ["getApiKey", "cancelOrders"],
