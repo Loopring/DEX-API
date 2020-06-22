@@ -3,8 +3,6 @@
     "not_ready": [
         "/api/v2/dexNonce",
         "/api/v2/offchainWithdrawal",
-        "/api/v2/transfer",
-        "/api/v2/user/transfers",
         "/api/v2/crawl"
     ],
     "enable_apis" : [
